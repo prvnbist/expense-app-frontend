@@ -1,0 +1,12 @@
+@mixin object($max-width,$width, $height, $bg){
+    max-width:$max-width;
+    width: $width;
+    height: $height;
+    background: $bg;
+}
+
+@mixin flex($ai,$jc){
+    display:flex;
+    align-items: $ai;
+    justify-content: $jc;
+}

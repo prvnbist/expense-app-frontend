@@ -1,0 +1,17 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: 'Oswald', sans-serif;
+  }
+
+  @import './base/typography.scss';
+  @import './layout/header.scss';
+  @import './layout/main.scss';
+  
+  
+  
+  
+  

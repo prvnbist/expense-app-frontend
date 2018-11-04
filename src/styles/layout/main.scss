@@ -1,0 +1,29 @@
+@import '../helpers/mixins.scss';
+
+main {
+    @include object(980px,calc(100% - 40px),60px,null);
+    margin: 0 auto;
+}
+
+#section-title {
+    @include object(100%,null,60px,null);
+    @include flex(center,null);
+    h1 {
+        font-size:24px;
+        font-weight:500;
+        color:#041A2A;
+    }
+    button {
+        @include object(null,24px,24px,#318FFE);
+        border-radius: 50%;
+        margin-left: 20px;
+        border:none;
+        color:#fff;
+        font-size:24px;
+        line-height: 24px;
+        cursor:pointer;
+        &:focus {
+            outline: none;
+        }
+    }
+}
