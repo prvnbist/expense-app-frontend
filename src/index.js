@@ -22,11 +22,13 @@ const httpLink = new HttpLink({uri: DB_URI});
 
 // Middleware to set the headers
 const authLink = new ApolloLink((operation, forward) => {
-    if(localStorage.getItem('access_token') !== undefined) {
+    if (localStorage.getItem('access_token') !== undefined) {
         const token = localStorage.getItem('access_token');
         operation.setContext({
             headers: {
-                authorization: token ? `Bearer ${token}` : ''
+                authorization: token
+                    ? `Bearer ${token}`
+                    : ''
             }
         });
         return forward(operation);
@@ -40,9 +42,10 @@ const client = new ApolloClient({
         credentials: 'include'
     },
     onError: ({networkError}) => {
-        if(networkError) console.log('Network Error',networkError);
-    }
-});
+        if (networkError) 
+            console.log('Network Error', networkError);
+        }
+    });
 
 class App extends Component {
     render() {
