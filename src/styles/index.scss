@@ -5,13 +5,41 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-family: 'Oswald', sans-serif;
-  }
+}
+@import './helpers/spacings.scss';
+@import './base/typography.scss';
+@import './layout/header.scss';
+@import './layout/main.scss';
 
-  @import './base/typography.scss';
-  @import './layout/header.scss';
-  @import './layout/main.scss';
-  
-  
-  
-  
-  
+input.ant-input {
+    margin: 20px 0;
+    height: 48px;
+}
+div.ant-select {
+    width: 100px;
+    display: block;
+    margin: 20px 0;
+    .ant-select-selection {
+		height: 48px;
+		.ant-select-selection__rendered {
+			height:48px;
+			line-height:48px;
+		}
+    }
+}
+.wrapper {
+    @include object(null,100vw,100vh,null);
+}
+
+.center-content {
+    @include flex(center,center);
+}
+
+.loginForm {
+    width: 480px;
+    height: auto;
+}
+
+.loginOption {
+    font-size: 18px;
+}
