@@ -16,9 +16,9 @@ import SignUp from './components/SignUp.jsx';
 import './styles/index.scss';
 
 // Keys 
-// import {DB_URI} from './config/keys';
+import {DB_URI} from './config/keys';
 
-const httpLink = new HttpLink({uri: 'http://localhost:4000/graphql'});
+const httpLink = new HttpLink({uri: DB_URI});
 
 // Middleware to set the headers
 const authLink = new ApolloLink((operation, forward) => {
