@@ -7,13 +7,16 @@ import {ApolloProvider} from "react-apollo";
 import {ApolloClient, ApolloLink, InMemoryCache, HttpLink} from "apollo-boost";
 
 // Components
-import Dashboard from './components/Main.jsx';
+import Home from './components/Home.jsx';
+import Dashboard from './components/Dashboard.jsx';
 import Login from './components/Login.jsx';
+import SignUp from './components/SignUp.jsx';
 
 // Styles
 import './styles/index.scss';
 
-// Keys import {DB_URI} from './config/keys';
+// Keys 
+// import {DB_URI} from './config/keys';
 
 const httpLink = new HttpLink({uri: 'http://localhost:4000/graphql'});
 
@@ -21,7 +24,6 @@ const httpLink = new HttpLink({uri: 'http://localhost:4000/graphql'});
 const authLink = new ApolloLink((operation, forward) => {
     if(localStorage.getItem('access_token') !== undefined) {
         const token = localStorage.getItem('access_token');
-        console.log('token',token);
         operation.setContext({
             headers: {
                 authorization: token ? `Bearer ${token}` : ''
@@ -33,7 +35,13 @@ const authLink = new ApolloLink((operation, forward) => {
 
 const client = new ApolloClient({
     link: authLink.concat(httpLink),
-    cache: new InMemoryCache()
+    cache: new InMemoryCache(),
+    fetchOptions: {
+        credentials: 'include'
+    },
+    onError: ({networkError}) => {
+        if(networkError) console.log('Network Error',networkError);
+    }
 });
 
 class App extends Component {
@@ -43,7 +51,9 @@ class App extends Component {
                 <ApolloProvider client={client}>
                     <BrowserRouter>
                         <Switch>
-                            <Route exact path="/" component={Login}/>
+                            <Route exact path="/" component={Home}/>
+                            <Route exact path="/login" component={Login}/>
+                            <Route exact path="/signup" component={SignUp}/>
                             <Route exact path="/dashboard" component={Dashboard}/>
                         </Switch>
                     </BrowserRouter>
