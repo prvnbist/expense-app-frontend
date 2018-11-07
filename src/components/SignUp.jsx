@@ -1,10 +1,18 @@
 import React, {Component} from 'react';
 import {Mutation} from 'react-apollo';
 import gql from 'graphql-tag';
-import { Link } from 'react-router-dom';
+
+import NavBar from './NavBar';
 
 // Ant Design
-import { Input, Row, Col, Button, Select } from 'antd';
+import {
+    Input,
+    Row,
+    Col,
+    Button,
+    Select,
+    Layout
+} from 'antd';
 const Option = Select.Option;
 
 const SIGNUP_MUTATION = gql `
@@ -35,60 +43,72 @@ export default class SignUp extends Component {
     render() {
         const {username, password, name, email, gender} = this.state;
         return (
-            <div className="wrapper center-content">
-                <Row gutter={16} className="loginForm">
-                    <Col span={24}>
-                        <Row gutter={16} >
-                            <Col span={12}>
-                                <label className="inputLabel">Name</label>
-                                <Input
-                                    value={name}
-                                    onChange={e => this.setState({name: e.target.value})}
-                                    type="text"
-                                    placeholder="Enter your name"/>
-                            </Col>
-                            <Col span={12}>
-                                <label className="inputLabel">Email</label>
-                                <Input
-                                    value={email}
-                                    onChange={e => this.setState({email: e.target.value})}
-                                    type="text"
-                                    placeholder="Enter your email"/>
-                            </Col>
-                        </Row>                        
-                        <Row gutter={16} >
-                            <Col span={12}>
-                                <label className="inputLabel">Username</label>
-                                <Input
-                                    value={username}
-                                    onChange={e => this.setState({username: e.target.value})}
-                                    type="text"
-                                    placeholder="Enter your username"/>
-                            </Col>
-                            <Col span={12}>
-                                <label className="inputLabel">Password</label>
-                                <Input
-                                    value={password}
-                                    onChange={e => this.setState({password: e.target.value})}
-                                    type="password"
-                                    placeholder="Enter your password"/>
-                            </Col>
-                        </Row>                
-                        <label className="inputLabel">Gender: </label>
-                        <Select defaultValue={gender} onChange={e => this.setState({gender: e.target.value})}>
-                            <Option value="male">Male</Option>
-                            <Option value="female">Female</Option>
-                        </Select>
-                        <Mutation
-                            mutation={SIGNUP_MUTATION}
-                            variables={{username,password,name,email,gender}}
-                            onCompleted={data => this.submitForm(data)}>
-                            {mutation => <Button type="primary" size="large" onClick={mutation}>Sign Up</Button>}
-                        </Mutation>
-                        <span className="loginOption"> or <Link to="/login">Login</Link></span>
-                    </ Col>
-                </ Row>
-            </div>
+            <Layout className="layout">
+                <NavBar/>
+                <div className="wrapper center-content">
+                    <Row gutter={16} className="loginForm">
+                        <Col span={24}>
+                            <Row gutter={16}>
+                                <Col span={12}>
+                                    <label className="inputLabel">Name</label>
+                                    <Input
+                                        value={name}
+                                        onChange={e => this.setState({name: e.target.value})}
+                                        type="text"
+                                        placeholder="Enter your name"/>
+                                </Col>
+                                <Col span={12}>
+                                    <label className="inputLabel">Email</label>
+                                    <Input
+                                        value={email}
+                                        onChange={e => this.setState({email: e.target.value})}
+                                        type="text"
+                                        placeholder="Enter your email"/>
+                                </Col>
+                            </Row>
+                            <Row gutter={16}>
+                                <Col span={12}>
+                                    <label className="inputLabel">Username</label>
+                                    <Input
+                                        value={username}
+                                        onChange={e => this.setState({username: e.target.value})}
+                                        type="text"
+                                        placeholder="Enter your username"/>
+                                </Col>
+                                <Col span={12}>
+                                    <label className="inputLabel">Password</label>
+                                    <Input
+                                        value={password}
+                                        onChange={e => this.setState({password: e.target.value})}
+                                        type="password"
+                                        placeholder="Enter your password"/>
+                                </Col>
+                            </Row>
+                            <label className="inputLabel">Gender:
+                            </label>
+                            <Select
+                                defaultValue={gender}
+                                onChange={e => this.setState({gender: e.target.value})}>
+                                <Option value="male">Male</Option>
+                                <Option value="female">Female</Option>
+                            </Select>
+                            <Mutation
+                                mutation={SIGNUP_MUTATION}
+                                variables={{
+                                username,
+                                password,
+                                name,
+                                email,
+                                gender
+                            }}
+                                onCompleted={data => this.submitForm(data)}>
+                                {mutation => <Button type="primary" size="large" onClick={mutation}>Sign Up</Button>}
+                            </Mutation>
+                        </ Col>
+                    </ Row>
+                </div>
+
+            </Layout>
         )
     }
 }
