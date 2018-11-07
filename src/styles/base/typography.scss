@@ -3,4 +3,17 @@
 .inputLabel {
     font-size:14px;
     text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+.loginOption {
+    font-size: 18px;
+}
+
+.error-message {
+    display: block;
+    margin-bottom: 20px;
+    color: #fb5a5a;
+    font-size:16px;
 }

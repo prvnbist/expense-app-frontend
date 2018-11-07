@@ -6,6 +6,10 @@
     -moz-osx-font-smoothing: grayscale;
     font-family: 'Oswald', sans-serif;
 }
+body {
+    overflow: hidden;
+}
+
 @import './helpers/spacings.scss';
 @import './base/typography.scss';
 @import './layout/header.scss';
@@ -15,6 +19,7 @@ input.ant-input {
     margin: 20px 0;
     height: 48px;
 }
+
 div.ant-select {
     width: 100px;
     display: block;
@@ -40,6 +45,29 @@ div.ant-select {
     height: auto;
 }
 
-.loginOption {
-    font-size: 18px;
+.logo {
+    color: #fff;
+    font-size: 24px;
+    line-height: 58px;
+    float: left;
+    width: auto;
+    height: 60px;
+    margin-right:20px;
 }
+
+.nav-items {
+    line-height: 60px;
+    display: flex;
+    float:right;
+    li {
+        text-decoration: none;
+        list-style: none;
+        margin: 0 20px;
+        a {
+            color:#fff;
+            font-size:16px;
+            line-height: 64px;
+        }
+    }
+}
+
