@@ -17,7 +17,7 @@ import './styles/index.scss';
 
 // Keys 
 import {DB_URI} from './config/keys';
-console.log(DB_URI);
+console.log("uri", DB_URI);
 const httpLink = new HttpLink({uri: DB_URI});
 
 // Middleware to set the headers
@@ -55,8 +55,8 @@ class App extends Component {
                     <BrowserRouter>
                         <Switch>
                             <Route exact path="/" component={Home}/>
-                            <Route exact path="/login" component={Login}/>
-                            <Route exact path="/signup" component={SignUp}/>
+                            <Route exact activeClassName="active" path="/login" component={Login}/>
+                            <Route exact activeClassName="active" path="/signup" component={SignUp}/>
                             <Route exact path="/dashboard" component={Dashboard}/>
                         </Switch>
                     </BrowserRouter>
