@@ -33,7 +33,7 @@ export default class Login extends Component {
             <Layout className="layout">
                 <NavBar/>
             <div className="wrapper center-content">
-                <Row gutter={16} className="loginForm">
+                <Row gutter={16} className="loginForm" style={{height:320}}>
                     <Col span={24}>
                     <label className="inputLabel">Username</label>
                     <Input

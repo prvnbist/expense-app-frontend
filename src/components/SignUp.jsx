@@ -44,44 +44,32 @@ export default class SignUp extends Component {
             <Layout className="layout">
                 <NavBar/>
                 <div className="wrapper center-content">
-                    <Row gutter={16} className="loginForm">
+                    <Row gutter={16} className="loginForm" style={{height: 643}}>
                         <Col span={24}>
-                            <Row gutter={16}>
-                                <Col span={12}>
                                     <label className="inputLabel">Name</label>
                                     <Input
                                         value={name}
                                         onChange={e => this.setState({name: e.target.value})}
                                         type="text"
                                         placeholder="Enter your name"/>
-                                </Col>
-                                <Col span={12}>
                                     <label className="inputLabel">Email</label>
                                     <Input
                                         value={email}
                                         onChange={e => this.setState({email: e.target.value})}
                                         type="text"
                                         placeholder="Enter your email"/>
-                                </Col>
-                            </Row>
-                            <Row gutter={16}>
-                                <Col span={12}>
                                     <label className="inputLabel">Username</label>
                                     <Input
                                         value={username}
                                         onChange={e => this.setState({username: e.target.value})}
                                         type="text"
                                         placeholder="Enter your username"/>
-                                </Col>
-                                <Col span={12}>
                                     <label className="inputLabel">Password</label>
                                     <Input
                                         value={password}
                                         onChange={e => this.setState({password: e.target.value})}
                                         type="password"
                                         placeholder="Enter your password"/>
-                                </Col>
-                            </Row>
                             <label className="inputLabel">Gender:
                             </label>
                             <select
