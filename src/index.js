@@ -16,9 +16,9 @@ import SignUp from './components/SignUp.jsx';
 import './styles/index.scss';
 
 // Keys 
-import {SERVER_URL} from './config/keys';
-console.log("uri", SERVER_URL, "node", process.env.NODE_ENV, "env uri", process.env.SERVER_URL,"yo",process.env.HELLO);
-const httpLink = new HttpLink({uri: SERVER_URL});
+import {REACT_APP_SERVER_URL} from './config/keys';
+console.log("uri", REACT_APP_SERVER_URL, "node", process.env.NODE_ENV, "env uri", process.env.REACT_APP_SERVER_URL,"yo",process.env.HELLO);
+const httpLink = new HttpLink({uri: REACT_APP_SERVER_URL});
 
 // Middleware to set the headers
 const authLink = new ApolloLink((operation, forward) => {
