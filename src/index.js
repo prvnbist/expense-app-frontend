@@ -17,7 +17,7 @@ import './styles/index.scss';
 
 // Keys 
 import {DB_URI} from './config/keys';
-console.log("uri", DB_URI);
+console.log("uri", DB_URI, "node", process.env.NODE_ENV);
 const httpLink = new HttpLink({uri: DB_URI});
 
 // Middleware to set the headers
