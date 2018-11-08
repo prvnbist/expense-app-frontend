@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import {NavLink, Link} from 'react-router-dom';
 
 // Ant Design
 import {Layout} from 'antd';
@@ -10,13 +10,15 @@ export default class NavBar extends Component {
     render() {
         return (
             <Header>
-                <span className="logo">Expense Manager</span>
+                <span className="logo">
+                    <Link to="/">Expense Manager</Link>
+                </span>
                 <ul className="nav-items">
                     <li>
-                        <Link to="/login">LOGIN</Link>
+                        <NavLink to="/login">LOGIN</NavLink>
                     </li>
                     <li>
-                        <Link to="/signup">SINGUP</Link>
+                        <NavLink to="/signup">SIGNUP</NavLink>
                     </li>
                 </ul>
             </Header>
