@@ -41,12 +41,16 @@ div.ant-select {
 }
 
 .center-content {
-    @include flex(center, center);
+    @include flex(null, center);
+    padding-top: 40px;
 }
 
 .loginForm {
     width: 480px;
     height: auto;
+    background: #fff;
+    padding: 30px 20px;
+    border-radius: 8px;
 }
 
 .logo {
@@ -103,4 +107,16 @@ div.ant-select {
         padding: 0 10px;
         font-size: 16px;
     }
+}
+
+#logout {
+    font-size: 18px;
+    margin-top: -5px;
+    display: inline-block;
+    margin-left: 20px;
+    background: rgba(255, 255, 255, 0.11);
+    border: none;
+    padding: 5px 10px;
+    border-radius: 6px;
+    color:#fff;
 }
