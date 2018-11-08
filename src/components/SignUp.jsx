@@ -10,10 +10,8 @@ import {
     Row,
     Col,
     Button,
-    Select,
     Layout
 } from 'antd';
-const Option = Select.Option;
 
 const SIGNUP_MUTATION = gql `
   mutation SignUpMutation($username: String!, $password: String!,$name:String!,$email:String!,$gender: String!) {
@@ -29,7 +27,7 @@ export default class SignUp extends Component {
             password: '',
             name: '',
             email: '',
-            gender: 'male'
+            gender: 'M'
         }
     }
     submitForm = ({signup}) => {
@@ -86,21 +84,16 @@ export default class SignUp extends Component {
                             </Row>
                             <label className="inputLabel">Gender:
                             </label>
-                            <Select
-                                defaultValue={gender}
+                            <select
+                                className="select-dropdown"
+                                value={gender}
                                 onChange={e => this.setState({gender: e.target.value})}>
-                                <Option value="male">Male</Option>
-                                <Option value="female">Female</Option>
-                            </Select>
+                                <option value="M">Male</option>
+                                <option value="F">Female</option>
+                            </select>
                             <Mutation
                                 mutation={SIGNUP_MUTATION}
-                                variables={{
-                                username,
-                                password,
-                                name,
-                                email,
-                                gender
-                            }}
+                                variables={{username,password,name,email,gender}}
                                 onCompleted={data => this.submitForm(data)}>
                                 {mutation => <Button type="primary" size="large" onClick={mutation}>Sign Up</Button>}
                             </Mutation>
