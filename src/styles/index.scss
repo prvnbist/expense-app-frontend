@@ -6,6 +6,7 @@
     -moz-osx-font-smoothing: grayscale;
     font-family: 'Oswald', sans-serif;
 }
+
 body {
     overflow: hidden;
 }
@@ -24,20 +25,23 @@ div.ant-select {
     width: 100px;
     display: block;
     margin: 20px 0;
+
     .ant-select-selection {
-		height: 48px;
-		.ant-select-selection__rendered {
-			height:48px;
-			line-height:48px;
-		}
+        height: 48px;
+
+        .ant-select-selection__rendered {
+            height: 48px;
+            line-height: 48px;
+        }
     }
 }
+
 .wrapper {
-    @include object(null,100vw,100vh,null);
+    @include object(null, 100vw, 100vh, null);
 }
 
 .center-content {
-    @include flex(center,center);
+    @include flex(center, center);
 }
 
 .loginForm {
@@ -46,28 +50,57 @@ div.ant-select {
 }
 
 .logo {
-    color: #fff;
     font-size: 24px;
     line-height: 58px;
     float: left;
     width: auto;
     height: 60px;
-    margin-right:20px;
+    margin-right: 20px;
+
+    a {
+        color: #fff;
+    }
 }
 
 .nav-items {
     line-height: 60px;
     display: flex;
-    float:right;
+    float: right;
+
     li {
         text-decoration: none;
         list-style: none;
         margin: 0 20px;
+
         a {
-            color:#fff;
-            font-size:16px;
+            color: #fff;
+            font-size: 16px;
             line-height: 64px;
+            padding: 18px 0;
         }
     }
 }
 
+.active {
+    border-bottom: 4px solid #fff;
+}
+
+.select-dropdown {
+    height: 40px;
+    width: 100px;
+    display: block;
+    margin: 20px 0;
+    padding: 0 10px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #d9d9d9;
+
+    option {
+        height: 40px;
+        width: 100px;
+        display: block;
+        margin: 20px 0;
+        padding: 0 10px;
+        font-size: 16px;
+    }
+}
