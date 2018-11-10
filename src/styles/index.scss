@@ -119,4 +119,26 @@ div.ant-select {
     padding: 5px 10px;
     border-radius: 6px;
     color:#fff;
+    cursor:pointer;
+}
+
+#homepage-content {
+    height:calc(100vh - 60px);
+    max-width:1180px;
+    @include flex(center,null);
+    .ant-row {
+        width:100%;
+        @include flex(center,null);
+        #heading {
+            font-size: 56px;
+            color: #7C74F2;
+        }
+        #homepage-illo {
+            width:100%;
+        }
+    }
+}
+
+.ant-layout-header {
+    background: #7C74F2;
 }
