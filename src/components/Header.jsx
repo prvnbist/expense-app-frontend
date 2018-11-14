@@ -2,35 +2,8 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 
 import {Query} from 'react-apollo';
-import gql from 'graphql-tag';
 
-const CURRENT_USER = gql `
-  query currentUser {
-    me {
-        id
-        name
-        username
-        email
-        gender
-        expenses {
-          spentOn
-        }
-      }
-  }
-`;
-
-const LoggedInUser = () => (
-    <Query query={CURRENT_USER}>
-        {({loading, error, data}) => {
-            if (loading) 
-                return "Loading...";
-            if (error) 
-                return `Error! ${error.message}`;
-            const {name} = data.me;
-            return name;
-        }}
-    </Query>
-);
+import CURRENT_USER from './queries/currentUser';
 
 export default class Header extends Component {
     logOut = () => {
@@ -42,8 +15,18 @@ export default class Header extends Component {
                 <nav>
                     <span id="logo">Expense Manager</span>
                     <div id="profile-options">
-                        <span id="user-name"><LoggedInUser /></span>
-                        <Link to="/"><button id="logout" onClick={this.logOut}>Logout</button></Link>
+                        <Query query={CURRENT_USER}>
+                            {({client,loading, error, data:{me}}) => {
+                                if (loading) 
+                                    return "Loading...";
+                                if (error) 
+                                    return `Error! ${error.message}`;
+                                return <React.Fragment>
+                                    <span id="user-name">{me.name}</span>
+                                    <Link to="/"><button id="logout" onClick={() => {this.logOut();client.resetStore()}}>Logout</button></Link>
+                                </React.Fragment>
+                            }}
+                        </Query>
                     </div>
                 </nav>
                 <div id="total-expenses">
