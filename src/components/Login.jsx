@@ -1,17 +1,12 @@
 import React, {Component} from 'react';
 import {Mutation} from 'react-apollo';
-import gql from 'graphql-tag';
 
 import NavBar from './NavBar';
 
 // Ant Design
 import { Input, Row, Col, Button, Layout } from 'antd';
 
-const LOGIN_MUTATION = gql `
-  mutation LoginMutation($username: String!, $password: String!) {
-    login(username: $username, password: $password)
-  }
-`
+import LOGIN_MUTATION from '../queries/LoginMutation';
 
 export default class Login extends Component {
     constructor(props) {

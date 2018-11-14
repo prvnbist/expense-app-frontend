@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {Mutation} from 'react-apollo';
-import gql from 'graphql-tag';
 
 import NavBar from './NavBar';
 
@@ -13,12 +12,7 @@ import {
     Layout
 } from 'antd';
 
-const SIGNUP_MUTATION = gql `
-  mutation SignUpMutation($username: String!, $password: String!,$name:String!,$email:String!,$gender: String!) {
-    signup(username: $username, password: $password, email: $email, name: $name, gender: $gender)
-  }
-`
-
+import SIGNUP_MUTATION from '../queries/SignUpMutation';
 export default class SignUp extends Component {
     constructor(props) {
         super(props);
