@@ -8,6 +8,7 @@ const CURRENT_USER = gql `
         username
         email
         gender
+        balance
         expenses {
           id
           spentOn

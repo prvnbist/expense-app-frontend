@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Query} from 'react-apollo';
-import CURRENT_USER from './queries/currentUser';
+import CURRENT_USER from '../queries/CurrentUser';
 export default class Main extends Component {
     render() {
         return (

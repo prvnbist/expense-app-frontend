@@ -16,6 +16,10 @@ body {
 @import './layout/header.scss';
 @import './layout/main.scss';
 
+.ant-layout {
+    background: #fff;
+}
+
 input.ant-input {
     margin: 20px 0;
     height: 48px;
