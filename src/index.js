@@ -1,4 +1,4 @@
-import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import {BrowserRouter, Switch, Route, Redirect} from 'react-router-dom';
 import React, {Component, Fragment} from 'react';
 import ReactDOM from 'react-dom';
 
@@ -57,6 +57,7 @@ class App extends Component {
                             <Route exact activeClassName="active" path="/login" component={Login}/>
                             <Route exact activeClassName="active" path="/signup" component={SignUp}/>
                             <Route exact path="/dashboard" component={Dashboard}/>
+                            <Redirect to="/login" />
                         </Switch>
                     </BrowserRouter>
                 </ApolloProvider>
