@@ -15,6 +15,7 @@ const CURRENT_USER = gql `
           amount
           description
           category
+          createdAt
         }
       }
   }

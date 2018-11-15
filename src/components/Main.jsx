@@ -16,11 +16,19 @@ export default class Main extends Component {
                         if (error) 
                             return `Error! ${error.message}`;
                         return <div>
-                            {me.expenses.map(item => <div key={item.id}>
-                                <span>{item.spentOn}</span>
-                                <span>{item.category}</span>
-                                <span>{item.description}</span>
-                                <span>{item.amount}</span>
+                            {me.expenses.map(item => <div  className="expense-card" key={item.id}>
+                                <div>
+                                    <span className="spentOn">{item.spentOn}</span>
+                                    <span className="description">{item.description}</span>
+                                </div>
+                                <div>
+                                    <span className="category">{item.category}</span>
+                                    <span className="createdAt">{new Date(Number(item.createdAt)).toTimeString().slice(0,5)}  •  {new Date(Number(item.createdAt)).toDateString().replace(' 2018','')}</span>
+                                    {console.log(item.createdAt)}
+                                </div>
+                                <div>
+                                    <span className="amount">{item.amount}</span>
+                                </div>
                             </div>)}
                         </div>;
                     }}

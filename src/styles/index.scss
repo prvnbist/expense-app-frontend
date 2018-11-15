@@ -122,23 +122,26 @@ div.ant-select {
     border: none;
     padding: 5px 10px;
     border-radius: 6px;
-    color:#fff;
-    cursor:pointer;
+    color: #fff;
+    cursor: pointer;
 }
 
 #homepage-content {
-    height:calc(100vh - 60px);
-    max-width:1180px;
-    @include flex(center,null);
+    height: calc(100vh - 60px);
+    max-width: 1180px;
+    @include flex(center, null);
+
     .ant-row {
-        width:100%;
-        @include flex(center,null);
+        width: 100%;
+        @include flex(center, null);
+
         #heading {
             font-size: 56px;
             color: #7C74F2;
         }
+
         #homepage-illo {
-            width:100%;
+            width: 100%;
         }
     }
 }
@@ -150,7 +153,43 @@ div.ant-select {
 #monthlySpent {
     background: transparent;
     border: none;
+
     option {
         color: #000;
+    }
+}
+
+.expense-card {
+    height: 128px;
+    background: #fff;
+    border: 1px solid #eaeaeaa3;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+
+    div {
+        span {
+            display: block;
+
+            &.spentOn,&.category {
+                font-size: 28px;
+                color: #041A2A;
+                margin-bottom: 16px;
+            }
+
+            &.description,&.createdAt {
+                font-size: 18px;
+                color: #041A2A;
+                opacity: 0.4;
+            }
+
+            &.amount {
+                font-size: 20px;
+                text-align: right;
+                color: #EC1A1A;
+            }
+        }
     }
 }
