@@ -97,8 +97,8 @@ export default class Header extends Component {
                                         placeholder='Not Set'
                                         id="inputBalance"
                                         defaultValue={balance === ""
-                                        ? me.balance
-                                        : balance}
+                                        ? parseInt(me.balance).toLocaleString('en-IN')
+                                        : parseInt(balance).toLocaleString('en-IN')}
                                         onChange={e => this.setState({balance: e.target.value})}/>
                                 }}
                             </Query>
@@ -109,7 +109,21 @@ export default class Header extends Component {
                         <label htmlFor="#">TOTAL SPENT</label>
                         <div className="expense-wrapper">
                             <input type="text" placeholder="0" disabled/>
-                            <div className="expense-option">OCT</div>
+                            <div className="expense-option">
+                                <select defaultValue='oct' id="monthlySpent">
+                                    <option value="jan">JAN</option>
+                                    <option value="feb">FEB</option>
+                                    <option value="mar">MAR</option>
+                                    <option value="apr">APR</option>
+                                    <option value="jun">JUN</option>
+                                    <option value="jul">JUL</option>
+                                    <option value="aug">AUG</option>
+                                    <option value="sept">SEPT</option>
+                                    <option value="oct">OCT</option>
+                                    <option value="nov">NOV</option>
+                                    <option value="dec">DEC</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>

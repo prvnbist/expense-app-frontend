@@ -146,3 +146,11 @@ div.ant-select {
 .ant-layout-header {
     background: #7C74F2;
 }
+
+#monthlySpent {
+    background: transparent;
+    border: none;
+    option {
+        color: #000;
+    }
+}
