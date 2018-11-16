@@ -1,71 +1,105 @@
 @import '../helpers/mixins.scss';
 
-header {
-    @include object(100%,null, auto, linear-gradient(96.48deg, #3D25D0 12.4%, #1A96DB 100%));
-    padding-bottom: 20px;
-    color: #fff;
+.dashboard-header {
+    height: 280px;
+    background-image: url(../images/navbar-bg.jpg);
+    background-size: cover;
+    background-position-y: 16%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(#000, 0.7);
+        z-index: 0;
+    }
 }
 
-nav {
-    @include object(980px,calc(100% - 40px),60px,null);
-    @include flex(center,space-between);
-    margin: 0 auto 120px auto;
+.top-nav {
+    height: 60px;
+    position: relative;
+    z-index: 10;
+    @include flex(center, space-between);
+
+    #logo {
+        font-weight: 400;
+        line-height: normal;
+        font-size: 18px;
+        color: #FFFFFF;
+    }
 }
 
-#logo, #user-name {
-    font-size: 24px;
+#user-name {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    color: #FFFFFF;
+    margin-right: 20px;
+}
+
+#logout {
+    height:40px;
+    padding: 0 15px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    line-height: normal;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+}
+
+#user-account-info {
+    position: relative;
+    z-index: 10;
+    label {
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        font-size: 16px;
+        color: #FFFFFF;
+    }
 }
 
 #total-expenses {
-    @include object(980px,calc(100% - 40px),100px,null);    
-    margin: 0 auto;
-    display:grid;
+    display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-column-gap: 20px;
-    div {
-        @include object(null,null,60px,null);
-        label {
-            font-size:16px;
-            display:block;
-            margin-bottom: 20px;
-        }
-        input {
-            @include object(80%,null,60px,rgba(255, 255, 255, 0.11));
-            border-radius:4px 0 0 4px;            
-            width:100%;
-            border: none;
-            padding-left: 20px;
-            color: #fff;
-            font-size: 20px;
-            float:left;
-            &:focus {
-                outline:none;
-            }
-            &::placeholder {
-                color:#fff;
-            }
-        }
-        .expense-option {
-            @include object(null,20%,60px,rgba(255, 255, 255, 0.11));
-            border-radius:0 4px 4px 0;            
-            float:left;
-            line-height: 60px;
-            text-align: center;
-            font-size:20px;
-        }
-    }
+    grid-gap: 20px;
 }
 
-@media screen and (max-width:567px){
-    nav {
-        height:80px;
+.expense-wrapper {
+    margin: 20px 0;
+    height: 60px;
+    @include flex(center, space-between);
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    input {
+        width:70%;
+        padding: 0 20px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        font-size: 20px;
+        color: #FFFFFF;
+        &::placeholder{
+            color:#fff;
+        }
     }
-    #total-expenses {
-        height:auto;
-        grid-template-columns: 1fr;
-        grid-row-gap: 20px;
-        div {
-            height:100px;
+    .expense-option {
+        width:30%;
+        text-align:center;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        font-size: 20px;
+        color: #FFFFFF;
+        option {
+            color:#000;
         }
     }
 }

@@ -1,30 +1,93 @@
 @import '../helpers/mixins.scss';
 
-main {
-    @include object(980px,calc(100% - 40px),60px,null);
-    margin: 0 auto;
+#section-title {
+    width: inherit;
+    height: 100px;
+    @include flex(center, null);
+
+    h1 {
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        font-size: 16px;
+        color: #031A2A;
+        margin-right: 20px;
+        margin-bottom: 0;
+    }
+
+    button {
+        @include object(null, 40px, 40px, #318FFE);
+        border-radius: 50%;
+        color: #fff;
+        font-size: 28px;
+
+        i {
+            line-height: 40px;
+        }
+    }
 }
 
-#section-title {
-    @include object(100%,null,80px,null);
-    @include flex(center,null);
-    h1 {
-        font-size:24px;
-        font-weight:500;
-        color:#041A2A;
+.expense-card {
+    @include object(720px, calc(100% - 40px), 160px, null);
+    border: 1px solid rgba(212, 212, 212, 0.6);
+    border-radius: 4px;
+    margin-bottom: 20px;
+    padding: 20px;
+}
+
+.top-row {
+    @include flex(center, space-between);
+    margin-bottom: 20px;
+
+    .spentOn {
+        font-style: normal;
+        font-weight: 450;
+        line-height: normal;
+        font-size: 24px;
+
+        color: #041A2A;
     }
-    button {
-        @include object(null,36px,36px,#318FFE);
-        border-radius: 50%;
-        margin-left: 20px;
-        border: none;
-        color: #fff;
-        font-size: 37px;
-        line-height: 24px;
-        cursor: pointer;
-        margin-top: -10px;
-        &:focus {
-            outline: none;
+
+    .amount {
+        font-style: normal;
+        font-weight: 450;
+        line-height: normal;
+        font-size: 20px;
+        text-align: right;
+        color: #EC1A1A;
+    }
+}
+
+.mid-row {
+    display:flex;
+    margin-bottom: 20px;
+    .category,
+    .time,
+    .date {
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        font-size: 16px;
+        color: #041A2A;
+        opacity: 0.4;
+        margin-right: 40px;
+        @include flex(center,null);
+        i{
+            padding-right: 15px;
         }
+    }
+}
+
+.description {
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    font-size: 16px;
+    color: #041A2A;
+    opacity: 0.4;
+    margin-right: 40px;
+    @include flex(center,null);
+    i{
+        padding-right: 15px;
     }
 }

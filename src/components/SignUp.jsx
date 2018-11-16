@@ -3,15 +3,6 @@ import {Mutation} from 'react-apollo';
 
 import NavBar from './NavBar';
 
-// Ant Design
-import {
-    Input,
-    Row,
-    Col,
-    Button,
-    Layout
-} from 'antd';
-
 import SIGNUP_MUTATION from '../queries/SignUpMutation';
 export default class SignUp extends Component {
     constructor(props) {
@@ -35,37 +26,44 @@ export default class SignUp extends Component {
     render() {
         const {username, password, name, email, gender} = this.state;
         return (
-            <Layout className="layout">
+            <div>
                 <NavBar/>
-                <div className="wrapper center-content">
-                    <Row gutter={16} className="loginForm" style={{height: 643}}>
-                        <Col span={24}>
-                                    <label className="inputLabel">Name</label>
-                                    <Input
-                                        value={name}
-                                        onChange={e => this.setState({name: e.target.value})}
-                                        type="text"
-                                        placeholder="Enter your name"/>
-                                    <label className="inputLabel">Email</label>
-                                    <Input
-                                        value={email}
-                                        onChange={e => this.setState({email: e.target.value})}
-                                        type="text"
-                                        placeholder="Enter your email"/>
-                                    <label className="inputLabel">Username</label>
-                                    <Input
-                                        value={username}
-                                        onChange={e => this.setState({username: e.target.value})}
-                                        type="text"
-                                        placeholder="Enter your username"/>
-                                    <label className="inputLabel">Password</label>
-                                    <Input
-                                        value={password}
-                                        onChange={e => this.setState({password: e.target.value})}
-                                        type="password"
-                                        placeholder="Enter your password"/>
-                            <label className="inputLabel">Gender:
-                            </label>
+                <div  className="container form form-signup">
+                    <div>
+                        <div className='name-field'>
+                            <label><i className='material-icons'>account_circle</i></label>
+                            <input
+                                value={name}
+                                onChange={e => this.setState({name: e.target.value})}
+                                type="text"
+                                placeholder="Enter your name"/>
+                        </div>
+                        <div className='email-field'>
+                            <label><i className='material-icons'>email</i></label>
+                            <input
+                                value={email}
+                                onChange={e => this.setState({email: e.target.value})}
+                                type="text"
+                                placeholder="Enter your email"/>
+                        </div>
+                        
+                        <div className="username-field">
+                            <label><i className='material-icons'>alternate_email</i></label>
+                            <input
+                                value={username}
+                                onChange={e => this.setState({username: e.target.value})}
+                                type="text"
+                                placeholder="Enter your username"/>
+                        </div>
+                        <div className='password-field'>
+                            <label><i className='material-icons'>remove_red_eye</i></label>
+                            <input
+                                value={password}
+                                onChange={e => this.setState({password: e.target.value})}
+                                type="password"
+                                placeholder="Enter your password"/>
+                        </div>
+                        <div className="select-field">
                             <select
                                 className="select-dropdown"
                                 value={gender}
@@ -73,17 +71,23 @@ export default class SignUp extends Component {
                                 <option value="M">Male</option>
                                 <option value="F">Female</option>
                             </select>
-                            <Mutation
-                                mutation={SIGNUP_MUTATION}
-                                variables={{username,password,name,email,gender}}
-                                onCompleted={data => this.submitForm(data)}>
-                                {mutation => <Button type="primary" size="large" onClick={mutation}>Sign Up</Button>}
-                            </Mutation>
-                        </ Col>
-                    </ Row>
+                        </div>
+                        <Mutation
+                            mutation={SIGNUP_MUTATION}
+                            variables={{
+                            username,
+                            password,
+                            name,
+                            email,
+                            gender
+                        }}
+                            onCompleted={data => this.submitForm(data)}>
+                            {mutation => <button className='btn' onClick={mutation}>Sign Up</button>}
+                        </Mutation>
+                    </div>
                 </div>
 
-            </Layout>
+            </div>
         )
     }
 }

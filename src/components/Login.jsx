@@ -3,9 +3,6 @@ import {Mutation} from 'react-apollo';
 
 import NavBar from './NavBar';
 
-// Ant Design
-import { Input, Row, Col, Button, Layout } from 'antd';
-
 import LOGIN_MUTATION from '../queries/LoginMutation';
 
 export default class Login extends Component {
@@ -25,50 +22,52 @@ export default class Login extends Component {
     render() {
         const {username, password} = this.state;
         return (
-            <Layout className="layout">
+            <div>
                 <NavBar/>
-            <div className="wrapper center-content">
-                <Row gutter={16} className="loginForm" style={{height:320}}>
-                    <Col span={24}>
-                    <label className="inputLabel">Username</label>
-                    <Input
-                        value={username}
-                        onChange={e => this.setState({username: e.target.value})}
-                        type="text"
-                        placeholder="Enter your username"/>
-                    <span id='username-error' className='error-message'></span>
-                    <label className="inputLabel">Password</label>
-                    <Input
-                        value={password}
-                        onChange={e => this.setState({password: e.target.value})}
-                        type="password"
-                        placeholder="Enter your password"/>
-                    <span id='password-error' className='error-message'></span>
-                    <Mutation
-                        mutation={LOGIN_MUTATION}
-                        variables={{username,password}}
-                        onCompleted={data => this.submitForm(data)}
-                        onError = {error => {
-                            let message = error.message.toString().replace('GraphQL error: ','');
-                            if(message.includes('username')) {
-                                document.getElementById("username-error").style.display = 'block';
-                                document.getElementById('username-error').innerHTML = message;
-                            }
-                            else if(message.includes('password')){
-                                document.getElementById("password-error").style.display = 'block';
-                                document.getElementById('password-error').innerHTML = message;
-                            }
-                            setTimeout(() =>{
-                                document.getElementById("username-error").style.display = 'none';
-                                document.getElementById("password-error").style.display = 'none';
-                                },2000);
-                        }}>                        
-                        {mutation => <Button type="primary" size="large" onClick={mutation}>Login</Button>}
-                    </Mutation>
-                    </ Col>
-                </Row>
+                <div className="container form form-login">
+                    <div>
+                        <div className='username-field'>
+                            <label><i className='material-icons'>account_circle</i></label>
+                            <input
+                                value={username}
+                                onChange={e => this.setState({username: e.target.value})}
+                                type="text"
+                                placeholder="Enter your username"/>
+                            <span id='username-error' className='error-message'></span>
+                        </div>
+                        <div className="password-field">
+                            <label><i className='material-icons'>remove_red_eye</i></label>
+                            <input
+                                value={password}
+                                onChange={e => this.setState({password: e.target.value})}
+                                type="password"
+                                placeholder="Enter your password"/>
+                            <span id='password-error' className='error-message'></span>
+                        </div>
+                        <Mutation
+                            mutation={LOGIN_MUTATION}
+                            variables={{username,password}}
+                            onCompleted={data => this.submitForm(data)}
+                            onError = {error => {
+                                let message = error.message.toString().replace('GraphQL error: ','');
+                                if(message.includes('username')) {
+                                    document.getElementById("username-error").style.display = 'block';
+                                    document.getElementById('username-error').innerHTML = message;
+                                }
+                                else if(message.includes('password')){
+                                    document.getElementById("password-error").style.display = 'block';
+                                    document.getElementById('password-error').innerHTML = message;
+                                }
+                                setTimeout(() =>{
+                                    document.getElementById("username-error").style.display = 'none';
+                                    document.getElementById("password-error").style.display = 'none';
+                                    },2000);
+                            }}>                        
+                            {mutation => <button className='btn' onClick={mutation}>Login</button>}
+                        </Mutation>
+                    </div>
+                </div>
             </div>
-            </Layout>
         )
     }
 }

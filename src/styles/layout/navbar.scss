@@ -1,0 +1,41 @@
+@import '../helpers/mixins.scss';
+
+nav {
+    height:60px;
+    background-image: url(../images/navbar-bg.jpg);
+    background-size: cover;
+    background-position-y: 26%;
+    position: relative;
+    margin-bottom: 40px;
+    &:after {
+        content:'';
+        position:absolute;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+        background: rgba(#000,0.5);
+        z-index: 0;
+    }
+    & > .container {
+        height:60px;
+        position: relative;
+        z-index: 10;
+        @include flex(center,space-between);
+        ul {
+            margin-bottom: 0;
+            li {
+                list-style: none;
+                display: inline;
+                a {
+                    color:#fff;
+                    font-size: 14px;
+                    font-weight: 400;
+                }
+                &:first-child {
+                    margin-right: 20px;
+                }
+            }
+        }
+    }
+}

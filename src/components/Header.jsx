@@ -35,8 +35,8 @@ export default class Header extends Component {
     render() {
         const {balance} = this.state;
         return (
-            <header>
-                <nav>
+            <header className="conatiner-fluid dashboard-header">
+                <div className='container top-nav'>
                     <span id="logo">Expense Manager</span>
                     <div id="profile-options">
                         <Query query={CURRENT_USER}>
@@ -47,7 +47,7 @@ export default class Header extends Component {
                                     return "Loading...";
                                 if (error) 
                                     return `Error! ${error.message}`;
-                                return <React.Fragment>
+                                return <div id='user-info-actions'>
                                     <span id="user-name">{me.name}</span>
                                     <Link to="/">
                                         <button
@@ -57,72 +57,74 @@ export default class Header extends Component {
                                             client.resetStore()
                                         }}>Logout</button>
                                     </Link>
-                                </React.Fragment>
+                                </div>
                             }}
                         </Query>
                     </div>
-                </nav>
-                <div id="total-expenses">
-                    <div id="income">
-                        <label htmlFor="#">BALANCE
-                            <Mutation
-                                mutation={UPDATE_USER_MUTATION}
-                                variables={{
-                                balance
-                            }}>
-                                {mutation => <span
-                                    style={{
-                                    float: 'right',
-                                    cursor: 'pointer'
-                                }}
-                                    onClick={e => {
-                                    this.editBalance(e);
-                                    mutation()
-                                }}
-                                    className='material-icons'>edit</span>}
-                            </Mutation>
-                        </label>
-                        <div className="expense-wrapper">
-                            <Query query={CURRENT_USER}>
-                                {({loading, error, data: {
-                                        me
-                                    }}) => {
-                                    if (loading) 
-                                        return "Loading...";
-                                    if (error) 
-                                        return `Error! ${error.message}`;
-                                    return <input
-                                        readOnly
-                                        type="text"
-                                        placeholder='Not Set'
-                                        id="inputBalance"
-                                        defaultValue={balance === ""
-                                        ? parseInt(me.balance).toLocaleString('en-IN')
-                                        : parseInt(balance).toLocaleString('en-IN')}
-                                        onChange={e => this.setState({balance: e.target.value})}/>
-                                }}
-                            </Query>
-                            <div className="expense-option">INR</div>
+                </div>
+                <div className='container' id='user-account-info'>
+                    <div id="total-expenses">
+                        <div id="income">
+                            <label htmlFor="#">BALANCE
+                                <Mutation
+                                    mutation={UPDATE_USER_MUTATION}
+                                    variables={{
+                                    balance
+                                }}>
+                                    {mutation => <span
+                                        style={{
+                                        float: 'right',
+                                        cursor: 'pointer'
+                                    }}
+                                        onClick={e => {
+                                        this.editBalance(e);
+                                        mutation()
+                                    }}
+                                        className='material-icons'>edit</span>}
+                                </Mutation>
+                            </label>
+                            <div className="expense-wrapper">
+                                <Query query={CURRENT_USER}>
+                                    {({loading, error, data: {
+                                            me
+                                        }}) => {
+                                        if (loading) 
+                                            return "Loading...";
+                                        if (error) 
+                                            return `Error! ${error.message}`;
+                                        return <input
+                                            readOnly
+                                            type="text"
+                                            placeholder='Not Set'
+                                            id="inputBalance"
+                                            defaultValue={balance === ""
+                                            ? parseInt(me.balance).toLocaleString('en-IN')
+                                            : parseInt(balance).toLocaleString('en-IN')}
+                                            onChange={e => this.setState({balance: e.target.value})}/>
+                                    }}
+                                </Query>
+                                <div className="expense-option">INR</div>
+                            </div>
                         </div>
-                    </div>
-                    <div id="total-spent">
-                        <label htmlFor="#">TOTAL SPENT</label>
-                        <div className="expense-wrapper">
-                            <input type="text" placeholder="0" disabled/>
-                            <div className="expense-option">
-                                <select defaultValue='oct' id="monthlySpent">
-                                    <option value="jan">JAN</option>
-                                    <option value="feb">FEB</option>
-                                    <option value="mar">MAR</option>
-                                    <option value="apr">APR</option>
-                                    <option value="jun">JUN</option>
-                                    <option value="jul">JUL</option>
-                                    <option value="aug">AUG</option>
-                                    <option value="sept">SEPT</option>
-                                    <option value="oct">OCT</option>
-                                    <option value="nov">NOV</option>
-                                    <option value="dec">DEC</option>
-                                </select>
+                        <div id="total-spent">
+                            <label htmlFor="#">TOTAL SPENT</label>
+                            <div className="expense-wrapper">
+                                <input type="text" placeholder="0" disabled/>
+                                <div className="expense-option">
+                                    <select defaultValue='oct' id="monthlySpent">
+                                        <option value="jan">JAN</option>
+                                        <option value="feb">FEB</option>
+                                        <option value="mar">MAR</option>
+                                        <option value="apr">APR</option>
+                                        <option value="jun">JUN</option>
+                                        <option value="jul">JUL</option>
+                                        <option value="aug">AUG</option>
+                                        <option value="sept">SEPT</option>
+                                        <option value="oct">OCT</option>
+                                        <option value="nov">NOV</option>
+                                        <option value="dec">DEC</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </div>

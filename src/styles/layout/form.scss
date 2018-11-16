@@ -1,0 +1,76 @@
+@import '../helpers/mixins.scss'; 
+
+input,select,button {
+    height:56px;
+    border:none;
+    background: transparent;
+    &:focus {
+        outline: none;
+    }
+}
+
+.form-login,.form-signup {
+    width:100%;
+    height:auto;
+    padding: 50px 0;
+    @include flex(null,center);
+    border: 1px solid #F1E9E9;
+    border-radius: 4px;
+}
+
+.username-field,.password-field,.email-field,.name-field,.select-field {
+    @include object(380px,380px,56px,null);
+    border: 1px solid #CFD2D6;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    label {
+        @include object(null,56px,32px,null);
+        @include flex(center,center);
+        border-right: 1px solid #CFD2D6;
+        i {
+            color: #CFD2D6;
+        }
+    }
+    input {
+        padding-left: 20px;
+        font-weight: 400;
+        line-height: normal;
+        font-size: 16px;
+        color: #0066DC;
+        width:100%;
+        &::placeholder {
+            color: #CFD2D6;
+        }
+    }
+    select {
+        padding: 0 20px;
+        width: 100%;
+        -webkit-appearance: none;
+        background: transparent;
+        background-image: url("data:image/svg+xml;utf8,<svg fill='#0066DC' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+        background-repeat: no-repeat;
+        background-position-x: 88%;
+        background-position-y: 16px;
+        font-weight: 400;
+        line-height: normal;
+        font-size: 18px;
+        color: #0066DC;
+    }
+}
+
+.select-field {
+    width:150px;
+}
+
+.btn {
+    @include object(null,null,56px,linear-gradient(270deg, #0066DC 0%, #4D99F1 100%));
+    padding:16px;
+    border-radius: 6px;
+    font-size: 16px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    cursor:pointer;
+}
