@@ -42,7 +42,16 @@ export default class Main extends Component {
                                 .map(item => <div className="expense-card" key={item.id}>
                                     <div className='top-row'>
                                         <span className="spentOn">{item.spentOn}</span>
-                                        <span className="amount">{parseInt(item.amount).toLocaleString('en-IN')} INR</span>
+                                        <span
+                                            className="amount"
+                                            style={{
+                                            color: item.type === "plus"
+                                                ? '#318FFE'
+                                                : '#EC1A1A'
+                                        }}>{item.type === "plus"
+                                                ? '+'
+                                                : '-'} {parseInt(item.amount).toLocaleString('en-IN')}
+                                            INR</span>
                                     </div>
                                     <div className='mid-row'>
                                         <span className="category">
@@ -52,20 +61,21 @@ export default class Main extends Component {
                                         <span className="time">
                                             <i className='material-icons'>access_time</i>
                                             <span>
-                                            {new Date(Number(item.createdAt))
-                                                .toTimeString()
-                                                .slice(0, 5)}
+                                                {new Date(Number(item.createdAt))
+                                                    .toTimeString()
+                                                    .slice(0, 5)}
                                             </span>
                                         </span>
                                         <span className="date">
                                             <i className='material-icons'>event</i>
                                             <span>{new Date(Number(item.createdAt))
-                                                .toDateString()
-                                                .replace(' 2018', '')}</span>
+                                                    .toDateString()
+                                                    .replace(' 2018', '')}</span>
                                         </span>
                                     </div>
                                     <div className='bottom-row'>
-                                        <span className="description"><i className='material-icons'>description</i>{item.description}</span>
+                                        <span className="description">
+                                            <i className='material-icons'>description</i>{item.description}</span>
                                     </div>
                                 </div>)}
                         </div>;

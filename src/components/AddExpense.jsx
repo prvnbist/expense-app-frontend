@@ -11,12 +11,15 @@ export default class AddExpense extends Component {
             spentOn: '',
             category: 'grocery',
             amount: '',
-            plusminus: 'plus',
+            type: 'plus',
             description: ''
         }
     }
+    reLoadPageWithnewData = _ => {
+        window.location.reload();
+    }
     render() {
-        const {spentOn, category, amount, plusminus,description} = this.state;
+        const {spentOn, category, amount, type,description} = this.state;
         const fixedExpensesList = [
             "Mortgage",
             "Rent",
@@ -27,7 +30,9 @@ export default class AddExpense extends Component {
             "Vehicle Insurance",
             "Life/Disability/Extended Health",
             "Bank Fees",
-            "Debt Payments"
+            "Debt Payments",
+            "Salary",
+            "Electronics"
         ];
         const variableExpensesList = [
             "Groceries",
@@ -45,7 +50,8 @@ export default class AddExpense extends Component {
             "Sports & Recreation",
             "Hair Care/Salon Services",
             "Magazines/Newspapers/Books",
-            "Children’s Lessons & Activities"
+            "Children’s Lessons & Activities",
+            "Furniture"
         ];
         return (
             <div id="add-expense-wrapper">
@@ -84,8 +90,8 @@ export default class AddExpense extends Component {
                                     fontSize: "32px"
                                 }}
                                     className="select-dropdown"
-                                    defaultValue={plusminus}
-                                    onChange={e => this.setState({plusminus: e.target.value})}>
+                                    defaultValue={type}
+                                    onChange={e => this.setState({type: e.target.value})}>
                                     <option value="plus">+</option>
                                     <option value="minus">-</option>
                                 </select>
@@ -111,7 +117,8 @@ export default class AddExpense extends Component {
                         </div>
                         <Mutation
                             mutation={ADD_EXPENSE_MUTATION}
-                            variables={{spentOn, category, amount, description}}>      
+                            variables={{spentOn, category, amount, description, type}} 
+                            onCompleted={data => this.reLoadPageWithnewData(data)}>
                             {mutation => <button className='submit-expense' onClick={mutation}>ADD</button>}
                         </Mutation>
                 </div>

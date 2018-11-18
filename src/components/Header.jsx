@@ -30,6 +30,7 @@ export default class Header extends Component {
                 .setAttribute('readOnly', 'true');
             e.target.innerHTML = 'edit';
             this.setState({firstClick: true});
+            window.location.reload();
         }
     }
     render() {

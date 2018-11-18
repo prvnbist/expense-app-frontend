@@ -13,6 +13,7 @@ const CURRENT_USER = gql `
           id
           spentOn
           amount
+          type
           description
           category
           createdAt
