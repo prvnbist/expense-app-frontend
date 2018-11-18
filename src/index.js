@@ -1,4 +1,4 @@
-import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import {HashRouter as Router, Switch, Route} from 'react-router-dom';
 import React, {Component, Fragment} from 'react';
 import ReactDOM from 'react-dom';
 
@@ -50,14 +50,14 @@ class App extends Component {
         return (
             <Fragment>
                 <ApolloProvider client={client}>
-                    <BrowserRouter>
+                    <Router>
                         <Switch>
                             <Route exact activeClassName="active" path="/" component={Login}/>
                             <Route exact activeClassName="active" path="/signup" component={SignUp}/>
                             <Route exact path="/dashboard" component={Dashboard}/>
                             <Route component={Login}/>
                         </Switch>
-                    </BrowserRouter>
+                    </Router>
                 </ApolloProvider>
             </Fragment>
         );
