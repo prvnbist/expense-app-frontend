@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Query} from 'react-apollo';
 import CURRENT_USER from '../queries/CurrentUser';
 
-// import AddExpense from './AddExpense';
+import AddExpense from './AddExpense';
 
 export default class Main extends Component {
     constructor(props) {
@@ -19,9 +19,9 @@ export default class Main extends Component {
     render() {
         return (
             <main className='container'>
-                {/* {this.state.showPopup
+                {this.state.showPopup
                     ? <AddExpense closePopUp={this.toggleExpense}/>
-                    : null} */}
+                    : null}
                 <div id="section-title">
                     <h1>EXPENSES</h1>
                     <button onClick={this.toggleExpense}>

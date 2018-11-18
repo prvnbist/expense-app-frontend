@@ -1,17 +1,22 @@
 import React, {Component} from 'react';
 
+import {Mutation} from 'react-apollo';
+
+import ADD_EXPENSE_MUTATION from '../queries/AddExpense';
+
 export default class AddExpense extends Component {
     constructor(props) {
         super(props);
         this.state = {
             spentOn: '',
             category: 'grocery',
-            amount:'',
-            plusminus:'plus',
+            amount: '',
+            plusminus: 'plus',
+            description: ''
         }
     }
     render() {
-        const {spentOn, category, amount, plusminus} = this.state;
+        const {spentOn, category, amount, plusminus,description} = this.state;
         const fixedExpensesList = [
             "Mortgage",
             "Rent",
@@ -45,57 +50,70 @@ export default class AddExpense extends Component {
         return (
             <div id="add-expense-wrapper">
                 <div id="expense-popup-card">
-                    <div id="left">Yo</div>
-                    <div id="right">
-                        <div id="heading">
-                            <span>Add Expense</span>
-                            <button onClick={this.props.closePopUp}>
-                                <i className="material-icons">close</i>
-                            </button>
-                        </div>
-                        <form>
-                            <div className="row span-8-4">
-                                <div className="col">
-                                    <label>SPENT ON/EARNED</label>
-                                    <input
-                                        value={spentOn}
-                                        onChange={e => this.setState({spentOn: e.target.value})}
-                                        type="text"
-                                        placeholder="Enter the article"/>
-                                </div>
-                                <div className="col">
-                                    <label>CATEGORY</label>
-                                    <select
-                                        className="select-dropdown"
-                                        defaultValue={category}
-                                        onChange={e => this.setState({category: e.target.value})}>
-                                        {fixedExpensesList.map((item, index) => <option key={index} value={item}>{item}</option>)}
-                                        {variableExpensesList.map((item, index) => <option key={index} value={item}>{item}</option>)}
-                                    </select>
-                                </div>
-                                </div>
-                            <div className="row span-2-10">
-                                <div className="col">
-                                    <label>AMOUNT</label>
-                                    <select
-                                        style={{fontSize:"32px"}}
-                                        className="select-dropdown"
-                                        defaultValue={plusminus}
-                                        onChange={e => this.setState({plusminus: e.target.value})}>
-                                        <option value="plus">+</option>
-                                        <option value="minus">-</option>
-                                    </select>
-                                </div>
-                                <div className="col">
-                                    <input
-                                        value={amount}
-                                        onChange={e => this.setState({amount: e.target.value})}
-                                        type="text"
-                                        placeholder="Enter the amount..."/>
-                                </div>
-                            </div>
-                        </form>
+                    <div id="heading">
+                        <span>Add Expense</span>
+                        <button onClick={this.props.closePopUp}>
+                            <i className="material-icons">close</i>
+                        </button>
                     </div>
+                        <div className="row span-8-4">
+                            <div className="col">
+                                <label>SPENT ON/EARNED</label>
+                                <input
+                                    value={spentOn}
+                                    onChange={e => this.setState({spentOn: e.target.value})}
+                                    type="text"
+                                    placeholder="Enter the article"/>
+                            </div>
+                            <div className="col">
+                                <label>CATEGORY</label>
+                                <select
+                                    className="select-dropdown"
+                                    defaultValue={category}
+                                    onChange={e => this.setState({category: e.target.value})}>
+                                    {fixedExpensesList.map((item, index) => <option key={index} value={item}>{item}</option>)}
+                                    {variableExpensesList.map((item, index) => <option key={index} value={item}>{item}</option>)}
+                                </select>
+                            </div>
+                        </div>
+                        <div className="row span-3-9" style={{alignItems:'flex-end'}}>
+                            <div className="col">
+                                <label>AMOUNT</label>
+                                <select
+                                    style={{
+                                    fontSize: "32px"
+                                }}
+                                    className="select-dropdown"
+                                    defaultValue={plusminus}
+                                    onChange={e => this.setState({plusminus: e.target.value})}>
+                                    <option value="plus">+</option>
+                                    <option value="minus">-</option>
+                                </select>
+                            </div>
+                            <div className="col">
+                                <input
+                                    value={amount}
+                                    onChange={e => this.setState({amount: e.target.value})}
+                                    type="text"
+                                    placeholder="Enter the amount..."/>
+                            </div>
+                        </div>
+                        <div className='row span-12'>
+                            <div className='col'>
+                                <label>DESCRIPTION</label>
+                                <textarea
+                                    maxLength="60"
+                                    value={description}
+                                    onChange={e => this.setState({description: e.target.value})}
+                                    type="text"
+                                    placeholder="Enter the description..."/>
+                            </div>
+                        </div>
+                        <Mutation
+                            mutation={ADD_EXPENSE_MUTATION}
+                            variables={{spentOn, category, amount, description}}>      
+                            {mutation => <button className='submit-expense' onClick={mutation}>ADD</button>}
+                        </Mutation>
                 </div>
             </div>
         )

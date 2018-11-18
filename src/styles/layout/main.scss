@@ -28,7 +28,7 @@
 }
 
 .expense-card {
-    @include object(720px, calc(100% - 40px), 160px, null);
+    @include object(null,720px, 160px, null);
     border: 1px solid rgba(212, 212, 212, 0.6);
     border-radius: 4px;
     margin-bottom: 20px;
