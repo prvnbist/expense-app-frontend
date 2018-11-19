@@ -45,7 +45,7 @@ export default class Header extends Component {
                                     me
                                 }}) => {
                                 if (loading) 
-                                    return "Loading...";
+                                    return <img src="https://upload.wikimedia.org/wikipedia/commons/a/ad/YouTube_loading_symbol_3_%28transparent%29.gif" alt=""/>;
                                 if (error) 
                                     return `Error! ${error.message}`;
                                 return <div id='user-info-actions'>
@@ -90,7 +90,7 @@ export default class Header extends Component {
                                             me
                                         }}) => {
                                         if (loading) 
-                                            return "Loading...";
+                                            return <img src="https://upload.wikimedia.org/wikipedia/commons/a/ad/YouTube_loading_symbol_3_%28transparent%29.gif" alt=""/>;
                                         if (error) 
                                             return `Error! ${error.message}`;
                                         return <input
@@ -99,7 +99,7 @@ export default class Header extends Component {
                                             placeholder='Not Set'
                                             id="inputBalance"
                                             defaultValue={balance === ""
-                                            ? parseInt(me.balance).toLocaleString('en-IN')
+                                            ? parseInt(me.balance ? me.balance : 0).toLocaleString('en-IN')
                                             : parseInt(balance).toLocaleString('en-IN')}
                                             onChange={e => this.setState({balance: e.target.value})}/>
                                     }}
