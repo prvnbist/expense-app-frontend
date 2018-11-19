@@ -48,7 +48,12 @@ export default class Main extends Component {
                         return <div>
                             {me
                                 .expenses
-                                .map(item => <div className="expense-card" key={item.id}>
+                                .map(item => <div className="expense-card" key={item.id}
+                                    style={{
+                                        borderTop: item.type === "plus"
+                                            ? '3px solid #318FFE'
+                                            : '3px solid #EC1A1A'
+                                    }}>
                                     <div className='top-row'>
                                         <span className="spentOn">{item.spentOn}</span>
                                         <div style={{display:"flex",alignItems:"center"}}>
