@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
-import {Query} from 'react-apollo';
+import {Query, Mutation} from 'react-apollo';
+
 import CURRENT_USER from '../queries/CurrentUser';
+import DELETE_EXPENSE_MUTATION from '../queries/DeleteExpense';
 
 import AddExpense from './AddExpense';
 
@@ -15,6 +17,11 @@ export default class Main extends Component {
         this.setState({
             showPopup: !this.state.showPopup
         })
+    }
+    reLoadPageWithNewData = _ => {
+        window
+            .location
+            .reload();
     }
     render() {
         return (
@@ -33,7 +40,9 @@ export default class Main extends Component {
                             me
                         }}) => {
                         if (loading) 
-                            return "Loading...";
+                            return <img
+                                src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/cd514331234507.564a1d2324e4e.gif"
+                                alt=""/>;
                         if (error) 
                             return `Error! ${error.message}`;
                         return <div>
@@ -42,16 +51,29 @@ export default class Main extends Component {
                                 .map(item => <div className="expense-card" key={item.id}>
                                     <div className='top-row'>
                                         <span className="spentOn">{item.spentOn}</span>
-                                        <span
-                                            className="amount"
-                                            style={{
-                                            color: item.type === "plus"
-                                                ? '#318FFE'
-                                                : '#EC1A1A'
-                                        }}>{item.type === "plus"
-                                                ? '+'
-                                                : '-'} {parseInt(item.amount).toLocaleString('en-IN')}
-                                            INR</span>
+                                        <div style={{display:"flex",alignItems:"center"}}>
+                                            <span
+                                                className="amount"
+                                                style={{
+                                                color: item.type === "plus"
+                                                    ? '#318FFE'
+                                                    : '#EC1A1A'
+                                            }}>{item.type === "plus"
+                                                    ? '+'
+                                                    : '-'} {parseInt(item.amount).toLocaleString('en-IN')} INR</span>
+                                            <Mutation
+                                                mutation={DELETE_EXPENSE_MUTATION}
+                                                variables={{
+                                                    id: item.id
+                                                }}
+                                                onCompleted={data => this.reLoadPageWithNewData(data)}>
+                                                {mutation => <button
+                                                    className="deleteExpense"
+                                                    onClick={mutation}>
+                                                    <i className="material-icons">delete</i>
+                                                </button>}
+                                            </Mutation>
+                                        </div>
                                     </div>
                                     <div className='mid-row'>
                                         <span className="category">

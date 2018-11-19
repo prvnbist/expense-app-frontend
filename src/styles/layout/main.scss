@@ -1,5 +1,11 @@
 @import '../helpers/mixins.scss';
 
+main {
+    img {
+        width:5%;
+    }
+}
+
 #section-title {
     width: inherit;
     height: 100px;
@@ -88,5 +94,18 @@
     @include flex(center,null);
     i{
         padding-right: 15px;
+    }
+}
+
+.deleteExpense {
+    margin-left: 20px;
+    height: auto;
+    i {
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        font-size: 22spx;
+        color: #041A2A;
+        opacity: 0.4;
     }
 }
