@@ -15,7 +15,7 @@ export default class AddExpense extends Component {
             description: ''
         }
     }
-    reLoadPageWithnewData = _ => {
+    reLoadPageWithNewData = _ => {
         window.location.reload();
     }
     render() {
@@ -69,7 +69,8 @@ export default class AddExpense extends Component {
                                     value={spentOn}
                                     onChange={e => this.setState({spentOn: e.target.value})}
                                     type="text"
-                                    placeholder="Enter the article"/>
+                                    placeholder="Enter the article"
+                                    required/>
                             </div>
                             <div className="col">
                                 <label>CATEGORY</label>
@@ -91,7 +92,8 @@ export default class AddExpense extends Component {
                                 }}
                                     className="select-dropdown"
                                     defaultValue={type}
-                                    onChange={e => this.setState({type: e.target.value})}>
+                                    onChange={e => this.setState({type: e.target.value})}
+                                    required>
                                     <option value="plus">+</option>
                                     <option value="minus">-</option>
                                 </select>
@@ -101,7 +103,8 @@ export default class AddExpense extends Component {
                                     value={amount}
                                     onChange={e => this.setState({amount: e.target.value})}
                                     type="text"
-                                    placeholder="Enter the amount..."/>
+                                    placeholder="Enter the amount..."
+                                    required/>
                             </div>
                         </div>
                         <div className='row span-12'>
@@ -112,13 +115,14 @@ export default class AddExpense extends Component {
                                     value={description}
                                     onChange={e => this.setState({description: e.target.value})}
                                     type="text"
-                                    placeholder="Enter the description..."/>
+                                    placeholder="Enter the description..."
+                                    required/>
                             </div>
                         </div>
                         <Mutation
                             mutation={ADD_EXPENSE_MUTATION}
                             variables={{spentOn, category, amount, description, type}} 
-                            onCompleted={data => this.reLoadPageWithnewData(data)}>
+                            onCompleted={data => this.reLoadPageWithNewData(data)}>
                             {mutation => <button className='submit-expense' onClick={mutation}>ADD</button>}
                         </Mutation>
                 </div>

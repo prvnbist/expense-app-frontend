@@ -43,6 +43,14 @@
     margin-right: 20px;
 }
 
+#profile-options {
+    img {
+        padding-left: 20px;    
+        float: right;
+        width:10%;
+    }
+}
+
 #logout {
     height:40px;
     padding: 0 15px;
@@ -78,6 +86,10 @@
     @include flex(center, space-between);
     background: rgba(255, 255, 255, 0.3);
     border-radius: 4px;
+    img {
+        padding-left: 20px;
+        width:10%;
+    }
     input {
         width:70%;
         padding: 0 20px;
@@ -98,6 +110,13 @@
         line-height: normal;
         font-size: 20px;
         color: #FFFFFF;
+        select {
+            font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        font-size: 20px;
+        color: #FFFFFF;
+        }
         option {
             color:#000;
         }
