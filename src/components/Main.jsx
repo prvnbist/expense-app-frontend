@@ -48,6 +48,7 @@ export default class Main extends Component {
                         return <div>
                             {me
                                 .expenses
+                                .reverse()
                                 .map(item => <div className="expense-card" key={item.id}
                                     style={{
                                         borderTop: item.type === "plus"
