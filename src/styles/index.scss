@@ -16,6 +16,10 @@
     font-family: 'CircularStd', sans-serif;
 }
 
+a {
+    text-decoration: none;
+}
+
 .container {
     @include object(720px,calc(100% - 40px),null,null);
     margin: 0 auto;
