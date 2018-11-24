@@ -71,3 +71,8 @@ button {
 .span-12 {
     grid-template-columns: 1fr;
 }
+
+.error-message {
+    padding: 0 0 20px 0;
+    color: red;
+}

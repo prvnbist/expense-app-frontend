@@ -33,8 +33,8 @@ export default class Login extends Component {
                                 onChange={e => this.setState({username: e.target.value})}
                                 type="text"
                                 placeholder="Enter your username"/>
-                            <span id='username-error' className='error-message'></span>
                         </div>
+                        <span id='username-error' className='error-message'></span>
                         <div className="password-field">
                             <label><i className='material-icons'>remove_red_eye</i></label>
                             <input
@@ -42,8 +42,8 @@ export default class Login extends Component {
                                 onChange={e => this.setState({password: e.target.value})}
                                 type="password"
                                 placeholder="Enter your password"/>
-                            <span id='password-error' className='error-message'></span>
                         </div>
+                        <span id='password-error' className='error-message'></span>
                         <Mutation
                             mutation={LOGIN_MUTATION}
                             variables={{username,password}}
