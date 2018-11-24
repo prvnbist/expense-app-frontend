@@ -18,8 +18,12 @@ input,select,button {
     border-radius: 4px;
 }
 
+.form-center {
+    width:380px;
+}
+
 .username-field,.password-field,.email-field,.name-field,.select-field {
-    @include object(380px,380px,56px,null);
+    @include object(380px,100%,56px,null);
     border: 1px solid #CFD2D6;
     border-radius: 4px;
     margin-bottom: 20px;

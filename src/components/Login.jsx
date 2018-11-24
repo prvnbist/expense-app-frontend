@@ -25,7 +25,7 @@ export default class Login extends Component {
             <div>
                 <NavBar/>
                 <div className="container form form-login">
-                    <div>
+                    <div  className="form-center">
                         <div className='username-field'>
                             <label><i className='material-icons'>account_circle</i></label>
                             <input

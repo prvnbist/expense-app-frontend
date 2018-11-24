@@ -29,7 +29,7 @@ export default class SignUp extends Component {
             <div>
                 <NavBar/>
                 <div  className="container form form-signup">
-                    <div>
+                    <div className="form-center">
                         <span id='empty-error' className='error-message'></span>
                         <div className='name-field'>
                             <label><i className='material-icons'>account_circle</i></label>
@@ -119,8 +119,8 @@ export default class SignUp extends Component {
                                     document.getElementById('username-error').innerHTML = errorsList.username[0].exists;
                                 }
 
-                                const regex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
-                                let validEmail = emailInput => regex.test(emailInput);
+                                const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+                                let validEmail = emailInput => emailRegex.test(emailInput);
 
                                 if(email && !validEmail(email)) {
                                     document.getElementById("email-error").style.display = 'block';
@@ -135,6 +135,14 @@ export default class SignUp extends Component {
                                 if(password.length < 4 && password !== '') {
                                     document.getElementById("password-error").style.display = 'block';
                                     document.getElementById('password-error').innerHTML = errorsList.password[0].length;
+                                }
+
+                                const passwordRegex = /^(?=S*[a-z])(?=S*[A-Z])(?=\S*\d)(?=S*[^\W\s])\S{8,30}$/i;
+                                let validPassword = passwordInput => passwordRegex.test(passwordInput);
+
+                                if(password && !validPassword(password)) {
+                                    document.getElementById("password-error").style.display = 'block';
+                                    document.getElementById('password-error').innerHTML = errorsList.password[0].valid;
                                 }
 
                                 setTimeout(() =>{
