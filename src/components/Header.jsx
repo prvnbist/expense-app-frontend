@@ -112,7 +112,7 @@ export default class Header extends Component {
                             <div className="expense-wrapper">
                                 <input type="text" placeholder="0" disabled/>
                                 <div className="expense-option">
-                                    <select defaultValue='oct' id="monthlySpent">
+                                    <select defaultValue={Date().slice(4,7).toLowerCase()} id="monthlySpent">
                                         <option value="jan">JAN</option>
                                         <option value="feb">FEB</option>
                                         <option value="mar">MAR</option>
@@ -120,7 +120,7 @@ export default class Header extends Component {
                                         <option value="jun">JUN</option>
                                         <option value="jul">JUL</option>
                                         <option value="aug">AUG</option>
-                                        <option value="sept">SEPT</option>
+                                        <option value="sep">SEPT</option>
                                         <option value="oct">OCT</option>
                                         <option value="nov">NOV</option>
                                         <option value="dec">DEC</option>
