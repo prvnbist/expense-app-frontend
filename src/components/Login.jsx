@@ -26,6 +26,7 @@ export default class Login extends Component {
                 <NavBar/>
                 <div className="container form form-login">
                     <div  className="form-center">
+                        <span id='empty-error' className='error-message'></span>
                         <div className='username-field'>
                             <input
                                 value={username}
@@ -51,19 +52,52 @@ export default class Login extends Component {
                             variables={{username,password}}
                             onCompleted={data => this.submitForm(data)}
                             onError = {error => {
+
+                                let errorsList = {
+                                    "username": [{
+                                        "exists": "Username already exists!",
+                                        "length": "Username must be 4 letters long!"
+                                    }], 
+                                    "password": [{
+                                        "valid": "Password must have atleast one lowercase letter, one uppercase letter, one digit and one special character.",
+                                        "length": "Password length must be 8-30!"
+                                    }]
+                                }
+
+                                if(username === '' || password === '') {
+                                    document.getElementById("empty-error").style.display = 'block';
+                                    document.getElementById('empty-error').innerHTML = "Please, fill all the fields";
+                                }
+                                
+                                if(password && password.length < 4) {
+                                    document.getElementById("password-error").style.display = 'block';
+                                    document.getElementById('password-error').innerHTML = errorsList.password[0].length;
+                                }
+
+                                const passwordRegex = /^(?=S*[a-z])(?=S*[A-Z])(?=\S*\d)(?=S*[^\W\s])\S{8,30}$/i;
+                                let validPassword = passwordInput => passwordRegex.test(passwordInput);
+
+                                if(password && !validPassword(password)) {
+                                    document.getElementById("password-error").style.display = 'block';
+                                    document.getElementById('password-error').innerHTML = errorsList.password[0].valid;
+                                }
+
                                 let message = error.message.toString().replace('GraphQL error: ','');
-                                if(message.includes('username')) {
+                                if(username && message.includes('username')) {
                                     document.getElementById("username-error").style.display = 'block';
                                     document.getElementById('username-error').innerHTML = message;
                                 }
-                                else if(message.includes('password')){
+
+                                if(password && message.includes('password')){
                                     document.getElementById("password-error").style.display = 'block';
                                     document.getElementById('password-error').innerHTML = message;
                                 }
-                                setTimeout(() =>{
+
+                                setTimeout(() => {
+                                    document.getElementById("empty-error").style.display = 'none';
                                     document.getElementById("username-error").style.display = 'none';
                                     document.getElementById("password-error").style.display = 'none';
-                                    },2000);
+                                    },4000);
                             }}>                        
                             {mutation => <button className='btn' onClick={mutation}>Login</button>}
                         </Mutation>
