@@ -110,7 +110,30 @@ export default class Header extends Component {
                         <div id="total-spent">
                             <label htmlFor="#">TOTAL SPENT</label>
                             <div className="expense-wrapper">
-                                <input type="text" placeholder="0" disabled/>
+                            
+                                <Query query={CURRENT_USER}>
+                                    {({loading, error, data: {
+                                            me
+                                        }}) => {
+                                        if (loading) 
+                                            return <img src="https://upload.wikimedia.org/wikipedia/commons/a/ad/YouTube_loading_symbol_3_%28transparent%29.gif" alt=""/>;
+                                        if (error) 
+                                            return `Error! ${error.message}`;
+                                        var currentMonthExpenses = me.expenses
+                                                                        .filter(i => Date(Number(i.createdAt))
+                                                                        .toString()
+                                                                        .slice(4,7)
+                                                                        .toLowerCase() === Date()
+                                                                        .slice(4,7).toLowerCase() && i.type === "minus")
+                                        return  <input 
+                                                    type="text" 
+                                                    placeholder={
+                                                        currentMonthExpenses
+                                                            .map(i => i.amount)
+                                                            .reduce((a,b) => Number(a) + Number(b))
+                                                            .toLocaleString('en-IN')} disabled/>
+                                    }}
+                                </Query>
                                 <div className="expense-option">
                                     <select defaultValue={Date().slice(4,7).toLowerCase()} id="monthlySpent">
                                         <option value="jan">JAN</option>
