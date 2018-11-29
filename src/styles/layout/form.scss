@@ -7,6 +7,12 @@ input,select,button {
     &:focus {
         outline: none;
     }
+    &:focus + label {
+		border-right: 1px solid #0066dc;
+		i {
+			color: #0066dc;
+		}
+	}
 }
 
 .form-login,.form-signup {
@@ -29,6 +35,10 @@ input,select,button {
     margin-bottom: 20px;
     display: flex;
     align-items: center;
+	flex-direction: row-reverse;
+	&:focus-within {
+        border: 1px solid #0066dc;
+    }
     label {
         @include object(null,56px,32px,null);
         @include flex(center,center);

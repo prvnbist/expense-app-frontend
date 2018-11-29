@@ -32,39 +32,43 @@ export default class SignUp extends Component {
                     <div className="form-center">
                         <span id='empty-error' className='error-message'></span>
                         <div className='name-field'>
-                            <label><i className='material-icons'>account_circle</i></label>
                             <input
                                 value={name}
                                 onChange={e => this.setState({name: e.target.value})}
                                 type="text"
-                                placeholder="Enter your name"/>
+                                placeholder="Enter your name"
+                                id="name-input"/>
+                            <label htmlFor="name-input"><i className='material-icons'>account_circle</i></label>
                         </div>
                         <span id='name-error' className='error-message'></span>
                         <div className='email-field'>
-                            <label><i className='material-icons'>email</i></label>
                             <input
                                 value={email}
                                 onChange={e => this.setState({email: e.target.value})}
                                 type="text"
-                                placeholder="Enter your email"/>
+                                placeholder="Enter your email"
+                                id="email-input"/>
+                            <label htmlFor="email-input"><i className='material-icons'>email</i></label>
                         </div>
                         <span id='email-error' className='error-message'></span>
                         <div className="username-field">
-                            <label><i className='material-icons'>alternate_email</i></label>
                             <input
                                 value={username}
                                 onChange={e => this.setState({username: e.target.value})}
                                 type="text"
-                                placeholder="Enter your username"/>
+                                placeholder="Enter your username"
+                                id="username-input"/>
+                            <label htmlFor="username-input"><i className='material-icons'>alternate_email</i></label>
                         </div>
                         <span id='username-error' className='error-message'></span>
                         <div className='password-field'>
-                            <label><i className='material-icons'>remove_red_eye</i></label>
                             <input
                                 value={password}
                                 onChange={e => this.setState({password: e.target.value})}
                                 type="password"
-                                placeholder="Enter your password"/>
+                                placeholder="Enter your password"
+                                id="password-input"/>
+                            <label htmlFor="password-input"><i className='material-icons'>remove_red_eye</i></label>
                         </div>
                         <span id='password-error' className='error-message'></span>
                         <div className="select-field">

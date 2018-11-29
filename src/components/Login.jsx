@@ -27,21 +27,23 @@ export default class Login extends Component {
                 <div className="container form form-login">
                     <div  className="form-center">
                         <div className='username-field'>
-                            <label><i className='material-icons'>account_circle</i></label>
                             <input
                                 value={username}
                                 onChange={e => this.setState({username: e.target.value})}
                                 type="text"
-                                placeholder="Enter your username"/>
+                                placeholder="Enter your username"
+                                id="username-input"/>
+                            <label htmlFor="username-input"><i className='material-icons'>account_circle</i></label>
                         </div>
                         <span id='username-error' className='error-message'></span>
                         <div className="password-field">
-                            <label><i className='material-icons'>remove_red_eye</i></label>
                             <input
                                 value={password}
                                 onChange={e => this.setState({password: e.target.value})}
                                 type="password"
-                                placeholder="Enter your password"/>
+                                placeholder="Enter your password"
+                                id="password-input"/>
+                            <label htmlFor="password-input"><i className='material-icons'>remove_red_eye</i></label>
                         </div>
                         <span id='password-error' className='error-message'></span>
                         <Mutation
