@@ -11,7 +11,8 @@ export default class Header extends Component {
         super(props);
         this.state = {
             firstClick: true,
-            balance: ''
+            balance: '',
+            month: Date().slice(4,7).toLowerCase()
         }
     }
     logOut = () => {
@@ -34,7 +35,8 @@ export default class Header extends Component {
         }
     }
     render() {
-        const {balance} = this.state;
+        const {balance, month} = this.state;
+        console.log(month);
         return (
             <header className="conatiner-fluid dashboard-header">
                 <div className='container top-nav'>
@@ -120,11 +122,10 @@ export default class Header extends Component {
                                         if (error) 
                                             return `Error! ${error.message}`;
                                         var currentMonthExpenses = me.expenses
-                                                                        .filter(i => Date(Number(i.createdAt))
+                                                                        .filter(i => new Date(Number(i.createdAt))
                                                                         .toString()
                                                                         .slice(4,7)
-                                                                        .toLowerCase() === Date()
-                                                                        .slice(4,7).toLowerCase() && i.type === "minus")
+                                                                        .toLowerCase() === this.state.month && i.type === "minus")
                                         return  <input 
                                                     type="text" 
                                                     placeholder={
@@ -135,7 +136,7 @@ export default class Header extends Component {
                                     }}
                                 </Query>
                                 <div className="expense-option">
-                                    <select defaultValue={Date().slice(4,7).toLowerCase()} id="monthlySpent">
+                                    <select defaultValue={this.state.month} id="monthlySpent" onChange={e => this.setState({ month: e.target.value })}>
                                         <option value="jan">JAN</option>
                                         <option value="feb">FEB</option>
                                         <option value="mar">MAR</option>
