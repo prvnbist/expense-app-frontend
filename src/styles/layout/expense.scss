@@ -2,7 +2,7 @@
 
 #add-expense-wrapper {
     @include object(null, 100vw, 100vh, rgba(#000, 0.3));
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     z-index: 20;

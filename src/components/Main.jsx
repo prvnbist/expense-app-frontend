@@ -103,7 +103,7 @@ export default class Main extends Component {
                                     </div>
                                     <div className='bottom-row'>
                                         <span className="description">
-                                            <i className='material-icons'>description</i>{item.description}</span>
+                                            <i className='material-icons'>description</i>{item.description ? item.description : 'No description.'}</span>
                                     </div>
                                 </div>)}
                         </div>;
