@@ -125,14 +125,15 @@ export default class Header extends Component {
                                                                         .filter(i => new Date(Number(i.createdAt))
                                                                         .toString()
                                                                         .slice(4,7)
-                                                                        .toLowerCase() === this.state.month && i.type === "minus")
+                                                                        .toLowerCase() === this.state.month && i.type === "minus");
+                                        console.log(currentMonthExpenses);
                                         return  <input 
                                                     type="text" 
                                                     placeholder={
-                                                        currentMonthExpenses
-                                                            .map(i => i.amount)
-                                                            .reduce((a,b) => Number(a) + Number(b))
-                                                            .toLocaleString('en-IN')} disabled/>
+                                                        currentMonthExpenses.length !== 0 ? currentMonthExpenses
+                                                        .map(i => i.amount)
+                                                        .reduce((a,b) => Number(a) + Number(b))
+                                                        .toLocaleString('en-IN'): '0'} disabled/>
                                     }}
                                 </Query>
                                 <div className="expense-option">
