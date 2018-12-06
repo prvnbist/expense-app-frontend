@@ -36,7 +36,6 @@ export default class Header extends Component {
     }
     render() {
         const {balance, month} = this.state;
-        console.log(month);
         return (
             <header className="conatiner-fluid dashboard-header">
                 <div className='container top-nav'>
@@ -103,7 +102,7 @@ export default class Header extends Component {
                                             defaultValue={balance === ""
                                             ? parseInt(me.balance ? me.balance : 0).toLocaleString('en-IN')
                                             : parseInt(balance).toLocaleString('en-IN')}
-                                            onChange={e => this.setState({balance: e.target.value})}/>
+                                            onChange={e => this.setState({balance: e.target.value.replace(/,/g, '')})}/>
                                     }}
                                 </Query>
                                 <div className="expense-option">INR</div>
@@ -125,8 +124,7 @@ export default class Header extends Component {
                                                                         .filter(i => new Date(Number(i.createdAt))
                                                                         .toString()
                                                                         .slice(4,7)
-                                                                        .toLowerCase() === this.state.month && i.type === "minus");
-                                        console.log(currentMonthExpenses);
+                                                                        .toLowerCase() === month && i.type === "minus");
                                         return  <input 
                                                     type="text" 
                                                     placeholder={
@@ -137,7 +135,7 @@ export default class Header extends Component {
                                     }}
                                 </Query>
                                 <div className="expense-option">
-                                    <select defaultValue={this.state.month} id="monthlySpent" onChange={e => this.setState({ month: e.target.value })}>
+                                    <select defaultValue={month} id="monthlySpent" onChange={e => this.setState({ month: e.target.value })}>
                                         <option value="jan">JAN</option>
                                         <option value="feb">FEB</option>
                                         <option value="mar">MAR</option>
