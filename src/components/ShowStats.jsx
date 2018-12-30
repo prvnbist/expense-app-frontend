@@ -23,8 +23,8 @@ export default class AddExpense extends Component {
                         let categories = [...new Set(me.expenses.filter(item => item.type === "minus").map(item => item.category))];
                         let amount = [];
                         let catAmount = 0;
-                        for (let i = 0; i < categories.length; i++) {
-                            for (let j = 0; j < me.expenses.length; j++) {
+                        for (let i in categories) {
+                            for (let j in me.expenses) {
                                 if (me.expenses[j].category === categories[i]) {
                                     catAmount += Number(me.expenses[j].amount);
                                 }
@@ -32,28 +32,38 @@ export default class AddExpense extends Component {
                             amount.push(catAmount);
                             catAmount = 0;
                         }
-                        let colors = ["#5DA5DA","#FAA43A","#4D4D4D","#60BD68","#F17CB0","#B2912F","#B276B2","#DECF3F","#F15854"];
+                        let colors = [
+                            "#5DA5DA",
+                            "#FAA43A",
+                            "#4D4D4D",
+                            "#60BD68",
+                            "#F17CB0",
+                            "#B2912F",
+                            "#B276B2",
+                            "#DECF3F",
+                            "#F15854"
+                        ];
                         let chartData = [];
-                        for(let i=0;i<amount.length;i++) {
-                            let obj = {value:amount[i],label:categories[i],color:colors[i]}
+                        for (let i in amount) {
+                            let obj = {
+                                value: amount[i],
+                                label: categories[i],
+                                color: colors[i]
+                            }
                             chartData.push(obj);
                         }
-                        console.log(chartData);
-                        // let chartOptions;
                         return (
                             <div className="popup-card">
                                 <div id="left">
                                     <div id="heading">
                                         <span>Stats</span>
-                                        {/* <button onClick={this.props.closePopUp}>
-                                                    <i className="material-icons">close</i>
-                                                </button> */}
                                     </div>
                                     <h1
                                         style={{
                                         color: "rgba(4, 26, 42, 0.33)",
                                         fontSize: 14,
-                                        marginBottom: 20
+                                        marginBottom: 20,
+                                        marginTop: 30
                                     }}>CATEGORIES</h1>
                                     <div>
                                         {categories.map((item, index) => <div
@@ -77,20 +87,26 @@ export default class AddExpense extends Component {
                                                 INR</span>
                                         </div>)}
                                     </div>
-
                                 </div>
                                 <div id="right">
                                     <div id="heading">
                                         <span>Overview</span>
-                                        <button onClick={this.props.closePopUp}>
-                                            <i className="material-icons">close</i>
-                                        </button>
+                                        <i
+                                            className="material-icons"
+                                            style={{
+                                            cursor: "pointer"
+                                        }}
+                                            onClick={this.props.closePopUp}>close</i>
                                     </div>
+                                    <h1
+                                        style={{
+                                        color: "rgba(4, 26, 42, 0.33)",
+                                        fontSize: 14,
+                                        marginBottom: 20,
+                                        marginTop: 30
+                                    }}>MOST SPENT ON</h1>
                                     <div id="statsChart">
-                                        <PieChart
-                                            data={chartData}
-                                            width="400"
-                                            height="400"/>
+                                        <PieChart data={chartData} width="400" height="400"/>
                                     </div>
                                 </div>
                             </div>
