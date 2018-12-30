@@ -5,17 +5,24 @@ import CURRENT_USER from '../queries/CurrentUser';
 import DELETE_EXPENSE_MUTATION from '../queries/DeleteExpense';
 
 import AddExpense from './AddExpense';
+import ShowStats from './ShowStats';
 
 export default class Main extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            showPopup: false
+            showPopup: false,
+            showStats: false
         }
     }
     toggleExpense = () => {
         this.setState({
             showPopup: !this.state.showPopup
+        })
+    }
+    toggleStats = () => {
+        this.setState({
+            showStats: !this.state.showStats
         })
     }
     reLoadPageWithNewData = _ => {
@@ -29,11 +36,17 @@ export default class Main extends Component {
                 {this.state.showPopup
                     ? <AddExpense closePopUp={this.toggleExpense}/>
                     : null}
+                {this.state.showStats
+                    ? <ShowStats closePopUp={this.toggleStats}/>
+                    : null}
                 <div id="section-title">
-                    <h1>EXPENSES</h1>
-                    <button onClick={this.toggleExpense}>
-                        <i className='material-icons'>add</i>
-                    </button>
+                    <div style={{display:"flex",alignItems:"center"}}>
+                        <h1>EXPENSES</h1>
+                        <button onClick={this.toggleExpense}>
+                            <i className='material-icons'>add</i>
+                        </button>
+                    </div>
+                    <h1 onClick={this.toggleStats} style={{marginRight:0,color: "#318FFE", cursor:"pointer"}}>STATS</h1>
                 </div>
                 <Query query={CURRENT_USER}>
                     {({loading, error, data: {

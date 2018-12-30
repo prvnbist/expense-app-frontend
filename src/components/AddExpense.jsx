@@ -54,7 +54,7 @@ export default class AddExpense extends Component {
             "Furniture"
         ];
         return (
-            <div id="add-expense-wrapper">
+            <div className="popup-bg" >
                 <div id="expense-popup-card">
                     <div id="heading">
                         <span>Add Expense</span>

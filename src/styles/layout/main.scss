@@ -7,9 +7,8 @@ main {
 }
 
 #section-title {
-    width: inherit;
     height: 100px;
-    @include flex(center, null);
+    @include flex(center, space-between);
 
     h1 {
         font-style: normal;
