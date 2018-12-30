@@ -32,6 +32,11 @@
         line-height: normal;
         font-size: 18px;
         color: #FFFFFF;
+        @include flex(center,null);
+        img {
+            width:30px;
+            margin-right: 20px;
+        }
     }
 }
 

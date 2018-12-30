@@ -39,7 +39,7 @@ export default class Header extends Component {
         return (
             <header className="conatiner-fluid dashboard-header">
                 <div className='container top-nav'>
-                    <span id="logo">Expense Manager</span>
+                    <span id="logo"><img src="https://res.cloudinary.com/prvnbist/image/upload/v1546179938/Group_ovez0w.png" alt="Expense Manager"/> Expense Manager</span>
                     <div id="profile-options">
                         <Query query={CURRENT_USER}>
                             {({client, loading, error, data: {

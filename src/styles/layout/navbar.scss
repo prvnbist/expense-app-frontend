@@ -22,6 +22,13 @@ nav {
         position: relative;
         z-index: 10;
         @include flex(center,space-between);
+        #logo {
+            @include flex(center,null);
+            img {
+                width:30px;
+                margin-right: 20px;
+            }
+        }
         ul {
             margin-bottom: 0;
             li {
