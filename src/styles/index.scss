@@ -1,6 +1,8 @@
 @import './helpers/mixins.scss';
 @import './helpers/spacings.scss';
 @import './base/typography.scss';
+@import './base/reset.scss';
+@import './base/grid.scss';
 @import './layout/navbar.scss';
 @import './layout/header.scss';
 @import './layout/main.scss';
@@ -16,18 +18,6 @@
     font-family: 'CircularStd', sans-serif;
 }
 
-a {
-    text-decoration: none;
-}
-
-.container {
-    @include object(720px,calc(100% - 40px),null,null);
-    margin: 0 auto;
-}
-.container-fluid {
-    @include object(100%,null,null,null);
-}
-
 #logo {
     font-weight: 400;
     line-height: normal;
@@ -40,36 +30,6 @@ a {
 .active {
     border-bottom: 3px solid #fff;
     padding-bottom: 20px;
-}
-
-button {
-    cursor: pointer;
-}
-
-.row {
-    display: grid;
-    grid-gap: 20px;
-    margin-bottom: 20px;
-}
-
-.span-8-4 {
-    grid-template-columns: 2fr 1fr;
-}
-
-.span-2-10 {
-    grid-template-columns: 1fr 5fr; 
-}
-
-.span-3-9 {
-    grid-template-columns: 1fr 3fr;
-}
-
-.span-4-8 {
-    grid-template-columns: 1fr 2fr;
-}
-
-.span-12 {
-    grid-template-columns: 1fr;
 }
 
 .error-message {

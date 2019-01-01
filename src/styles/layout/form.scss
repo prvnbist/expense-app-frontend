@@ -4,9 +4,6 @@ input,select,button {
     height:56px;
     border:none;
     background: transparent;
-    &:focus {
-        outline: none;
-    }
     &:focus + label {
 		border-right: 1px solid #0066dc;
 		i {
