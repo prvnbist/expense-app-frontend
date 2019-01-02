@@ -94,7 +94,7 @@ export default class SignUp extends Component {
                                         "exists": "Email already exists!",
                                     }], 
                                     "username": [{
-                                        "valid": "Username must be a valid email!",
+                                        "valid": "Username must have only alphabets or numbers!",
                                         "exists": "Username already exists!",
                                         "length": "Username must be 4 letters long!"
                                     }], 
@@ -113,11 +113,20 @@ export default class SignUp extends Component {
                                     document.getElementById("name-error").style.display = 'block';
                                     document.getElementById('name-error').innerHTML = errorsList.name[0].length;
                                 }
-
-                                if(username && username.length < 4) {
+                                
+                                const userNameRegex = /^[a-zA-Z0-9-_]+$/;
+                                let validUserName = userNameInput => userNameRegex.test(userNameInput);
+                                
+                                if(username && username.length < 4 && !validUserName(username)) {
                                     document.getElementById("username-error").style.display = 'block';
                                     document.getElementById('username-error').innerHTML = errorsList.username[0].length;
-                                }                                
+                                }
+                                
+                                if(username && !validUserName(username)) {
+                                    document.getElementById("username-error").style.display = 'block';
+                                    document.getElementById('username-error').innerHTML = errorsList.username[0].valid;
+                                }  
+                                
                                 if(error.message.includes("Username already exists.")) {
                                     document.getElementById("username-error").style.display = 'block';
                                     document.getElementById('username-error').innerHTML = errorsList.username[0].exists;
