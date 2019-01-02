@@ -1,15 +1,16 @@
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import React, {Component, Fragment} from 'react';
 import ReactDOM from 'react-dom';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 // Apollo Imports
 import {ApolloProvider} from "react-apollo";
 import {ApolloClient, ApolloLink, InMemoryCache, HttpLink} from "apollo-boost";
 
 // Components
-import Dashboard from './components/Dashboard.jsx';
+import Home from './components/Home.jsx';
 import Login from './components/Login.jsx';
 import SignUp from './components/SignUp.jsx';
+import Dashboard from './components/Dashboard.jsx';
 
 // Styles
 import './styles/index.scss';
@@ -52,7 +53,8 @@ class App extends Component {
                 <ApolloProvider client={client}>
                     <Router>
                         <Switch>
-                            <Route exact activeClassName="active" path="/" component={Login}/>
+                            <Route exact activeClassName="active" path="/" component={Home}/>
+                            <Route exact activeClassName="active" path="/login" component={Login}/>
                             <Route exact activeClassName="active" path="/signup" component={SignUp}/>
                             <Route exact path="/dashboard" component={Dashboard}/>
                             <Route path="*" component={Login} />

@@ -18,12 +18,78 @@
     font-family: 'CircularStd', sans-serif;
 }
 
+#home {
+    background-image: url('../images/expense_bg.svg');
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+#homepage-header {
+    height: 80px;
+    @include flex(center, null);
+    border-bottom: 1px solid rgba(#000, 0.1), ;
+}
+
+#home-page-content {
+    maxWidth: 1280px;
+    height: calc(100vh - 80px);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#home-page-content-heading {
+    margin-bottom: 40px;
+    margin-top: -15%;
+    font-weight: 500;
+    line-height: normal;
+    font-size: 48px;
+    color: #031A2A;
+    width: 450px;
+}
+
+#home-page-content-buttons {
+    a {
+        button {
+            @include object(null, 123px, 48px, #F88383);
+            line-height: 48px;
+            font-weight: 400;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        &:first-child {
+            margin-right: 20px;
+            button {
+                color: #FFFFFF;
+                border: 1px solid transparent;
+            }
+        }
+
+        &:last-child {
+            button {
+                color: #CFD2D6;
+                background: transparent;            
+                border: 1.5px solid #CFD2D6;
+            }
+        }
+    }
+
+}
+
 #logo {
     font-weight: 400;
     line-height: normal;
     font-size: 18px;
+
     a {
         color: #FFFFFF;
+        @include flex(center, null);
+    }
+
+    img {
+        width: 30px;
+        margin-right: 20px;
     }
 }
 
@@ -33,6 +99,14 @@
 }
 
 .error-message {
-    padding: 0 0 20px 0;
+    padding: 0 0 20px;
     color: red;
+}
+
+
+@media screen and (max-width:576px) {
+    #home-page-content-heading {
+        width: 100%;
+        font-size: 40px;
+    }
 }
