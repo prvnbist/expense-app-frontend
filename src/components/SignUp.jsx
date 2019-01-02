@@ -150,7 +150,7 @@ export default class SignUp extends Component {
                                     document.getElementById('password-error').innerHTML = errorsList.password[0]["length"];
                                 }
 
-                                const passwordRegex = /^(?=S*[a-z])(?=S*[A-Z])(?=\S*\d)(?=S*[^\W\s])\S{8,30}$/i;
+                                const passwordRegex = /(?=^.{8,20}$)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s)[0-9a-zA-Z!@#$%^&*()]*$/;
                                 let validPassword = passwordInput => passwordRegex.test(passwordInput);
 
                                 if(password && !validPassword(password)) {
