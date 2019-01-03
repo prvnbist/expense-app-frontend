@@ -10,8 +10,24 @@ export default class Login extends Component {
         super(props);
         this.state = {
             username: '',
-            password: ''
+            password: '',
+            show: false
         }
+    }
+    showPassword = e => {
+        if(!this.state.show){
+            e.target.innerText = 'visibility';
+            document.getElementById('password-input').type = "text";
+            this.setState({
+                show: !this.state.show
+            });
+            return;
+        }
+        e.target.innerText = 'visibility_off';
+        document.getElementById('password-input').type = "password";
+        this.setState({
+            show: !this.state.show
+        });      
     }
     submitForm = ({login}) => {
         document.getElementsByClassName('error-message').innerHTML= '';
@@ -34,7 +50,7 @@ export default class Login extends Component {
                                 type="text"
                                 placeholder="Enter your username"
                                 id="username-input"/>
-                            <label htmlFor="username-input"><i className='material-icons'>account_circle</i></label>
+                            <label htmlFor="username-input"><i className='material-icons'>alternate_email</i></label>
                         </div>
                         <span id='username-error' className='error-message'></span>
                         <div className="password-field">
@@ -44,7 +60,7 @@ export default class Login extends Component {
                                 type="password"
                                 placeholder="Enter your password"
                                 id="password-input"/>
-                            <label htmlFor="password-input"><i className='material-icons'>remove_red_eye</i></label>
+                            <label htmlFor="password-input"><i className='material-icons' style={{cursor:"pointer"}} onClick={e => this.showPassword(e)}>visibility_off</i></label>
                         </div>
                         <span id='password-error' className='error-message'></span>
                         <Mutation
@@ -55,7 +71,6 @@ export default class Login extends Component {
 
                                 let errorsList = {
                                     "username": [{
-                                        "exists": "Username already exists!",
                                         "length": "Username must be 4 letters long!"
                                     }], 
                                     "password": [{
@@ -71,7 +86,7 @@ export default class Login extends Component {
                                 
                                 if(password && password.length < 4) {
                                     document.getElementById("password-error").style.display = 'block';
-                                    document.getElementById('password-error').innerHTML = errorsList.password[0].length;
+                                    document.getElementById('password-error').innerHTML = errorsList.password[0]["length"];
                                 }
 
                                 const passwordRegex = /^(?=S*[a-z])(?=S*[A-Z])(?=\S*\d)(?=S*[^\W\s])\S{8,30}$/i;
