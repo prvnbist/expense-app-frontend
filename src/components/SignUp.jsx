@@ -12,8 +12,24 @@ export default class SignUp extends Component {
             password: '',
             name: '',
             email: '',
-            gender: 'M'
+            gender: 'M',
+            show: false
         }
+    }
+    showPassword = e => {
+        if(!this.state.show){
+            e.target.innerText = 'visibility';
+            document.getElementById('password-input').type = "text";
+            this.setState({
+                show: !this.state.show
+            });
+            return;
+        }
+        e.target.innerText = 'visibility_off';
+        document.getElementById('password-input').type = "password";
+        this.setState({
+            show: !this.state.show
+        });      
     }
     submitForm = ({signup}) => {
         localStorage.clear();
@@ -68,7 +84,7 @@ export default class SignUp extends Component {
                                 type="password"
                                 placeholder="Enter your password"
                                 id="password-input"/>
-                            <label htmlFor="password-input"><i className='material-icons'>remove_red_eye</i></label>
+                            <label htmlFor="password-input"><i className='material-icons' style={{cursor:"pointer"}} onClick={e => this.showPassword(e)}>visibility_off</i></label>
                         </div>
                         <span id='password-error' className='error-message'></span>
                         <div className="select-field">
