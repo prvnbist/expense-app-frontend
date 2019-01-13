@@ -57,6 +57,12 @@ export default class AddExpense extends Component {
                                 <div id="left">
                                     <div id="heading">
                                         <span>Stats</span>
+                                        <i
+                                            className="material-icons"
+                                            style={{
+                                            cursor: "pointer"
+                                        }}
+                                            onClick={this.props.closePopUp}>close</i>
                                     </div>
                                     <h1
                                         style={{
@@ -68,18 +74,8 @@ export default class AddExpense extends Component {
                                     <div>
                                         {categories.map((item, index) => <div
                                             key={index}
-                                            style={{
-                                            width: 350,
-                                            marginBottom: 20,
-                                            display: "flex",
-                                            justifyContent: "space-between"
-                                        }}>
-                                            <span
-                                                style={{
-                                                fontWeight: 400,
-                                                fontSize: 18,
-                                                color: "#041A2A"
-                                            }}>{item}</span>
+                                            className="cateogriesSpentOn">
+                                            <span>{item}</span>
                                             <span
                                                 style={{
                                                 color: '#EC1A1A'
@@ -106,7 +102,7 @@ export default class AddExpense extends Component {
                                         marginTop: 30
                                     }}>MOST SPENT ON</h1>
                                     <div id="statsChart">
-                                        <PieChart data={chartData} width="400" height="400"/>
+                                        <PieChart data={chartData} width="350" height="350"/>
                                     </div>
                                 </div>
                             </div>

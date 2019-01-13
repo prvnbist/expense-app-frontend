@@ -103,10 +103,99 @@
     color: red;
 }
 
+.popup-card {
+    .cateogriesSpentOn {
+        width: 350px;
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: space-between;
+        span {
+            font-size:18px;
+            font-weight: 400;
+            &:first-child {
+                color: #041A2A;
+            }
+            &:last-child {
+                color: #EC1A1A
+            }
+        }
+    }
+}
 
 @media screen and (max-width:576px) {
     #home-page-content-heading {
         width: 100%;
         font-size: 40px;
     }
+    #logo {
+        a {
+            font-size:16px;
+        }
+    }
+    .top-nav #logo {
+        width:30px;
+        color:transparent;
+    }
+    .dashboard-header {
+        height:auto;
+    }
+    #total-expenses {
+        grid-template-columns: 1fr;
+    }
+    #user-account-info {
+        margin: 60px auto 20px auto;
+    }
+    .expense-wrapper {
+        margin: 20px 0 0 0;
+    }
+    .expense-card {
+        width:100%;
+        height:auto;
+    }
+    .mid-row {
+        flex-direction:column;
+        .category,.time {
+            margin-bottom: 16px;
+        }
+    }
+    .top-row {
+        .spentOn {
+            font-size:18px;
+        }
+        .amount {
+            font-size:16px;
+        }
+        .deleteExpense {
+            i {
+                font-size: 20px;
+            }
+        }
+    }
+    #expense-popup-card {
+        height:100%;
+        overflow-y: scroll;
+        div:nth-child(2){
+            grid-template-columns: 1fr;
+        }
+    }
+    
+    .popup-card {
+        height:100%;
+        width:100%;
+        padding: 40px;
+        grid-template-columns: 1fr;
+        grid-row-gap: 40px;
+        #left {
+            width:100%;
+        }
+        .cateogriesSpentOn {
+            width: 100%;
+        }
+    }
+    .cateogriesSpentOn {
+        span {
+            font-size:16px;
+        }
+    }
+    
 }

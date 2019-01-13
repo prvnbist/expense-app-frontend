@@ -85,3 +85,10 @@ input,select,button {
     color: #FFFFFF;
     cursor:pointer;
 }
+
+@media screen and (max-width:567px) {
+    .form-center {
+        width: 100%;
+        padding: 0 20px;
+    }
+}
