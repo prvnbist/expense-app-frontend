@@ -1,5 +1,5 @@
 .container {
-    @include object(720px,calc(100% - 40px),null,null);
+    @include object(1180px,calc(100% - 40px),null,null);
     margin: 0 auto;
 }
 
