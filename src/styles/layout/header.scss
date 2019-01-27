@@ -81,34 +81,56 @@
 
 #total-expenses {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 280px 1fr;
     grid-gap: 20px;
+}
+
+#total-spent {
+    width:480px;
+}
+
+@media screen and(max-width:567px) {
+    #total-spent {
+        width:auto;
+    }
 }
 
 .expense-wrapper {
     margin: 20px 0;
     height: 60px;
-    @include flex(center, space-between);
-    background: rgba(255, 255, 255, 0.3);
+    @include flex(flex-end, space-between);
+    // background: rgba(255, 255, 255, 0.3);
     border-radius: 4px;
     img {
         padding-left: 20px;
         width:10%;
     }
     input {
-        width:70%;
-        padding: 0 20px;
+        // width:70%;
+        // padding: 0 20px;
         font-style: normal;
         font-weight: 500;
-        line-height: normal;
-        font-size: 20px;
+        line-height: 0;
+        font-size: 48px;
         color: #FFFFFF;
+        float:left; //
         &::placeholder{
             color:#fff;
         }
     }
+    span {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 20px;
+        color: #FFFFFF;
+        float: left;
+        height:56px;
+    }
     .expense-option {
-        width:30%;
+        float:left; //
+        transform: translateY(-7px); //
+        margin-right: 20px; //
+        // width:30%;
         text-align:center;
         font-style: normal;
         font-weight: 500;
@@ -117,10 +139,10 @@
         color: #FFFFFF;
         select {
             font-style: normal;
-        font-weight: 500;
-        line-height: normal;
-        font-size: 20px;
-        color: #FFFFFF;
+            font-weight: 500;
+            line-height: normal;
+            font-size: 20px;
+            color: #FFFFFF;
         }
         option {
             color:#000;

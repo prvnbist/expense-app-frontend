@@ -8,6 +8,7 @@
 @import './layout/main.scss';
 @import './layout/form.scss';
 @import './layout/expense.scss';
+@import './layout/datepicker.scss';
 
 * {
     margin: 0;
@@ -140,7 +141,7 @@
         height:auto;
     }
     #total-expenses {
-        grid-template-columns: 1fr;
+        grid-template-columns:100%;
     }
     #user-account-info {
         margin: 60px auto 20px auto;
@@ -198,4 +199,10 @@
         }
     }
     
+}
+
+@media screen and (max-width:576px) {
+    #showStatsButton {
+        display: none;
+    }
 }

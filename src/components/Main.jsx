@@ -46,7 +46,7 @@ export default class Main extends Component {
                             <i className='material-icons'>add</i>
                         </button>
                     </div>
-                    <h1 onClick={this.toggleStats} style={{marginRight:0,color: "#318FFE", cursor:"pointer"}}>STATS</h1>
+                    <h1 onClick={this.toggleStats} id="showStatsButton" style={{marginRight:0,color: "#318FFE", cursor:"pointer"}}>STATS</h1>
                 </div>
                 <Query query={CURRENT_USER}>
                     {({loading, error, data: {
@@ -58,7 +58,7 @@ export default class Main extends Component {
                                 alt=""/>;
                         if (error) 
                             return `Error! ${error.message}`;
-                        return <div>
+                        return <div className="expenses-list">
                             {me
                                 .expenses
                                 .reverse()
@@ -79,7 +79,7 @@ export default class Main extends Component {
                                                     : '#EC1A1A'
                                             }}>{item.type === "plus"
                                                     ? '+'
-                                                    : '-'} {parseInt(item.amount).toLocaleString('en-IN')} INR</span>
+                                                    : '-'} {parseInt(item.amount).toLocaleString("en-IN",{style: 'currency', currency:"INR"})}</span>
                                             <Mutation
                                                 mutation={DELETE_EXPENSE_MUTATION}
                                                 variables={{

@@ -6,13 +6,35 @@ import {Query, Mutation} from 'react-apollo';
 import CURRENT_USER from '../queries/CurrentUser';
 import UPDATE_USER_MUTATION from '../queries/UpdateUser';
 
+import DatePicker from './DatePicker';
+
+const months = [
+    "jan",
+    "feb",
+    "mar",
+    "apr",
+    "may",
+    "jun",
+    "jul",
+    "aug",
+    "sep",
+    "oct",
+    "nov",
+    "dec"
+];
 export default class Header extends Component {
     constructor(props) {
         super(props);
         this.state = {
             firstClick: true,
             balance: '',
-            month: Date().slice(4,7).toLowerCase()
+            month: Date()
+                .slice(4, 7)
+                .toLowerCase(),
+            year: new Date().getFullYear(),
+            showDatePicker: false,
+            posX: "",
+            posY: ""
         }
     }
     logOut = () => {
@@ -31,22 +53,52 @@ export default class Header extends Component {
                 .setAttribute('readOnly', 'true');
             e.target.innerHTML = 'edit';
             this.setState({firstClick: true});
-            window.location.reload();
+            window
+                .location
+                .reload();
         }
     }
+    toggleDatePicker = e => {
+        this.setState({
+            showDatePicker: !this.state.showDatePicker,
+            posX: e
+                ? e.clientX
+                : "",
+            posY: e
+                ? e.clientY
+                : ""
+        });
+    };
+    data = d => {
+        document
+            .getElementById("monthYearSelector")
+            .innerHTML = `${d.month} ${d.year}`;
+        this.setState({month: d.month,year:d.year})
+    };
     render() {
-        const {balance, month} = this.state;
+        const {balance, month, year} = this.state;
         return (
-            <header className="conatiner-fluid dashboard-header">
+            <header className="container-fluid dashboard-header">
+                {this.state.showDatePicker
+                    ? (<DatePicker
+                        position={this.state}
+                        selectedData={this.data}
+                        closeDatePicker={this.toggleDatePicker}/>)
+                    : null}
                 <div className='container top-nav'>
-                    <span id="logo"><img src="https://res.cloudinary.com/prvnbist/image/upload/v1546179938/Group_ovez0w.png" alt="Expense Manager"/> Expense Manager</span>
+                    <span id="logo"><img
+                        src="https://res.cloudinary.com/prvnbist/image/upload/v1546179938/Group_ovez0w.png"
+                        alt="Expense Manager"/>
+                        Expense Manager</span>
                     <div id="profile-options">
                         <Query query={CURRENT_USER}>
                             {({client, loading, error, data: {
                                     me
                                 }}) => {
                                 if (loading) 
-                                    return <img src="https://upload.wikimedia.org/wikipedia/commons/a/ad/YouTube_loading_symbol_3_%28transparent%29.gif" alt=""/>;
+                                    return <img
+                                        src="https://upload.wikimedia.org/wikipedia/commons/a/ad/YouTube_loading_symbol_3_%28transparent%29.gif"
+                                        alt=""/>;
                                 if (error) 
                                     return `Error! ${error.message}`;
                                 return <div id='user-info-actions'>
@@ -75,8 +127,9 @@ export default class Header extends Component {
                                 }}>
                                     {mutation => <span
                                         style={{
-                                        float: 'right',
-                                        cursor: 'pointer'
+                                        cursor: 'pointer',
+                                        marginLeft: 20,
+                                        fontSize: 16
                                     }}
                                         onClick={e => {
                                         this.editBalance(e);
@@ -86,12 +139,15 @@ export default class Header extends Component {
                                 </Mutation>
                             </label>
                             <div className="expense-wrapper">
+                                {/* <div className="expense-option">INR</div> */}
                                 <Query query={CURRENT_USER}>
                                     {({loading, error, data: {
                                             me
                                         }}) => {
                                         if (loading) 
-                                            return <img src="https://upload.wikimedia.org/wikipedia/commons/a/ad/YouTube_loading_symbol_3_%28transparent%29.gif" alt=""/>;
+                                            return <img
+                                                src="https://upload.wikimedia.org/wikipedia/commons/a/ad/YouTube_loading_symbol_3_%28transparent%29.gif"
+                                                alt=""/>;
                                         if (error) 
                                             return `Error! ${error.message}`;
                                         return <input
@@ -100,42 +156,71 @@ export default class Header extends Component {
                                             placeholder='Not Set'
                                             id="inputBalance"
                                             defaultValue={balance === ""
-                                            ? parseInt(me.balance ? me.balance : 0).toLocaleString('en-IN')
-                                            : parseInt(balance).toLocaleString('en-IN')}
-                                            onChange={e => this.setState({balance: e.target.value.replace(/,/g, '')})}/>
+                                            ? parseInt(me.balance
+                                                ? me.balance
+                                                : 0).toLocaleString("en-IN", {
+                                                style: 'currency',
+                                                currency: "INR"
+                                            })
+                                            : parseInt(balance).toLocaleString("en-IN", {
+                                                style: 'currency',
+                                                currency: "INR"
+                                            })}
+                                            onChange={e => this.setState({
+                                            balance: e
+                                                .target
+                                                .value
+                                                .replace(/,/g, '')
+                                        })}/>
                                     }}
                                 </Query>
-                                <div className="expense-option">INR</div>
                             </div>
                         </div>
-                        <div id="total-spent">
-                            <label htmlFor="#">TOTAL SPENT</label>
+                        <div
+                            id="total-spent">
+                            <label htmlFor="#">INSIGHT</label>
                             <div className="expense-wrapper">
-                            
+
                                 <Query query={CURRENT_USER}>
                                     {({loading, error, data: {
                                             me
                                         }}) => {
                                         if (loading) 
-                                            return <img src="https://upload.wikimedia.org/wikipedia/commons/a/ad/YouTube_loading_symbol_3_%28transparent%29.gif" alt=""/>;
+                                            return <img
+                                                src="https://upload.wikimedia.org/wikipedia/commons/a/ad/YouTube_loading_symbol_3_%28transparent%29.gif"
+                                                alt=""/>;
                                         if (error) 
                                             return `Error! ${error.message}`;
-                                        var currentMonthExpenses = me.expenses
-                                                                        .filter(i => new Date(Number(i.createdAt))
-                                                                        .toString()
-                                                                        .slice(4,7)
-                                                                        .toLowerCase() === month && i.type === "minus");
-                                        return  <input 
-                                                    type="text" 
-                                                    placeholder={
-                                                        currentMonthExpenses.length !== 0 ? currentMonthExpenses
-                                                        .map(i => i.amount)
-                                                        .reduce((a,b) => Number(a) + Number(b))
-                                                        .toLocaleString('en-IN'): '0'} disabled/>
+                                        let currentMonthExpenses = me
+                                            .expenses
+                                            .filter(i => new Date(Number(i.createdAt)).toString().slice(4, 7).toLowerCase() === month && new Date(Number(i.createdAt)).toString().includes(`${year}`) && i.type === "minus");
+                                        return <span>You’ve spent a total of {currentMonthExpenses.length !== 0
+                                                ? Number(currentMonthExpenses.map(i => i.amount).reduce((a, b) => Number(a) + Number(b))).toLocaleString("en-IN", {
+                                                    style: 'currency',
+                                                    currency: "INR"
+                                                })
+                                                : '0'}&nbsp; in the month of&nbsp;
+                                            <span
+                                                id="monthYearSelector"
+                                                onClick={e => this.toggleDatePicker(e)}
+                                                style={{
+                                                cursor: "pointer",
+                                                float:'none',
+                                                textTransform: 'capitalize',
+                                                textDecoration: 'underline'
+                                            }}>
+                                                {months[new Date().getMonth()]}&nbsp;
+                                                {new Date().getFullYear()}
+                                            </span>
+                                            <i className="material-icons">arrow_drop_down</i>
+                                        </span>
                                     }}
                                 </Query>
-                                <div className="expense-option">
-                                    <select defaultValue={month} id="monthlySpent" onChange={e => this.setState({ month: e.target.value })}>
+                                {/* <div className="expense-option">
+                                    <select
+                                        defaultValue={month}
+                                        id="monthlySpent"
+                                        onChange={e => this.setState({month: e.target.value})}>
                                         <option value="jan">JAN</option>
                                         <option value="feb">FEB</option>
                                         <option value="mar">MAR</option>
@@ -148,7 +233,7 @@ export default class Header extends Component {
                                         <option value="nov">NOV</option>
                                         <option value="dec">DEC</option>
                                     </select>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>
