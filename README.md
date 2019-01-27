@@ -4,7 +4,7 @@ Links - [Demo](https://expense-app.netlify.com/) | [Backend](https://github.com/
 
 Status - Work In Progress
 
-![alt text](https://res.cloudinary.com/prvnbist/image/upload/v1542950367/Screenshot_11_bgyy7k.png "Logo Title Text 1")
+![alt text](https://res.cloudinary.com/prvnbist/image/upload/v1548586320/2019-01-27_162142_okqnmt.png "Logo Title Text 1")
 
 #### Tech Stack
 - ReactJs
