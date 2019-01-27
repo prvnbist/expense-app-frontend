@@ -7,10 +7,10 @@ import {ApolloProvider} from "react-apollo";
 import {ApolloClient, ApolloLink, InMemoryCache, HttpLink} from "apollo-boost";
 
 // Components
-import Home from './components/Home.jsx';
-import Login from './components/Login.jsx';
-import SignUp from './components/SignUp.jsx';
-import Dashboard from './components/Dashboard.jsx';
+import Home from './pages/Home.jsx';
+import Login from './pages/Login.jsx';
+import SignUp from './pages/SignUp.jsx';
+import Dashboard from './pages/Dashboard.jsx';
 
 // Styles
 import './styles/index.scss';

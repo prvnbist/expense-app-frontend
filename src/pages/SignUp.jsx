@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Mutation} from 'react-apollo';
 
-import NavBar from './NavBar';
+import NavBar from '../components/NavBar';
 
 import SIGNUP_MUTATION from '../queries/SignUpMutation';
 export default class SignUp extends Component {
