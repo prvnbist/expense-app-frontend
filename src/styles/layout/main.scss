@@ -181,3 +181,13 @@ main {
         opacity: 0.4;
     }
 }
+
+@media screen and (max-width:567px) {
+    #content {
+        grid-template-columns: 100%;
+    }
+    #filters {
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
+}
