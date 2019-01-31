@@ -42,9 +42,10 @@ export default class Header extends Component {
     }
     editBalance = (e) => {
         if (this.state.firstClick) {
-            document
-                .getElementById('inputBalance')
-                .removeAttribute('readOnly');
+            let inputBalance = document.getElementById('inputBalance');
+            inputBalance.removeAttribute('readOnly');
+            inputBalance.value = ' ';
+            inputBalance.focus();
             e.target.innerHTML = 'close';
             this.setState({firstClick: false});
         } else {
@@ -170,7 +171,7 @@ export default class Header extends Component {
                                             balance: e
                                                 .target
                                                 .value
-                                                .replace(/,/g, '')
+                                                .replace(/[^0-9]/g, '')
                                         })}/>
                                     }}
                                 </Query>
