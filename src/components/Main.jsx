@@ -104,7 +104,7 @@ export default class Main extends Component {
                                 type="text"
                                 id="searchInput"
                                 placeholder="Search..."
-                                onChange={e => this.setState({searchText: e.target.value})}/>
+                                onChange={e => this.setState({searchText: e.target.value.toLowerCase()})}/>
                         </div>
                         {/* <hr
                             style={{
