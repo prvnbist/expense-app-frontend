@@ -6,6 +6,75 @@ main {
     }
 }
 
+#content {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    grid-column-gap:20px;
+}
+
+// #search,#filterByCost, #filterByDate, #filterByCategory {
+//     margin-bottom: 20px;
+// }
+
+#filters {
+    @include object(280px,100%,auto,null);
+    border: 1px solid #E1E4E8;
+    border-radius: 4px;
+    padding: 20px;
+    align-self: flex-start;
+    label {
+        margin-bottom: 16px;
+        display: block;
+        font-size:14px;
+        font-weight:500;
+        color:rgba(#041A2A,0.4);
+    }
+    input {
+        @include object(100%,100%,48px,null);
+        border:1px solid #E1E4E8;
+        border-radius:4px;
+        padding-left: 12px;
+        font-size: 16px;
+        &::placeholder {
+            color:#9AA3AA;
+        }
+    }
+    select {
+        @include object(100%,100%,48px,null);
+        border:1px solid #E1E4E8;
+        border-radius:4px;
+        padding-left: 8px;
+        font-size: 16px;
+        &::placeholder {
+            color:#9AA3AA;
+        }
+        
+    }
+    button {
+        height: 40px;
+        padding: 0px 15px;
+        background: rgb(49, 143, 254);
+        border-radius: 4px;
+        line-height: normal;
+        font-size: 14px;
+        text-transform: uppercase;
+        color: rgb(255, 255, 255);
+    }
+}
+
+#filterByCost, #filterByDate {
+    input {
+        width:50%;
+        &#amountRangeFrom,&#dateRangeFrom {
+            border-right-color: transparent;
+            border-radius:4px 0 0 4px;
+        }
+        &#amountRangeTo,&#dateRangeTo {
+            border-radius: 0 4px 4px 0;
+        }
+    }
+}
+
 #section-title {
     height: 100px;
     @include flex(center, space-between);
