@@ -83,19 +83,19 @@ export default class AddExpense extends Component {
                                 </select>
                             </div>
                         </div>
-                        <div className="row span-3-9" style={{alignItems:'flex-end'}}>
+                        <div className="row span-4-8" style={{alignItems:'flex-end'}}>
                             <div className="col">
                                 <label>AMOUNT</label>
                                 <select
                                     style={{
-                                    fontSize: "32px"
+                                    fontSize: "18px"
                                 }}
                                     className="select-dropdown"
                                     defaultValue={type}
                                     onChange={e => this.setState({type: e.target.value})}
                                     required>
-                                    <option value="plus">+</option>
-                                    <option value="minus">-</option>
+                                    <option value="plus">Earned</option>
+                                    <option value="minus">Spent</option>
                                 </select>
                             </div>
                             <div className="col">
