@@ -140,7 +140,6 @@ export default class Header extends Component {
                                 </Mutation>
                             </label>
                             <div className="expense-wrapper">
-                                {/* <div className="expense-option">INR</div> */}
                                 <Query query={CURRENT_USER}>
                                     {({loading, error, data: {
                                             me
@@ -156,6 +155,10 @@ export default class Header extends Component {
                                             type="text"
                                             placeholder='Not Set'
                                             id="inputBalance"
+                                            title={parseInt(me.balance).toLocaleString("en-IN", {
+                                                style: 'currency',
+                                                currency: "INR"
+                                            })}
                                             defaultValue={balance === ""
                                             ? parseInt(me.balance
                                                 ? me.balance
@@ -217,24 +220,6 @@ export default class Header extends Component {
                                         </span>
                                     }}
                                 </Query>
-                                {/* <div className="expense-option">
-                                    <select
-                                        defaultValue={month}
-                                        id="monthlySpent"
-                                        onChange={e => this.setState({month: e.target.value})}>
-                                        <option value="jan">JAN</option>
-                                        <option value="feb">FEB</option>
-                                        <option value="mar">MAR</option>
-                                        <option value="apr">APR</option>
-                                        <option value="jun">JUN</option>
-                                        <option value="jul">JUL</option>
-                                        <option value="aug">AUG</option>
-                                        <option value="sep">SEPT</option>
-                                        <option value="oct">OCT</option>
-                                        <option value="nov">NOV</option>
-                                        <option value="dec">DEC</option>
-                                    </select>
-                                </div> */}
                             </div>
                         </div>
                     </div>
