@@ -101,7 +101,7 @@ export default class AddExpense extends Component {
                             <div className="col">
                                 <input
                                     value={amount}
-                                    onChange={e => this.setState({amount: e.target.value})}
+                                    onChange={e => this.setState({amount: e.target.value.replace(/[^0-9]/g, '')})}
                                     type="text"
                                     placeholder="Enter the amount..."
                                     required/>
