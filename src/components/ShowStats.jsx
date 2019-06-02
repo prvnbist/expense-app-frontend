@@ -4,7 +4,7 @@ import {Query} from 'react-apollo';
 
 import CURRENT_USER from '../queries/CurrentUser';
 
-let PieChart = require("react-chartjs").Pie;
+import {Pie} from 'react-chartjs-2';
 
 export default class AddExpense extends Component {
     render() {
@@ -32,26 +32,25 @@ export default class AddExpense extends Component {
                             amount.push(catAmount);
                             catAmount = 0;
                         }
-                        let colors = [
-                            "#5DA5DA",
-                            "#FAA43A",
-                            "#4D4D4D",
-                            "#60BD68",
-                            "#F17CB0",
-                            "#B2912F",
-                            "#B276B2",
-                            "#DECF3F",
-                            "#F15854"
-                        ];
-                        let chartData = [];
-                        for (let i in amount) {
-                            let obj = {
-                                value: amount[i],
-                                label: categories[i],
-                                color: colors[i]
-                            }
-                            chartData.push(obj);
-                        }
+
+                        const data = {
+                            labels: categories,
+                            datasets: [{
+                                data: amount,
+                                backgroundColor: [
+                                    "#5DA5DA",
+                                    "#FAA43A",
+                                    "#4D4D4D",
+                                    "#60BD68",
+                                    "#F17CB0",
+                                    "#B2912F",
+                                    "#B276B2",
+                                    "#DECF3F",
+                                    "#F15854"
+                                ]
+                            }]
+                        };
+
                         return (
                             <div className="popup-card">
                                 <div id="left">
@@ -102,7 +101,7 @@ export default class AddExpense extends Component {
                                         marginTop: 30
                                     }}>MOST SPENT ON</h1>
                                     <div id="statsChart">
-                                        <PieChart data={chartData} width="350" height="350"/>
+                                        <Pie data={data} width="350" height="350"/>
                                     </div>
                                 </div>
                             </div>

@@ -109,6 +109,18 @@ main {
     padding: 20px;
 }
 
+.expenses-section {
+    h1 {
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        font-size: 16px;
+        color: #9AA3AA;
+        margin-right: 20px;
+        margin-bottom: 20px;
+    }
+}
+
 .top-row {
     @include flex(center, space-between);
     margin-bottom: 20px;

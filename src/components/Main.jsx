@@ -175,20 +175,15 @@ export default class Main extends Component {
                             let expensesList = me
                                 .expenses
                                 .filter(i => i.spentOn.toLowerCase().includes(searchText))
-                                .filter(i => byCategory !== ''
-                                    ? i.category.toLowerCase() === byCategory
-                                    : i.category.toLowerCase() !== '')
-                                .filter(i => Number(i.amount) >= (fromAmount !== ''
-                                    ? Number(fromAmount)
-                                    : 0))
-                                .filter(i => Number(i.amount) <= (toAmount !== ''
-                                    ? Number(toAmount)
-                                    : Number(`4${ "0".repeat(20)}`)));
-
+                                .filter(i => byCategory !== '' ? i.category.toLowerCase() === byCategory : i.category.toLowerCase() !== '')
+                                .filter(i => Number(i.amount) >= (fromAmount !== '' ? Number(fromAmount) : 0))
+                                .filter(i => Number(i.amount) <= (toAmount !== '' ? Number(toAmount) : Number(`4${ "0".repeat(20)}`)));
+                            // console.table(expensesList)
                             return <div className="expenses-list">
-                                {expensesList
-                                    .reverse()
-                                    .map((item, index) => <Expense key={index} item={item}/>)}
+                                {expensesList.reverse().map((item, index) => <div key={index} className="expenses-section">
+                                    {/* <h1>TODAY</h1> */}
+                                    <Expense item={item}/>
+                                </div>)}
                             </div>;
                         }}
                     </Query>
