@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {Mutation} from 'react-apollo';
+import {Formik} from 'formik';
+import * as Yup from 'yup';
 
 import NavBar from '../components/NavBar';
 
@@ -8,28 +10,28 @@ export default class SignUp extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: '',
-            password: '',
-            name: '',
-            email: '',
-            gender: 'M',
-            show: false
+            show: false,
+            buttonText: "Sign Up"
         }
     }
     showPassword = e => {
-        if(!this.state.show){
+        if (!this.state.show) {
             e.target.innerText = 'visibility';
-            document.getElementById('password-input').type = "text";
+            document
+                .getElementById('password-input')
+                .type = "text";
             this.setState({
                 show: !this.state.show
             });
             return;
         }
         e.target.innerText = 'visibility_off';
-        document.getElementById('password-input').type = "password";
+        document
+            .getElementById('password-input')
+            .type = "password";
         this.setState({
             show: !this.state.show
-        });      
+        });
     }
     submitForm = ({signup}) => {
         localStorage.clear();
@@ -40,149 +42,153 @@ export default class SignUp extends Component {
             .push('/dashboard');
     }
     render() {
-        const {username, password, name, email, gender} = this.state;
+        const SignupSchema = Yup
+            .object()
+            .shape({
+                name: Yup
+                    .string()
+                    .min(4, 'Name is too short!')
+                    .max(50, 'Name is too long!')
+                    .required('Name is required!'),
+                email: Yup
+                    .string()
+                    .email('Please enter a valid email!')
+                    .required('Email is required!'),
+                username: Yup
+                    .string()
+                    .min(4, 'Username is too short!')
+                    .max(50, 'Username is too long!')
+                    .matches(/^[a-zA-Z0-9-_]+$/, "Username must have _alpha_numerics")
+                    .required("Username is required!"),
+                password: Yup
+                    .string()
+                    .min(8, 'Password is too short!')
+                    .max(20, 'Password is too long!')
+                    .matches(/(?=^.{8,20}$)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s)[0-9a-zA-Z!@#$%^&*()]*$/, "Password must have atleast one lowercase letter, one uppercase letter, one digit" +
+                            " and one special character.")
+                    .required("Password is required!")
+            });
         return (
             <div>
                 <NavBar/>
-                <div  className="container form form-signup">
+                <div className="container form form-signup">
                     <div className="form-center">
-                        <span id='empty-error' className='error-message'></span>
-                        <div className='name-field'>
-                            <input
-                                value={name}
-                                onChange={e => this.setState({name: e.target.value})}
-                                type="text"
-                                placeholder="Enter your name"
-                                id="name-input"/>
-                            <label htmlFor="name-input"><i className='material-icons'>account_circle</i></label>
-                        </div>
-                        <span id='name-error' className='error-message'></span>
-                        <div className='email-field'>
-                            <input
-                                value={email}
-                                onChange={e => this.setState({email: e.target.value})}
-                                type="text"
-                                placeholder="Enter your email"
-                                id="email-input"/>
-                            <label htmlFor="email-input"><i className='material-icons'>email</i></label>
-                        </div>
-                        <span id='email-error' className='error-message'></span>
-                        <div className="username-field">
-                            <input
-                                value={username}
-                                onChange={e => this.setState({username: e.target.value})}
-                                type="text"
-                                placeholder="Enter your username"
-                                id="username-input"/>
-                            <label htmlFor="username-input"><i className='material-icons'>alternate_email</i></label>
-                        </div>
-                        <span id='username-error' className='error-message'></span>
-                        <div className='password-field'>
-                            <input
-                                value={password}
-                                onChange={e => this.setState({password: e.target.value})}
-                                type="password"
-                                placeholder="Enter your password"
-                                id="password-input"/>
-                            <label htmlFor="password-input"><i className='material-icons' style={{cursor:"pointer"}} onClick={e => this.showPassword(e)}>visibility_off</i></label>
-                        </div>
-                        <span id='password-error' className='error-message'></span>
-                        <div className="select-field">
-                            <select
-                                className="select-dropdown"
-                                value={gender}
-                                onChange={e => this.setState({gender: e.target.value})}>
-                                <option value="M">Male</option>
-                                <option value="F">Female</option>
-                            </select>
-                        </div>
                         <Mutation
                             mutation={SIGNUP_MUTATION}
-                            variables={{username,password,name,email,gender}}
-                            onCompleted={data => this.submitForm(data)}
-                            onError = {error => {                                
-                                let errorsList = {
-                                    "name" : [{
-                                        "length": "Name must be 4 letters long!"
-                                    }],
-                                    "email" : [{
-                                        "valid": "Email must be a valid email!",
-                                        "exists": "Email already exists!",
-                                    }], 
-                                    "username": [{
-                                        "valid": "Username must have _alpha_numerics",
-                                        "exists": "Username already exists!",
-                                        "length": "Username must be 4 letters long!"
-                                    }], 
-                                    "password": [{
-                                        "valid": "Password must have atleast one lowercase letter, one uppercase letter, one digit and one special character.",
-                                        "length": "Password length must be 8-30!"
-                                    }]
-                                }
-
-                                if(username === '' || password === '' || email === '' || name === '') {
-                                    document.getElementById("empty-error").style.display = 'block';
-                                    document.getElementById('empty-error').innerHTML = "Please, fill all the fields";
-                                }
-
-                                if(name && name.length < 4) {
-                                    document.getElementById("name-error").style.display = 'block';
-                                    document.getElementById('name-error').innerHTML = errorsList.name[0]["length"];
-                                }
-                                
-                                const userNameRegex = /^[a-zA-Z0-9-_]+$/;
-                                let validUserName = userNameInput => userNameRegex.test(userNameInput);
-                                
-                                if(username && username.length < 4) {
-                                    document.getElementById("username-error").style.display = 'block';
-                                    document.getElementById('username-error').innerHTML = errorsList.username[0]["length"];
-                                }
-                                
-                                if(username && !validUserName(username)) {
-                                    document.getElementById("username-error").style.display = 'block';
-                                    document.getElementById('username-error').innerHTML = errorsList.username[0].valid;
-                                }  
-                                
-                                if(error.message.includes("Username already exists.")) {
-                                    document.getElementById("username-error").style.display = 'block';
-                                    document.getElementById('username-error').innerHTML = errorsList.username[0].exists;
-                                }
-
-                                const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
-                                let validEmail = emailInput => emailRegex.test(emailInput);
-
-                                if(email && !validEmail(email)) {
-                                    document.getElementById("email-error").style.display = 'block';
-                                    document.getElementById('email-error').innerHTML = errorsList.email[0].valid;
-                                }
-
-                                if(validEmail(email) && error.message.includes("Email already exists.")) {
-                                    document.getElementById("email-error").style.display = 'block';
-                                    document.getElementById('email-error').innerHTML = errorsList.email[0].exists;
-                                }
-
-                                if(password.length < 4 && password !== '') {
-                                    document.getElementById("password-error").style.display = 'block';
-                                    document.getElementById('password-error').innerHTML = errorsList.password[0]["length"];
-                                }
-
-                                const passwordRegex = /(?=^.{8,20}$)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s)[0-9a-zA-Z!@#$%^&*()]*$/;
-                                let validPassword = passwordInput => passwordRegex.test(passwordInput);
-
-                                if(password && !validPassword(password)) {
-                                    document.getElementById("password-error").style.display = 'block';
-                                    document.getElementById('password-error').innerHTML = errorsList.password[0].valid;
-                                }
-
-                                setTimeout(() =>{
-                                    document.getElementById("empty-error").style.display = 'none';
-                                    document.getElementById("name-error").style.display = 'none';
-                                    document.getElementById("username-error").style.display = 'none';
-                                    document.getElementById("password-error").style.display = 'none';
-                                    document.getElementById("email-error").style.display = 'none';
-                                    },4000);
-                            }}>         
-                            {mutation => <button className='btn' onClick={mutation}>Sign Up</button>}
+                            onCompleted={data => this.submitForm(data)}>
+                            {signUpMutation => <Formik
+                                initialValues={{
+                                username: '',
+                                password: '',
+                                name: '',
+                                email: '',
+                                gender: 'M'
+                            }}
+                                validationSchema={SignupSchema}
+                                onSubmit={(values, {setSubmitting}) => {
+                                    this.setState({
+                                        buttonText: "Signing Up..."
+                                    })
+                                setTimeout(() => {
+                                    signUpMutation({
+                                        variables: {
+                                            username: values.username,
+                                            password: values.password,
+                                            name: values.name,
+                                            email: values.email,
+                                            gender: values.gender
+                                        }
+                                    });
+                                    setSubmitting(false);
+                                }, 400);
+                            }}>
+                                {({
+                                    values,
+                                    errors,
+                                    touched,
+                                    handleChange,
+                                    handleBlur,
+                                    handleSubmit,
+                                    isSubmitting
+                                }) => (
+                                    <form onSubmit={handleSubmit}>
+                                        <div className='name-field'>
+                                            <input
+                                                type="text"
+                                                placeholder="Enter your name"
+                                                id="name-input"
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
+                                                name="name"
+                                                value={values.name}/>
+                                            <label htmlFor="name-input">
+                                                <i className='material-icons'>account_circle</i>
+                                            </label>
+                                        </div>
+                                        {touched.name && errors.name && <span id='name-error' className='error-message'>{errors.name}</span>}
+                                        <div className='email-field'>
+                                            <input
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
+                                                value={values.email}
+                                                type="text"
+                                                name="email"
+                                                placeholder="Enter your email"
+                                                id="email-input"/>
+                                            <label htmlFor="email-input">
+                                                <i className='material-icons'>email</i>
+                                            </label>
+                                        </div>
+                                        {touched.email && errors.email && <span id='email-error' className='error-message'>{errors.email}</span>}
+                                        <div className="username-field">
+                                            <input
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
+                                                value={values.username}
+                                                type="text"
+                                                name="username"
+                                                placeholder="Enter your username"
+                                                id="username-input"/>
+                                            <label htmlFor="username-input">
+                                                <i className='material-icons'>alternate_email</i>
+                                            </label>
+                                        </div>
+                                        {touched.username && errors.username && <span id='username-error' className='error-message'>{errors.username}</span>}
+                                        <div className='password-field'>
+                                            <input
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
+                                                value={values.password}
+                                                type="password"
+                                                name="password"
+                                                placeholder="Enter your password"
+                                                id="password-input"/>
+                                            <label htmlFor="password-input">
+                                                <i
+                                                    className='material-icons'
+                                                    style={{
+                                                    cursor: "pointer"
+                                                }}
+                                                    onClick={e => this.showPassword(e)}>visibility_off</i>
+                                            </label>
+                                        </div>
+                                        {touched.password && errors.password && <span id='password-error' className='error-message'>{errors.password}</span>}
+                                        <div className="select-field">
+                                            <select
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
+                                                className="select-dropdown"
+                                                value={values.gender}
+                                                name="gender">
+                                                <option value="M">Male</option>
+                                                <option value="F">Female</option>
+                                            </select>
+                                        </div>
+                                        <button type="submit" className='btn' onClick={e => e.target.innerText = "Signing Up..."}disabled={isSubmitting}>{this.state.buttonText}</button>
+                                    </form>
+                                )}
+                            </Formik>
+                        }
                         </Mutation>
                     </div>
                 </div>

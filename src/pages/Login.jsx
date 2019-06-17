@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Mutation} from 'react-apollo';
+import {Formik} from 'formik';
 
 import NavBar from '../components/NavBar';
 
@@ -9,112 +10,124 @@ export default class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: '',
-            password: '',
-            show: false
+            show: false,
+            buttonText: "Login"
         }
     }
     showPassword = e => {
-        if(!this.state.show){
+        if (!this.state.show) {
             e.target.innerText = 'visibility';
-            document.getElementById('password-input').type = "text";
+            document
+                .getElementById('password-input')
+                .type = "text";
             this.setState({
                 show: !this.state.show
             });
             return;
         }
         e.target.innerText = 'visibility_off';
-        document.getElementById('password-input').type = "password";
+        document
+            .getElementById('password-input')
+            .type = "password";
         this.setState({
             show: !this.state.show
-        });      
+        });
     }
     submitForm = ({login}) => {
-        document.getElementsByClassName('error-message').innerHTML= '';
         localStorage.clear();
-        localStorage.setItem('access_token',login);
-		this.props.history.push('/dashboard');
+        localStorage.setItem('access_token', login);
+        this
+            .props
+            .history
+            .push('/dashboard');
     }
     render() {
-        const {username, password} = this.state;
         return (
             <div>
                 <NavBar/>
                 <div className="container form form-login">
-                    <div  className="form-center">
-                        <span id='empty-error' className='error-message'></span>
-                        <div className='username-field'>
-                            <input
-                                value={username}
-                                onChange={e => this.setState({username: e.target.value})}
-                                type="text"
-                                placeholder="Enter your username"
-                                id="username-input"/>
-                            <label htmlFor="username-input"><i className='material-icons'>alternate_email</i></label>
-                        </div>
-                        <span id='username-error' className='error-message'></span>
-                        <div className="password-field">
-                            <input
-                                value={password}
-                                onChange={e => this.setState({password: e.target.value})}
-                                type="password"
-                                placeholder="Enter your password"
-                                id="password-input"/>
-                            <label htmlFor="password-input"><i className='material-icons' style={{cursor:"pointer"}} onClick={e => this.showPassword(e)}>visibility_off</i></label>
-                        </div>
-                        <span id='password-error' className='error-message'></span>
-                        <Mutation
-                            mutation={LOGIN_MUTATION}
-                            variables={{username,password}}
-                            onCompleted={data => this.submitForm(data)}
-                            onError = {error => {
-
-                                let errorsList = {
-                                    "username": [{
-                                        "length": "Username must be 4 letters long!"
-                                    }], 
-                                    "password": [{
-                                        "valid": "Password must have atleast one lowercase letter, one uppercase letter, one digit and one special character.",
-                                        "length": "Password length must be 8-30!"
-                                    }]
+                    <div className="form-center">
+                        <Mutation mutation={LOGIN_MUTATION} onCompleted={data => this.submitForm(data)}>
+                            {loginMutation => <Formik
+                                initialValues={{
+                                username: '',
+                                password: '',
+                            }}
+                                validate={values => {
+                                let errors = {};
+                                if (values.username === '') {
+                                    errors.username = "Please fill in your username";
                                 }
-
-                                if(username === '' || password === '') {
-                                    document.getElementById("empty-error").style.display = 'block';
-                                    document.getElementById('empty-error').innerHTML = "Please, fill all the fields";
+                                if (values.password === '') {
+                                    errors.password = "Please fill in your password";
                                 }
-                                
-                                if(password && password.length < 4) {
-                                    document.getElementById("password-error").style.display = 'block';
-                                    document.getElementById('password-error').innerHTML = errorsList.password[0]["length"];
-                                }
-
-                                const passwordRegex = /^(?=S*[a-z])(?=S*[A-Z])(?=\S*\d)(?=S*[^\W\s])\S{8,30}$/i;
-                                let validPassword = passwordInput => passwordRegex.test(passwordInput);
-
-                                if(password && !validPassword(password)) {
-                                    document.getElementById("password-error").style.display = 'block';
-                                    document.getElementById('password-error').innerHTML = errorsList.password[0].valid;
-                                }
-
-                                let message = error.message.toString().replace('GraphQL error: ','');
-                                if(username && message.includes('username')) {
-                                    document.getElementById("username-error").style.display = 'block';
-                                    document.getElementById('username-error').innerHTML = message;
-                                }
-
-                                if(password && message.includes('password')){
-                                    document.getElementById("password-error").style.display = 'block';
-                                    document.getElementById('password-error').innerHTML = message;
-                                }
-
+                                return errors;
+                            }}
+                                onSubmit={(values, {setSubmitting}) => {
+                                    this.setState({
+                                        buttonText: "Logging In..."
+                                    })
                                 setTimeout(() => {
-                                    document.getElementById("empty-error").style.display = 'none';
-                                    document.getElementById("username-error").style.display = 'none';
-                                    document.getElementById("password-error").style.display = 'none';
-                                    },4000);
-                            }}>                        
-                            {mutation => <button className='btn' onClick={mutation}>Login</button>}
+                                    loginMutation({
+                                        variables: {
+                                            username: values.username,
+                                            password: values.password
+                                        }
+                                    });
+                                    setSubmitting(false);
+                                }, 400);
+                            }}>
+                                {({
+                                    values,
+                                    errors,
+                                    touched,
+                                    handleChange,
+                                    handleBlur,
+                                    handleSubmit,
+                                    isSubmitting
+                                }) => (
+                                    <form onSubmit={handleSubmit}>
+                                        <div className='username-field'>
+                                            <input
+                                                type="text"
+                                                name="username"
+                                                id="username-input"
+                                                placeholder="Enter your username"
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
+                                                value={values.username}/>
+                                            <label htmlFor="username-input">
+                                                <i className='material-icons'>alternate_email</i>
+                                            </label>
+                                        </div>
+                                        {touched.username && errors.username && <span id='username-error' className='error-message'>{errors.username}</span>}
+                                        <div className="password-field">
+                                            <input
+                                                type="password"
+                                                name="password"
+                                                placeholder="Enter your password"
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
+                                                value={values.password}
+                                                id="password-input"/>
+                                            <label htmlFor="password-input">
+                                                <i
+                                                    className='material-icons'
+                                                    style={{
+                                                    cursor: "pointer"
+                                                }}
+                                                    onClick={e => this.showPassword(e)}>visibility_off</i>
+                                            </label>
+                                        </div>
+                                        {touched.password && errors.password && <span id='password-error' className='error-message'>{errors.password}</span>}
+                                        <button
+                                            type="submit"
+                                            className='btn'
+                                            disabled={isSubmitting}>{this.state.buttonText}</button>
+                                    </form>
+                                )}
+                            </Formik>
+}
                         </Mutation>
                     </div>
                 </div>
