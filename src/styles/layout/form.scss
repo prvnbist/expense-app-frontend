@@ -1,7 +1,7 @@
 @import '../helpers/mixins.scss'; 
 
 input,select,button {
-    height:56px;
+    height:48px;
     border:none;
     background: transparent;
     &:focus + label {
@@ -26,33 +26,33 @@ input,select,button {
 }
 
 .username-field,.password-field,.email-field,.name-field,.select-field {
-    @include object(380px,100%,48px,null);
-    border: 1px solid #CFD2D6;
+    @include object(320px,100%,48px,#FFFFFF);
     border-radius: 4px;
     margin-bottom: 20px;
     display: flex;
     align-items: center;
-	flex-direction: row-reverse;
+    flex-direction: row-reverse;
+    border: 1px solid #DCDCDC;
+
 	&:focus-within {
         border: 1px solid #0066dc;
     }
     label {
         @include object(null,56px,32px,null);
         @include flex(center,center);
-        border-right: 1px solid #CFD2D6;
+        border-right: 1px solid #A9A0A0;
         i {
-            color: #CFD2D6;
+            color: #A9A0A0;
         }
     }
     input {
         padding-left: 20px;
         font-weight: 400;
-        line-height: normal;
         font-size: 16px;
         color: #0066DC;
         width:100%;
         &::placeholder {
-            color: #CFD2D6;
+            color: #A9A0A0;
         }
     }
     select {
@@ -76,12 +76,12 @@ input,select,button {
 }
 
 .btn {
-    @include object(null,null,48px,linear-gradient(270deg, #0066DC 0%, #4D99F1 100%));
+    @include object(null,null,40px,#0052CC);
+    border-radius: 4px;
     padding:0 16px;
-    border-radius: 6px;
     font-size: 16px;
     text-align: center;
-    text-transform: uppercase;
+    line-height: 42px;
     color: #FFFFFF;
     cursor:pointer;
 }

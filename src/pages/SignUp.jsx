@@ -69,130 +69,126 @@ export default class SignUp extends Component {
                     .required("Password is required!")
             });
         return (
-            <div>
-                <NavBar/>
-                <div className="container form form-signup">
-                    <div className="form-center">
-                        <Mutation
-                            mutation={SIGNUP_MUTATION}
-                            onCompleted={data => this.submitForm(data)}>
-                            {signUpMutation => <Formik
-                                initialValues={{
-                                username: '',
-                                password: '',
-                                name: '',
-                                email: '',
-                                gender: 'M'
-                            }}
-                                validationSchema={SignupSchema}
-                                onSubmit={(values, {setSubmitting}) => {
-                                    this.setState({
-                                        buttonText: "Signing Up..."
-                                    })
-                                setTimeout(() => {
-                                    signUpMutation({
-                                        variables: {
-                                            username: values.username,
-                                            password: values.password,
-                                            name: values.name,
-                                            email: values.email,
-                                            gender: values.gender
-                                        }
-                                    });
-                                    setSubmitting(false);
-                                }, 400);
-                            }}>
-                                {({
-                                    values,
-                                    errors,
-                                    touched,
-                                    handleChange,
-                                    handleBlur,
-                                    handleSubmit,
-                                    isSubmitting
-                                }) => (
-                                    <form onSubmit={handleSubmit}>
-                                        <div className='name-field'>
-                                            <input
-                                                type="text"
-                                                placeholder="Enter your name"
-                                                id="name-input"
-                                                onChange={handleChange}
-                                                onBlur={handleBlur}
-                                                name="name"
-                                                value={values.name}/>
-                                            <label htmlFor="name-input">
-                                                <i className='material-icons'>account_circle</i>
-                                            </label>
-                                        </div>
-                                        {touched.name && errors.name && <span id='name-error' className='error-message'>{errors.name}</span>}
-                                        <div className='email-field'>
-                                            <input
-                                                onChange={handleChange}
-                                                onBlur={handleBlur}
-                                                value={values.email}
-                                                type="text"
-                                                name="email"
-                                                placeholder="Enter your email"
-                                                id="email-input"/>
-                                            <label htmlFor="email-input">
-                                                <i className='material-icons'>email</i>
-                                            </label>
-                                        </div>
-                                        {touched.email && errors.email && <span id='email-error' className='error-message'>{errors.email}</span>}
-                                        <div className="username-field">
-                                            <input
-                                                onChange={handleChange}
-                                                onBlur={handleBlur}
-                                                value={values.username}
-                                                type="text"
-                                                name="username"
-                                                placeholder="Enter your username"
-                                                id="username-input"/>
-                                            <label htmlFor="username-input">
-                                                <i className='material-icons'>alternate_email</i>
-                                            </label>
-                                        </div>
-                                        {touched.username && errors.username && <span id='username-error' className='error-message'>{errors.username}</span>}
-                                        <div className='password-field'>
-                                            <input
-                                                onChange={handleChange}
-                                                onBlur={handleBlur}
-                                                value={values.password}
-                                                type="password"
-                                                name="password"
-                                                placeholder="Enter your password"
-                                                id="password-input"/>
-                                            <label htmlFor="password-input">
-                                                <i
-                                                    className='material-icons'
-                                                    style={{
-                                                    cursor: "pointer"
-                                                }}
-                                                    onClick={e => this.showPassword(e)}>visibility_off</i>
-                                            </label>
-                                        </div>
-                                        {touched.password && errors.password && <span id='password-error' className='error-message'>{errors.password}</span>}
-                                        <div className="select-field">
-                                            <select
-                                                onChange={handleChange}
-                                                onBlur={handleBlur}
-                                                className="select-dropdown"
-                                                value={values.gender}
-                                                name="gender">
-                                                <option value="M">Male</option>
-                                                <option value="F">Female</option>
-                                            </select>
-                                        </div>
-                                        <button type="submit" className='btn' onClick={e => e.target.innerText = "Signing Up..."}disabled={isSubmitting}>{this.state.buttonText}</button>
-                                    </form>
-                                )}
-                            </Formik>
-                        }
-                        </Mutation>
-                    </div>
-                </div>
-
+            <div className="form-center">
+            <h2 className="page-heading">Register to start managing your expenses.</h2>
+                <Mutation
+                    mutation={SIGNUP_MUTATION}
+                    onCompleted={data => this.submitForm(data)}>
+                    {signUpMutation => <Formik
+                        initialValues={{
+                        username: '',
+                        password: '',
+                        name: '',
+                        email: '',
+                        gender: 'M'
+                    }}
+                        validationSchema={SignupSchema}
+                        onSubmit={(values, {setSubmitting}) => {
+                        this.setState({buttonText: "Signing Up..."});
+                        setTimeout(() => {
+                            signUpMutation({
+                                variables: {
+                                    username: values.username,
+                                    password: values.password,
+                                    name: values.name,
+                                    email: values.email,
+                                    gender: values.gender
+                                }
+                            });
+                            setSubmitting(false);
+                        }, 400);
+                    }}>
+                        {({
+                            values,
+                            errors,
+                            touched,
+                            handleChange,
+                            handleBlur,
+                            handleSubmit,
+                            isSubmitting
+                        }) => (
+                            <form onSubmit={handleSubmit}>
+                                <div className='name-field'>
+                                    <input
+                                        type="text"
+                                        placeholder="Enter your name"
+                                        id="name-input"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        name="name"
+                                        value={values.name}/>
+                                    <label htmlFor="name-input">
+                                        <i className='material-icons'>account_circle</i>
+                                    </label>
+                                </div>
+                                {touched.name && errors.name && <span id='name-error' className='error-message'>{errors.name}</span>}
+                                <div className='email-field'>
+                                    <input
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        value={values.email}
+                                        type="text"
+                                        name="email"
+                                        placeholder="Enter your email"
+                                        id="email-input"/>
+                                    <label htmlFor="email-input">
+                                        <i className='material-icons'>email</i>
+                                    </label>
+                                </div>
+                                {touched.email && errors.email && <span id='email-error' className='error-message'>{errors.email}</span>}
+                                <div className="username-field">
+                                    <input
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        value={values.username}
+                                        type="text"
+                                        name="username"
+                                        placeholder="Enter your username"
+                                        id="username-input"/>
+                                    <label htmlFor="username-input">
+                                        <i className='material-icons'>alternate_email</i>
+                                    </label>
+                                </div>
+                                {touched.username && errors.username && <span id='username-error' className='error-message'>{errors.username}</span>}
+                                <div className='password-field'>
+                                    <input
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        value={values.password}
+                                        type="password"
+                                        name="password"
+                                        placeholder="Enter your password"
+                                        id="password-input"/>
+                                    <label htmlFor="password-input">
+                                        <i
+                                            className='material-icons'
+                                            style={{
+                                            cursor: "pointer"
+                                        }}
+                                            onClick={e => this.showPassword(e)}>visibility_off</i>
+                                    </label>
+                                </div>
+                                {touched.password && errors.password && <span id='password-error' className='error-message'>{errors.password}</span>}
+                                <div className="select-field">
+                                    <select
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        className="select-dropdown"
+                                        value={values.gender}
+                                        name="gender">
+                                        <option value="M">Male</option>
+                                        <option value="F">Female</option>
+                                    </select>
+                                </div>
+                                <button
+                                    type="submit"
+                                    className='btn'
+                                    onClick={e => e.target.innerText = "Signing Up..."}disabled={isSubmitting}>{this.state.buttonText}</button>
+                            </form>
+                        )}
+                    </Formik>
+}
+                </Mutation>
             </div>
         )
     }

@@ -8,14 +8,12 @@ import {ApolloClient, ApolloLink, InMemoryCache, HttpLink} from "apollo-boost";
 
 // Components
 import Home from './pages/Home.jsx';
-import Login from './pages/Login.jsx';
-import SignUp from './pages/SignUp.jsx';
 import Dashboard from './pages/Dashboard.jsx';
 
 // Styles
 import './styles/index.scss';
 
-// Keys 
+// Keys
 import {REACT_APP_SERVER_URL} from './config/keys';
 const httpLink = new HttpLink({uri: REACT_APP_SERVER_URL});
 
@@ -54,10 +52,8 @@ class App extends Component {
                     <Router>
                         <Switch>
                             <Route exact activeClassName="active" path="/" component={Home}/>
-                            <Route exact activeClassName="active" path="/login" component={Login}/>
-                            <Route exact activeClassName="active" path="/signup" component={SignUp}/>
                             <Route exact path="/dashboard" component={Dashboard}/>
-                            <Route path="*" component={Login} />
+                            <Route path="*" component={Home}/>
                         </Switch>
                     </Router>
                 </ApolloProvider>
