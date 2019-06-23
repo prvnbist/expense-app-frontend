@@ -57,7 +57,7 @@ body {
 }
 
 .error-message {
-    padding: 0 0 20px;
+    padding-top: 8px;
     color: red;
     display: block;
 }
@@ -81,9 +81,13 @@ body {
     }
 }
 @media screen and (max-width:576px) {
-    #home-page-content-heading {
-        width: 100%;
-        font-size: 40px;
+    .login {
+        height: calc(100vh - 149px);
+    }
+    #home {
+        padding-bottom: 16px;
+        overflow-y: auto;
+        overflow-x: hidden;
     }
     #logo {
         a {

@@ -41,7 +41,7 @@ class Login extends React.Component {
     }
     render() {
         return (
-            <div className="form-center">
+            <div className="login">
                 <h2 className="page-heading">Login to view your expenses.</h2>
                 <Mutation mutation={LOGIN_MUTATION} onCompleted={data => this.submitForm(data)}>
                     {loginMutation => <Formik

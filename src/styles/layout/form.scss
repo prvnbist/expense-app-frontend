@@ -21,14 +21,10 @@ input,select,button {
     border-radius: 4px;
 }
 
-.form-center {
-    width:380px;
-}
-
 .username-field,.password-field,.email-field,.name-field,.select-field {
     @include object(320px,100%,48px,#FFFFFF);
     border-radius: 4px;
-    margin-bottom: 20px;
+    margin-top: 16px;
     display: flex;
     align-items: center;
     flex-direction: row-reverse;
@@ -40,9 +36,10 @@ input,select,button {
     label {
         @include object(null,56px,32px,null);
         @include flex(center,center);
-        border-right: 1px solid #A9A0A0;
+        border-right: 1px solid #a9a0a087;
         i {
             color: #A9A0A0;
+            font-size: 21px;
         }
     }
     input {
@@ -62,11 +59,11 @@ input,select,button {
         background: transparent;
         background-image: url("data:image/svg+xml;utf8,<svg fill='%230066DC' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
         background-repeat: no-repeat;
-        background-position-x: 88%;
-        background-position-y: 16px;
+        background-position-x: 92%;
+        background-position-y: 12px;
         font-weight: 400;
         line-height: normal;
-        font-size: 18px;
+        font-size: 16px;
         color: #0066DC;
     }
 }
@@ -76,6 +73,7 @@ input,select,button {
 }
 
 .btn {
+    margin-top: 16px;
     @include object(null,null,40px,#0052CC);
     border-radius: 4px;
     padding:0 16px;

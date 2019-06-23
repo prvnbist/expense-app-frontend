@@ -69,7 +69,7 @@ export default class SignUp extends Component {
                     .required("Password is required!")
             });
         return (
-            <div className="form-center">
+            <div>
             <h2 className="page-heading">Register to start managing your expenses.</h2>
                 <Mutation
                     mutation={SIGNUP_MUTATION}
