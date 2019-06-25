@@ -35,7 +35,7 @@ export default class NavBar extends Component {
                                 <span id="user-name">{me.name}</span>
                                 <Link to="/">
                                     <button
-                                        id="logout"
+                                        className="btn btn__overlay__dark"
                                         onClick={() => {
                                         this.logOut();
                                         client.resetStore()

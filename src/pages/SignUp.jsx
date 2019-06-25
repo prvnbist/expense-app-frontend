@@ -182,7 +182,7 @@ export default class SignUp extends Component {
                                 </div>
                                 <button
                                     type="submit"
-                                    className='btn'
+                                    className='btn btn__primary'
                                     onClick={e => e.target.innerText = "Signing Up..."}disabled={isSubmitting}>{this.state.buttonText}</button>
                             </form>
                         )}

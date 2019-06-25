@@ -114,7 +114,7 @@ class Login extends React.Component {
                                     </label>
                                 </div>
                                 {touched.password && errors.password && <span id='password-error' className='error-message'>{errors.password}</span>}
-                                <button type="submit" className='btn' disabled={isSubmitting}>{this.state.buttonText}</button>
+                                <button type="submit" className='btn btn__primary' disabled={isSubmitting}>{this.state.buttonText}</button>
                             </form>
                         )}
                     </Formik>

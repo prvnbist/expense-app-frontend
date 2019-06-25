@@ -75,7 +75,10 @@ const Main1 = () => {
                             placeholder={"Select a category"}
                             selected={selected}/>
                         </div>
-                        <button type="button" className='btn'>Add Expense</button>
+                        <button type="button" className='btn btn__primary btn__icon'>
+                            <i className="material-icons">add_circle</i>
+                            <span>Add Expense</span>
+                        </button>
                     </div>
                     <Query query={CURRENT_USER}>
                         {({loading, error, data: {

@@ -12,3 +12,18 @@
 .btn__primary {
     background: #0052CC;
 }
+
+.btn__overlay__dark {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.btn__icon {
+    display: flex;
+    align-items: center;
+    i {
+        margin-right: 8px;
+    }
+    span {
+        transform: translateY(2px);
+    }
+}
