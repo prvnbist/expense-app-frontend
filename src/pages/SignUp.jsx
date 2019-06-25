@@ -69,7 +69,7 @@ export default class SignUp extends Component {
                     .required("Password is required!")
             });
         return (
-            <div>
+            <div className="signup">
             <h2 className="page-heading">Register to start managing your expenses.</h2>
                 <Mutation
                     mutation={SIGNUP_MUTATION}
@@ -108,7 +108,7 @@ export default class SignUp extends Component {
                             isSubmitting
                         }) => (
                             <form onSubmit={handleSubmit}>
-                                <div className='name-field'>
+                                <div className='field'>
                                     <input
                                         type="text"
                                         placeholder="Enter your name"
@@ -122,7 +122,7 @@ export default class SignUp extends Component {
                                     </label>
                                 </div>
                                 {touched.name && errors.name && <span id='name-error' className='error-message'>{errors.name}</span>}
-                                <div className='email-field'>
+                                <div className='field'>
                                     <input
                                         onChange={handleChange}
                                         onBlur={handleBlur}
@@ -136,7 +136,7 @@ export default class SignUp extends Component {
                                     </label>
                                 </div>
                                 {touched.email && errors.email && <span id='email-error' className='error-message'>{errors.email}</span>}
-                                <div className="username-field">
+                                <div className="field">
                                     <input
                                         onChange={handleChange}
                                         onBlur={handleBlur}
@@ -150,7 +150,7 @@ export default class SignUp extends Component {
                                     </label>
                                 </div>
                                 {touched.username && errors.username && <span id='username-error' className='error-message'>{errors.username}</span>}
-                                <div className='password-field'>
+                                <div className='field'>
                                     <input
                                         onChange={handleChange}
                                         onBlur={handleBlur}
@@ -169,7 +169,7 @@ export default class SignUp extends Component {
                                     </label>
                                 </div>
                                 {touched.password && errors.password && <span id='password-error' className='error-message'>{errors.password}</span>}
-                                <div className="select-field">
+                                <div className="field select-field">
                                     <select
                                         onChange={handleChange}
                                         onBlur={handleBlur}

@@ -81,7 +81,7 @@ class Login extends React.Component {
                             isSubmitting
                         }) => (
                             <form onSubmit={handleSubmit}>
-                                <div className='username-field'>
+                                <div className='field'>
                                     <input
                                         type="text"
                                         name="username"
@@ -95,7 +95,7 @@ class Login extends React.Component {
                                     </label>
                                 </div>
                                 {touched.username && errors.username && <span id='username-error' className='error-message'>{errors.username}</span>}
-                                <div className="password-field">
+                                <div className="field">
                                     <input
                                         type="password"
                                         name="password"

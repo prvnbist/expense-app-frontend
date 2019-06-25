@@ -12,16 +12,14 @@ input,select,button {
 	}
 }
 
-.form-login,.form-signup {
-    width:100%;
-    height:auto;
-    padding: 50px 0;
-    @include flex(null,center);
-    border: 1px solid #F1E9E9;
-    border-radius: 4px;
+.login,
+.signup {
+    .btn {
+        margin-top: 16px;
+    }
 }
 
-.username-field,.password-field,.email-field,.name-field,.select-field {
+.field {
     @include object(320px,100%,48px,#FFFFFF);
     border-radius: 4px;
     margin-top: 16px;
@@ -70,18 +68,6 @@ input,select,button {
 
 .select-field {
     width:150px;
-}
-
-.btn {
-    margin-top: 16px;
-    @include object(null,null,40px,#0052CC);
-    border-radius: 4px;
-    padding:0 16px;
-    font-size: 16px;
-    text-align: center;
-    line-height: 42px;
-    color: #FFFFFF;
-    cursor:pointer;
 }
 
 @media screen and (max-width:567px) {
