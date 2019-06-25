@@ -46,7 +46,7 @@ export default class Expense extends React.Component {
                         id: this.props.item.id
                     }}
                         onCompleted={data => this.reLoadPageWithNewData(data)}>
-                        {mutation => <button className="deleteExpense" onClick={mutation}>
+                        {mutation => <button className="expense__action" onClick={mutation}>
                             <i className="material-icons">delete</i>
                         </button>}
                     </Mutation>
@@ -74,9 +74,11 @@ export default class Expense extends React.Component {
             </div>
             <div className='bottom-row'>
                 <span className="description">
-                    <i className='material-icons'>description</i>{this.props.item.description
+                    <i className='material-icons'>description</i>
+                    <span>{this.props.item.description
                         ? this.props.item.description
                         : 'No description.'}</span>
+                        </span>
             </div>
         </div>
     }

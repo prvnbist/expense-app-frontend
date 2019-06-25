@@ -101,39 +101,34 @@ main {
     }
 }
 
-.expense-card {
-    height:auto;
-    border: 1px solid rgba(212, 212, 212, 0.6);
-    border-radius: 4px;
-    margin-bottom: 20px;
-    padding: 20px;
+.expenses-list {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap:24px;
+    padding-bottom: 24px;
 }
 
-.expenses-section {
-    h1 {
-        font-style: normal;
-        font-weight: 500;
-        line-height: normal;
-        font-size: 16px;
-        color: #9AA3AA;
-        margin-right: 20px;
-        margin-bottom: 20px;
-    }
+.expense-card {
+    min-height:232px;
+    border: 1px solid rgba(212, 212, 212, 0.6);
+    border-radius: 4px;
+    padding-bottom: 20px;
 }
 
 .top-row {
     @include flex(center, space-between);
     margin-bottom: 20px;
-
+    height: 56px;
+    padding: 0 20px;
+    border-bottom: 1px solid rgba(212, 212, 212, 0.6);
     .spentOn {
         font-style: normal;
         font-weight: 450;
         line-height: normal;
         font-size: 24px;
-
         color: #041A2A;
     }
-
     .amount {
         font-style: normal;
         font-weight: 450;
@@ -145,7 +140,9 @@ main {
 
 .mid-row {
     display:flex;
-    margin-bottom: 20px;
+    flex-wrap:wrap;
+    margin-bottom: 8px;
+    padding: 0 20px;
     .category,
     .time,
     .date {
@@ -155,10 +152,15 @@ main {
         font-size: 16px;
         color: #041A2A;
         opacity: 0.4;
-        margin-right: 40px;
+        margin-right: 20px;
+        margin-bottom: 16px;
         @include flex(center,null);
         i{
             padding-right: 15px;
+            font-size:21px;
+        }
+        span {
+            transform: translateY(2px);
         }
     }
 }
@@ -171,20 +173,37 @@ main {
     color: #041A2A;
     opacity: 0.4;
     margin-right: 40px;
+    padding: 0 20px;
     @include flex(center,null);
     i{
         padding-right: 15px;
+        font-size: 21px;
+    }
+    span {
+        transform: translateY(2px);
     }
 }
 
-.deleteExpense {
-    margin-left: 20px;
-    height: auto;
+.expense__action {
+    margin-left: 16px;
+    height: 32px;
+    width: 32px;
+    border: 1px solid #DCDCDC;
+    border-radius: 4px;
+    @include flex(center,center);
+    transition: 0.3s ease-in-out;
+    &:hover {
+        background: #EC1A1A;
+        i {
+            color:#fff;
+            opacity: 1;
+        }
+    }
     i {
         font-style: normal;
         font-weight: 400;
         line-height: normal;
-        font-size: 22spx;
+        font-size: 21px;
         color: #041A2A;
         opacity: 0.4;
     }
@@ -197,5 +216,10 @@ main {
     #filters {
         max-width: 100%;
         margin-bottom: 20px;
+    }
+}
+@media screen and (max-width:768px) {
+    .expenses-list {
+        grid-template-columns: 1fr;
     }
 }
