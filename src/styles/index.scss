@@ -4,6 +4,7 @@
 @import './base/typography.scss';
 @import './base/reset.scss';
 @import './base/grid.scss';
+@import './components/button';
 @import './layout/navbar.scss';
 @import './layout/header.scss';
 @import './layout/main.scss';
@@ -11,6 +12,7 @@
 @import './layout/expense.scss';
 @import './layout/datepicker.scss';
 @import './layout/tabs.scss';
+@import './layout/select.scss';
 
 * {
     margin: 0;
