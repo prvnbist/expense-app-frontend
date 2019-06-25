@@ -12,10 +12,6 @@ main {
     grid-column-gap:20px;
 }
 
-#search,#filterByCost, #filterByDate, #filterByCategory {
-    margin-bottom: 20px;
-}
-
 #filters {
     @include object(280px,100%,auto,null);
     border: 1px solid #E1E4E8;
@@ -98,6 +94,25 @@ main {
         i {
             line-height: 40px;
         }
+    }
+}
+
+.expense__options {
+    width:100%;
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: space-between;
+    .field {
+        width: 260px;
+        margin-right: 24px;
+        margin-top: 0;
+    }
+    .select__component {
+        width: 260px;
+    }
+    .btn {
+        margin-top: 0;
+        height: 48px;
     }
 }
 
