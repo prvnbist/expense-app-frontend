@@ -99,13 +99,22 @@ main {
 
 .expense__options {
     width:100%;
-    margin-bottom: 24px;
+    margin-bottom: 16px;
     display: flex;
     justify-content: space-between;
     .field {
         width: 260px;
+        height: 40px;
         margin-right: 24px;
         margin-top: 0;
+        label {
+            width: 40px;
+            height: 24px;
+        }
+        input {
+            padding-left: 12px;
+            transform: translateY(2px);
+        }
     }
     .select__component {
         width: 260px;

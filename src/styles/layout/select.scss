@@ -1,16 +1,13 @@
 
 .select__component {
     width: 240px;
-    height: 48px;
+    height: 40px;
     padding: 0 16px;
     border-radius: 6px;
     background: #fff;
     border: 1px solid rgb(243, 220, 220);
     position: relative;
-    
     cursor: pointer;
-    
-
     .selected-option {
         height: inherit;
         display: flex;
@@ -28,7 +25,7 @@
         z-index: 1000;
         position: absolute;
         background: #fff;
-        top: 50px;
+        top: 44px;
         left: 0;
         width: 260px;
         max-height: 249px;
@@ -36,9 +33,6 @@
         padding: 0 8px 8px;
         border-radius: 6px;
         border: 1px solid rgb(243, 220, 220);
-        ul {
-            // margin-top: 108px;
-        }
         li {
             height: 32px;
             font-size: 14px;
