@@ -37,7 +37,7 @@
         border-radius: 6px;
         border: 1px solid rgb(243, 220, 220);
         ul {
-            margin-top: 48px;
+            // margin-top: 108px;
         }
         li {
             height: 32px;
@@ -63,11 +63,9 @@
     .search-options {
         padding-top: 8px;
         background: #fff;
-        position: fixed;
         height: 40px;
         width: 208px;
     }
-
     input {
         width: calc(260px - 32px);
         height: 32px;
@@ -76,7 +74,6 @@
         padding: 0 10px;
         margin-bottom: 8px;
         border-radius: 6px;
-        position: fixed;
         border: 1px solid rgb(243, 220, 220);
         &::placeholder {
             color: rgb(175, 161, 161);
