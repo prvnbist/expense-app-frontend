@@ -5,18 +5,23 @@ import Tabs from './Tabs';
 import CURRENT_USER from '../queries/CurrentUser';
 import Expense from './ExpenseCard';
 import Select from './Select';
+import RadioGroup from './RadioGroup';
 
 const Main1 = () => {
     const [filters,
         setFilters] = React.useState({
             search: "",
-            category: ""
+            category: "",
+            type: ""
         });
     const selected = option => setFilters({
         ...filters,
         category: option
     });
-    console.log(filters);
+    const typeSelected = option => setFilters({
+        ...filters,
+        type: option
+    });
     const categories = [
         "Mortgage",
         "Rent",
@@ -48,6 +53,11 @@ const Main1 = () => {
         "Children’s Lessons & Activities",
         "Furniture"
     ];
+    const radioOptions = [
+		{ value: "plus", text: "Earned" },
+		{ value: "minus", text: "Spent" }
+    ];
+    console.log(filters)
     return (
 
         <div className="container-fluid"> 
@@ -74,6 +84,7 @@ const Main1 = () => {
                             options={categories}
                             placeholder={"Select a category"}
                             selected={selected}/>
+                        <RadioGroup options={radioOptions} name={"type"} selected={typeSelected}/>
                         </div>
                         <button type="button" className='btn btn__primary btn__icon'>
                             <i className="material-icons">add_circle</i>

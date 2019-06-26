@@ -1,0 +1,35 @@
+.radio__group__component {
+  height: 48px;
+  width: auto;
+  border-radius: 4px;
+  border: 1px solid #DCDCDC;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  .radio__option {
+	  text-align: center;
+	  position: relative;
+	  &:first-child {
+		  label {
+			  border-left: none;
+		  }
+	  }
+    label {
+      height: 48px;
+      line-height: 50px;
+      padding: 0 16px;
+      display: inline-block;
+		border-left: 1px solid #DCDCDC;
+	 }
+    input {
+		position: absolute;
+      visibility: hidden;
+      &:checked + label {
+		  	background: #0066dc;
+			border-right: 1px solid #0066dc;
+		  	color: #fff;
+      }
+    }
+  }
+}
