@@ -16,11 +16,12 @@ const RadioGroup = props => {
                             setcheckedOption(e.target.value);
                             props.selected(e.target.value);
                         }}
-						onClick={() =>
-							checkedOption === option.value
+						onClick={() => {
+							props.selected("");
+							return checkedOption === option.value
 								? setcheckedOption("")
-								: null
-						}
+								: null; 
+						}}
 					/>
 					<label htmlFor={option.value}>{option.text}</label>
 				</div>
