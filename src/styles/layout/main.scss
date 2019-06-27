@@ -120,9 +120,13 @@ main {
         width: 260px;
         margin-right: 24px;
     }
-    .btn {
+    .btn__icon {
         margin-top: 0;
-        height: 48px;
+        height: 40px;
+        padding: 0 12px;
+        span {
+            transform: translateY(1px); 
+        }
     }
 }
 
@@ -130,8 +134,8 @@ main {
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-gap:24px;
-    padding-bottom: 24px;
+    grid-gap:16px;
+    padding-bottom: 16px;
 }
 
 .expense-card {

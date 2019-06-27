@@ -58,7 +58,6 @@ const Main = () => {
             text: "Spent"
         }
     ];
-    console.log(filters)
     return (
         <div className="container-fluid">
             <Tabs>
@@ -103,14 +102,40 @@ const Main = () => {
                     }}>
                         {({loading, error, data}) => {
                             if (loading) 
-                                return <div>Loading...</div>;
+                                return <div
+                                    className="container"
+                                    style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    height: "calc(100vh - 190px)"
+                                }}>
+                                    <img
+                                        src="https://res.cloudinary.com/prvnbist/image/upload/c_scale,w_40/v1561624433/Expense%20App/ZlXo.gif"
+                                        alt=""/>
+                                </div>;
                             if (error) 
                                 return `Error! ${error.message}`;
-                            return <div className="expenses-list">
-                                {data
-                                    .usersExpenses
-                                    .map((item, index) => <Expense key={index} item={item}/>)}
-                            </div>;
+                            return <React.Fragment>
+                                {data.usersExpenses.length === 0
+                                    ? <div
+                                            className="container"
+                                            style={{
+                                            display: "flex",
+                                            alignItems: "center",
+                                            justifyContent: "center",
+                                            height: "calc(100vh - 190px)"
+                                        }}><img
+                                            style={{
+                                            width: "320px"
+                                        }}
+                                            src="https://res.cloudinary.com/prvnbist/image/upload/v1561618359/Expense%20App/empty-expenses.svg"
+                                            alt="EMpty Expenses"/></div>
+                                    : <div className="expenses-list">{data
+                                            .usersExpenses
+                                            .map((item, index) => <Expense key={index} item={item}/>)}</div>
+}
+                            </React.Fragment>;
                         }}
                     </Query>
                 </div>
