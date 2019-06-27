@@ -1,15 +1,22 @@
 import React from 'react'
-import {Query} from 'react-apollo';
+import {Query, Mutation} from 'react-apollo';
+import {Formik} from 'formik';
+import * as Yup from 'yup';
+
+import ADD_EXPENSE_MUTATION from '../queries/AddExpense';
+import USERS_EXPENSES from '../queries/UsersExpenses';
 
 import Tabs from './Tabs';
-import USERS_EXPENSES from '../queries/UsersExpenses';
 import Expense from './ExpenseCard';
 import Select from './Select';
 import RadioGroup from './RadioGroup';
+import Modal from './Modal';
 
 const Main = () => {
     const [filters,
         setFilters] = React.useState({search: "", category: "", type: ""});
+    const [modal,
+        showModal] = React.useState(false);
     const selected = option => setFilters({
         ...filters,
         category: option
@@ -18,6 +25,8 @@ const Main = () => {
         ...filters,
         type: option
     });
+    const closeModal = value => showModal(value);
+
     const categories = [
         "Mortgage",
         "Rent",
@@ -58,8 +67,157 @@ const Main = () => {
             text: "Spent"
         }
     ];
+    const expenseSchema = Yup
+        .object()
+        .shape({
+            spentOn: Yup
+                .string()
+                .required(),
+            amount: Yup
+                .number()
+                .typeError()
+                .required(),
+            description: Yup
+                .string()
+                .max(80)
+        });
+    const reLoadPageWithNewData = _ => {
+        window
+            .location
+            .reload();
+    }
     return (
         <div className="container-fluid">
+            {modal && (
+                <Modal title={"Add Expense"} closeModal={closeModal}>
+                    <Mutation
+                        mutation={ADD_EXPENSE_MUTATION}
+                        onCompleted={() => reLoadPageWithNewData()}>
+                        {addExpense => (
+                            <Formik
+                                initialValues={{
+                                spentOn: '',
+                                category: 'grocery',
+                                amount: '',
+                                type: 'plus',
+                                description: ''
+                            }}
+                                validationSchema={expenseSchema}
+                                onSubmit={(values, {setSubmitting}) => {
+                                setTimeout(() => {
+                                    addExpense({
+                                        variables: {
+                                            spentOn: values.spentOn,
+                                            category: values.category,
+                                            amount: values.amount,
+                                            type: values.type,
+                                            description: values.description
+                                        }
+                                    });
+                                    setSubmitting(false);
+                                }, 400);
+                            }}>
+                                {({
+                                    values,
+                                    errors,
+                                    touched,
+                                    handleChange,
+                                    handleBlur,
+                                    handleSubmit,
+                                    isSubmitting
+                                }) => (
+                                    <React.Fragment>
+                                        <form onSubmit={handleSubmit}>
+                                            <Modal.Main>
+                                                <div className="addexpense__row">
+                                                    <div className="addexpense__column">
+                                                        <label>Category</label>
+                                                        <select
+                                                            name="category"
+                                                            defaultValue={values.category}
+                                                            onChange={handleChange}
+                                                            onBlur={handleBlur}>
+                                                            {categories.map((item, index) => <option key={index} value={item}>{item}</option>)}
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div className="addexpense__row">
+                                                    <div className="addexpense__column">
+                                                        <label>Expense Name</label>
+                                                        <input
+                                                            style={{
+                                                            border: touched.spentOn && errors.spentOn && "1px solid red"
+                                                        }}
+                                                            type="text"
+                                                            name="spentOn"
+                                                            value={values.spentOn}
+                                                            onChange={handleChange}
+                                                            onBlur={handleBlur}
+                                                            placeholder="Enter the article"/>
+                                                    </div>
+
+                                                </div>
+                                                <div className="addexpense__row">
+                                                    <div className="addexpense__column">
+                                                        <label>Type</label>
+                                                        <select
+                                                            name="type"
+                                                            defaultValue={values.type}
+                                                            onChange={handleChange}
+                                                            onBlur={handleBlur}>
+                                                            <option value="plus">Earned</option>
+                                                            <option value="minus">Spent</option>
+                                                        </select>
+                                                    </div>
+                                                    <div className="addexpense__column">
+                                                        <label>Amount</label>
+                                                        <input
+                                                            style={{
+                                                            border: touched.amount && errors.amount && "1px solid red"
+                                                        }}
+                                                            value={values.amount}
+                                                            onChange={handleChange}
+                                                            onBlur={handleBlur}
+                                                            type="text"
+                                                            name="amount"
+                                                            placeholder="Enter the amount..."/>
+                                                    </div>
+                                                </div>
+                                                <div className="addexpense__row">
+                                                    <div className="addexpense__column">
+                                                        <label>Description</label>
+                                                        <textarea
+                                                            value={values.description}
+                                                            onChange={handleChange}
+                                                            onBlur={handleBlur}
+                                                            type="text"
+                                                            name="description"
+                                                            placeholder="Enter the description..."/>
+                                                    </div>
+                                                </div>
+                                            </Modal.Main>
+                                            <Modal.Footer>
+                                                <button
+                                                    type="submit"
+                                                    disabled={isSubmitting}
+                                                    style={{
+                                                    marginRight: "var(--margin-1)"
+                                                }}
+                                                    onClick={() => setTimeout(() => showModal(!modal), 1000)}
+                                                    className="btn btn__primary btn__small">Add Expense</button>
+                                                <button
+                                                    type="button"
+                                                    onClick={() => showModal(!modal)}
+                                                    className="btn btn__outline btn__small">Cancel</button>
+                                            </Modal.Footer>
+                                        </form>
+                                    </React.Fragment>
+                                )}
+                            </Formik>
+                        )}
+                    </Mutation>
+                </Modal>
+            )}
             <Tabs>
                 <div label="Expenses">
                     <div className="expense__options">
@@ -88,7 +246,10 @@ const Main = () => {
                                 selected={selected}/>
                             <RadioGroup options={radioOptions} name={"type"} selected={typeSelected}/>
                         </div>
-                        <button type="button" className='btn btn__primary btn__icon'>
+                        <button
+                            type="button"
+                            className='btn btn__primary btn__icon'
+                            onClick={() => showModal(!modal)}>
                             <i className="material-icons">add_circle</i>
                             <span>Add Expense</span>
                         </button>
