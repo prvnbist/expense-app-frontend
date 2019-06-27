@@ -58,19 +58,6 @@ main {
     }
 }
 
-#filterByCost, #filterByDate {
-    input {
-        width:50%;
-        &#amountRangeFrom,&#dateRangeFrom {
-            border-right-color: transparent;
-            border-radius:4px 0 0 4px;
-        }
-        &#amountRangeTo,&#dateRangeTo {
-            border-radius: 0 4px 4px 0;
-        }
-    }
-}
-
 #section-title {
     height: 100px;
     @include flex(center, space-between);
