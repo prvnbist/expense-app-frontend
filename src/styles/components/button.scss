@@ -13,8 +13,22 @@
     background: #0052CC;
 }
 
+.btn__outline {
+    background: #fff;
+    color: #041A2A;
+    border: 1px solid #DCDCDC;
+}
+
 .btn__overlay__dark {
     background: rgba(255, 255, 255, 0.3);
+}
+
+.btn__small {
+    height: 32px;
+    padding: 0 8px;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 34px;
 }
 
 .btn__icon {
