@@ -81,18 +81,14 @@ const Main = () => {
                 .string()
                 .max(80)
         });
-    const reLoadPageWithNewData = _ => {
-        window
-            .location
-            .reload();
-    }
     return (
         <div className="container-fluid">
             {modal && (
                 <Modal title={"Add Expense"} closeModal={closeModal}>
                     <Mutation
                         mutation={ADD_EXPENSE_MUTATION}
-                        onCompleted={() => reLoadPageWithNewData()}>
+                        refetchQueries={() => ['usersExpenses']}
+                    >
                         {addExpense => (
                             <Formik
                                 initialValues={{
