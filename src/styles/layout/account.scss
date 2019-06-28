@@ -1,0 +1,19 @@
+.account__modal {
+    main {
+        margin-bottom: 16px;
+        .field {
+            height: 40px;
+            label {
+                width: 40px;
+            }
+            input {
+                padding-left: 14px;
+                font-size: 14px;
+                height: inherit;
+            }
+        }
+    }
+    .container {
+        width:100%;
+    }
+}

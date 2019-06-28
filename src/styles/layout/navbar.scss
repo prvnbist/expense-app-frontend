@@ -19,4 +19,17 @@ nav {
             }
         }
     }
+    #user-info-actions {
+        display: flex;
+    }
+    .user__image {
+        cursor: pointer;
+        height: 40px;
+        width: 40px;
+        margin-right: 16px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.3);
+        @include flex(center,center);
+        color: #fff;
+    }
 }
