@@ -3,8 +3,11 @@
     grid-auto-flow: column;
     grid-gap: 16px;
     margin-bottom: 16px;
+    &:first-child {
+        margin-top: 16px;
+    }
     &:last-child {
-        margin-bottom: 0;
+        margin-bottom: 16px;
     }
 }
 
