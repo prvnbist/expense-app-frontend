@@ -448,6 +448,7 @@ const Main = () => {
                                                             }
                                                         }
                                                     },
+                                                    responsive: true,
                                                     maintainAspectRatio: false
                                                 }}/>
                                             </main>
