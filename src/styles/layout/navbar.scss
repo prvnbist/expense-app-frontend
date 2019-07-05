@@ -33,3 +33,9 @@ nav {
         color: #fff;
     }
 }
+
+@media screen and (max-width: 567px) {
+    nav > .container #logo a {
+        color: #0052CC;
+    }
+}

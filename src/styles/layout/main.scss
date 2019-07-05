@@ -234,9 +234,41 @@ main {
         max-width: 100%;
         margin-bottom: 20px;
     }
+    .expense__options {
+        &>div {
+            .field, .select__component, .radio__group__component {
+                max-width:100%;
+                width: 100%;
+                margin-right: 0;
+            }
+            .radio__group__component {
+                display: grid;
+                grid-auto-flow: column;
+                grid-template-columns: 1fr 1fr; 
+                .radio__option {
+                    label {
+                        padding: 0;
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
 }
 @media screen and (max-width:768px) {
     .expenses-list {
         grid-template-columns: 1fr;
+    }
+}
+
+@media screen and (max-width:980px) {
+    .expense__options {
+        flex-wrap: wrap;
+        &>div {
+            flex-wrap: wrap;
+            .field, .select__component, .radio__group__component {
+                margin-bottom: 16px;
+            }
+        }
     }
 }

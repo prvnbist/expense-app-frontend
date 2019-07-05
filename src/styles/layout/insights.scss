@@ -1,7 +1,7 @@
 #top__row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-column-gap: 16px;
+    grid-gap: 16px;
     grid-auto-rows: 200px;
     width: 100%;
 }
@@ -43,8 +43,8 @@
 #middle__row {
     display: grid;
     grid-template-columns: 2fr 1fr;
-    grid-column-gap: 16px;
-    grid-auto-rows: 380px;
+    grid-gap: 16px;
+    // grid-auto-rows: 380px;
     width: 100%;
     margin-top: 16px;
 }
@@ -65,5 +65,26 @@
         padding: 16px;
         min-height: calc(100% - 48px);
         color: #fff;
+    }
+}
+
+#monthly__stats {
+    canvas {
+        width:100% !important;
+        height: 100% !important;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    #top__row {
+        grid-template-columns: 1fr;
+    }
+    #middle__row {
+        grid-template-columns: 1fr;
+        margin-bottom: 24px;
+        canvas {
+            width: 100%  !important;
+            height: 350px  !important;
+        }
     }
 }

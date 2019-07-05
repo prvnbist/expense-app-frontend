@@ -42,3 +42,14 @@
         border-radius: 4px;
     }
 }
+
+
+@media screen and (max-width: 567px) {
+    .modal__card {
+        height: 100%;
+        width: 100%;
+        .addexpense__row {
+            width: 100%;
+        }
+    }
+}
