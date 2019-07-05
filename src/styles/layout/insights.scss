@@ -1,5 +1,7 @@
 #top__row {
+    display: -ms-grid;
     display: grid;
+    -ms-grid-columns: 1fr 16px 1fr;
     grid-template-columns: 1fr 1fr;
     grid-gap: 16px;
     grid-auto-rows: 200px;
@@ -9,12 +11,18 @@
 .stats__card {
     border-radius: 4px;
     &:nth-child(1) {
+        background: -webkit-linear-gradient(317.82deg, #6A11CB 0%, #2575FC 100%);
+        background: -o-linear-gradient(317.82deg, #6A11CB 0%, #2575FC 100%);
         background: linear-gradient(132.18deg, #6A11CB 0%, #2575FC 100%);
     }
     &:nth-child(2) {
+        background: -webkit-linear-gradient(317.82deg, #C471F5 0%, #FA71CD 100%);
+        background: -o-linear-gradient(317.82deg, #C471F5 0%, #FA71CD 100%);
         background: linear-gradient(132.18deg, #C471F5 0%, #FA71CD 100%);
     }
     &:nth-child(3) {
+        background: -webkit-linear-gradient(317.82deg, #4FACFE 0%, #00F2FE 100%);
+        background: -o-linear-gradient(317.82deg, #4FACFE 0%, #00F2FE 100%);
         background: linear-gradient(132.18deg, #4FACFE 0%, #00F2FE 100%);
     }
     header {
@@ -29,10 +37,19 @@
         padding: 0 16px;
         height: calc(100% - 48px);
         color: #fff;
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
-        align-items: flex-start;
-        justify-content: center;
-        flex-direction: column;
+        -webkit-box-align: start;
+            -ms-flex-align: start;
+                align-items: flex-start;
+        -webkit-box-pack: center;
+            -ms-flex-pack: center;
+                justify-content: center;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
         .stats__number {
             font-size: 48px;
             font-weight: bold;
@@ -41,10 +58,11 @@
 }
 
 #middle__row {
+    display: -ms-grid;
     display: grid;
+    -ms-grid-columns: 2fr 16px 1fr;
     grid-template-columns: 2fr 1fr;
     grid-gap: 16px;
-    // grid-auto-rows: 380px;
     width: 100%;
     margin-top: 16px;
 }
@@ -77,9 +95,11 @@
 
 @media screen and (max-width: 767px) {
     #top__row {
+        -ms-grid-columns: 1fr;
         grid-template-columns: 1fr;
     }
     #middle__row {
+        -ms-grid-columns: 1fr;
         grid-template-columns: 1fr;
         margin-bottom: 24px;
         canvas {

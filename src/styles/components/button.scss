@@ -35,12 +35,18 @@
 }
 
 .btn__icon {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    align-items: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     i {
         margin-right: 8px;
     }
     span {
-        transform: translateY(2px);
+        -webkit-transform: translateY(2px);
+                -ms-transform: translateY(2px);
+            transform: translateY(2px);
     }
 }

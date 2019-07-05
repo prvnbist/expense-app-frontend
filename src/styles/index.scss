@@ -20,7 +20,8 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-family: var(--font);
@@ -71,8 +72,12 @@ body {
     .cateogriesSpentOn {
         width: 350px;
         margin-bottom: 20px;
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
-        justify-content: space-between;
+        -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+                justify-content: space-between;
         span {
             font-size: 18px;
             font-weight: 400;
@@ -107,6 +112,7 @@ body {
         height: auto;
     }
     #total-expenses {
+        -ms-grid-columns: 100%;
         grid-template-columns: 100%;
     }
     #user-account-info {
@@ -119,7 +125,10 @@ body {
         height: auto;
     }
     .mid-row {
-        flex-direction: column;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
         .category,
         .time {
             margin-bottom: 16px;
@@ -142,6 +151,7 @@ body {
         height: 100%;
         overflow-y: scroll;
         div:nth-child(2) {
+            -ms-grid-columns: 1fr;
             grid-template-columns: 1fr;
         }
     }
@@ -150,6 +160,7 @@ body {
         height: 100%;
         width: 100%;
         padding: 40px;
+        -ms-grid-columns: 1fr;
         grid-template-columns: 1fr;
         grid-row-gap: 40px;
         #left {
@@ -177,8 +188,12 @@ body {
     font-weight: 600;
     font-size: 24px;
     line-height: 37px;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    align-items: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     color: #1B2C44;
     margin-bottom: 24px;
 }

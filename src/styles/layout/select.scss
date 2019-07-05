@@ -10,14 +10,22 @@
     cursor: pointer;
     .selected-option {
         height: inherit;
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
-        align-items: center;
-        justify-content: space-between;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
+        -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+                justify-content: space-between;
         span {
             font-size: 16px;
         }
         i {
-            transform: translateX(43%);
+            -webkit-transform: translateX(43%);
+                    -ms-transform: translateX(43%);
+                transform: translateX(43%);
         }
     }
 
@@ -42,6 +50,8 @@
             cursor: pointer;
             border-radius: 6px;
             color: rgb(175, 161, 161);
+            -webkit-transition: 0.3s linear;
+            -o-transition: 0.3s linear;
             transition: 0.3s linear;
             &:hover {
                 color: #000;
@@ -69,6 +79,15 @@
         margin-bottom: 8px;
         border-radius: 6px;
         border: 1px solid rgb(243, 220, 220);
+        &::-webkit-input-placeholder {
+            color: rgb(175, 161, 161);
+        }
+        &:-ms-input-placeholder {
+            color: rgb(175, 161, 161);
+        }
+        &::-ms-input-placeholder {
+            color: rgb(175, 161, 161);
+        }
         &::placeholder {
             color: rgb(175, 161, 161);
         }

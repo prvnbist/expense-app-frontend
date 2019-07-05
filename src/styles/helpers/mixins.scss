@@ -6,7 +6,13 @@
 }
 
 @mixin flex($ai,$jc){
+    display:-webkit-box;
+    display:-ms-flexbox;
     display:flex;
-    align-items: $ai;
-    justify-content: $jc;
+    -webkit-box-align: $ai;
+        -ms-flex-align: $ai;
+            align-items: $ai;
+    -webkit-box-pack: $jc;
+        -ms-flex-pack: $jc;
+            justify-content: $jc;
 }

@@ -7,7 +7,9 @@ main {
 }
 
 #content {
+    display: -ms-grid;
     display: grid;
+    -ms-grid-columns: 280px 20px 1fr;
     grid-template-columns: 280px 1fr;
     grid-column-gap:20px;
 }
@@ -17,7 +19,8 @@ main {
     border: 1px solid #E1E4E8;
     border-radius: 4px;
     padding: 20px;
-    align-self: flex-start;
+    -ms-flex-item-align: start;
+        align-self: flex-start;
     label {
         margin-bottom: 16px;
         display: block;
@@ -31,6 +34,15 @@ main {
         border-radius:4px;
         padding-left: 12px;
         font-size: 16px;
+        &::-webkit-input-placeholder {
+            color:#9AA3AA;
+        }
+        &:-ms-input-placeholder {
+            color:#9AA3AA;
+        }
+        &::-ms-input-placeholder {
+            color:#9AA3AA;
+        }
         &::placeholder {
             color:#9AA3AA;
         }
@@ -41,6 +53,15 @@ main {
         border-radius:4px;
         padding-left: 8px;
         font-size: 16px;
+        &::-webkit-input-placeholder {
+            color:#9AA3AA;
+        }
+        &:-ms-input-placeholder {
+            color:#9AA3AA;
+        }
+        &::-ms-input-placeholder {
+            color:#9AA3AA;
+        }
         &::placeholder {
             color:#9AA3AA;
         }
@@ -87,8 +108,12 @@ main {
 .expense__options {
     width:100%;
     margin-bottom: 16px;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: space-between;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
     .field {
         width: 260px;
         height: 40px;
@@ -100,7 +125,9 @@ main {
         }
         input {
             padding-left: 12px;
-            transform: translateY(2px);
+            -webkit-transform: translateY(2px);
+                    -ms-transform: translateY(2px);
+                transform: translateY(2px);
         }
     }
     .select__component {
@@ -112,14 +139,18 @@ main {
         height: 40px;
         padding: 0 12px;
         span {
-            transform: translateY(1px); 
+            -webkit-transform: translateY(1px);
+                    -ms-transform: translateY(1px);
+                transform: translateY(1px); 
         }
     }
 }
 
 .expenses-list {
     width: 100%;
+    display: -ms-grid;
     display: grid;
+    -ms-grid-columns: 1fr 16px 1fr;
     grid-template-columns: 1fr 1fr;
     grid-gap:16px;
     padding-bottom: 16px;
@@ -156,8 +187,11 @@ main {
 }
 
 .mid-row {
+    display:-webkit-box;
+    display:-ms-flexbox;
     display:flex;
-    flex-wrap:wrap;
+    -ms-flex-wrap:wrap;
+        flex-wrap:wrap;
     margin-bottom: 8px;
     padding: 0 20px;
     .category,
@@ -177,7 +211,9 @@ main {
             font-size:21px;
         }
         span {
-            transform: translateY(2px);
+            -webkit-transform: translateY(2px);
+                    -ms-transform: translateY(2px);
+                transform: translateY(2px);
         }
     }
 }
@@ -197,7 +233,9 @@ main {
         font-size: 21px;
     }
     span {
-        transform: translateY(2px);
+        -webkit-transform: translateY(2px);
+                -ms-transform: translateY(2px);
+            transform: translateY(2px);
     }
 }
 
@@ -208,6 +246,8 @@ main {
     border: 1px solid #DCDCDC;
     border-radius: 4px;
     @include flex(center,center);
+    -webkit-transition: 0.3s ease-in-out;
+    -o-transition: 0.3s ease-in-out;
     transition: 0.3s ease-in-out;
     &:hover {
         background: #EC1A1A;
@@ -228,6 +268,7 @@ main {
 
 @media screen and (max-width:567px) {
     #content {
+        -ms-grid-columns: 100%;
         grid-template-columns: 100%;
     }
     #filters {
@@ -242,8 +283,10 @@ main {
                 margin-right: 0;
             }
             .radio__group__component {
+                display: -ms-grid;
                 display: grid;
                 grid-auto-flow: column;
+                -ms-grid-columns: 1fr 1fr;
                 grid-template-columns: 1fr 1fr; 
                 .radio__option {
                     label {
@@ -257,15 +300,18 @@ main {
 }
 @media screen and (max-width:768px) {
     .expenses-list {
+        -ms-grid-columns: 1fr;
         grid-template-columns: 1fr;
     }
 }
 
 @media screen and (max-width:980px) {
     .expense__options {
-        flex-wrap: wrap;
-        &>div {
+        -ms-flex-wrap: wrap;
             flex-wrap: wrap;
+        &>div {
+            -ms-flex-wrap: wrap;
+                flex-wrap: wrap;
             .field, .select__component, .radio__group__component {
                 margin-bottom: 16px;
             }

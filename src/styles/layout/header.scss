@@ -5,9 +5,16 @@
     background-size: cover;
     background-position-y: 16%;
     position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
     &:after {
         content: '';
         position: absolute;
@@ -68,7 +75,9 @@
 }
 
 #total-expenses {
+    display: -ms-grid;
     display: grid;
+    -ms-grid-columns: 280px 20px 1fr;
     grid-template-columns: 280px 1fr;
     grid-gap: 20px;
 }
@@ -87,21 +96,30 @@
     margin: 20px 0;
     height: 60px;
     @include flex(flex-end, space-between);
-    // background: rgba(255, 255, 255, 0.3);
     border-radius: 4px;
     img {
         padding-left: 20px;
         width:10%;
     }
     input {
-        // width:70%;
-        // padding: 0 20px;
         font-style: normal;
         font-weight: 500;
         line-height: 0;
         font-size: 48px;
         color: #FFFFFF;
-        float:left; //
+        float:left;
+        &::-webkit-input-placeholder{
+            color:#fff;
+        }
+        &:-ms-input-placeholder{
+            color:#fff;
+        }
+        &::-ms-input-placeholder{
+            color:#fff;
+        }
+        &::-webkit-input-placeholder{
+            color:#fff;
+        }
         &::placeholder{
             color:#fff;
         }
@@ -115,10 +133,12 @@
         height:56px;
     }
     .expense-option {
-        float:left; //
-        transform: translateY(-7px); //
-        margin-right: 20px; //
-        // width:30%;
+        float:left;
+        -webkit-transform: translateY(-7px);
+                -webkit-transform: translateY(-7px);
+                    -ms-transform: translateY(-7px);
+                        transform: translateY(-7px);
+        margin-right: 20px;
         text-align:center;
         font-style: normal;
         font-weight: 500;

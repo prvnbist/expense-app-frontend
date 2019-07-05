@@ -21,7 +21,9 @@
         @include flex(center, space-between);
         border-bottom: 1px solid #DCDCDC;
         i {
-            transform: translateX(4px);
+            -webkit-transform: translateX(4px);
+                    -ms-transform: translateX(4px);
+                transform: translateX(4px);
             cursor: pointer;
         }
     }

@@ -23,9 +23,16 @@ input,select,button {
     @include object(320px,100%,48px,#FFFFFF);
     border-radius: 4px;
     margin-top: 16px;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    align-items: center;
-    flex-direction: row-reverse;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: reverse;
+        -ms-flex-direction: row-reverse;
+            flex-direction: row-reverse;
     border: 1px solid #DCDCDC;
 
 	&:focus-within {
@@ -46,6 +53,15 @@ input,select,button {
         font-size: 16px;
         color: #0066DC;
         width:100%;
+        &::-webkit-input-placeholder {
+            color: #A9A0A0;
+        }
+        &:-ms-input-placeholder {
+            color: #A9A0A0;
+        }
+        &::-ms-input-placeholder {
+            color: #A9A0A0;
+        }
         &::placeholder {
             color: #A9A0A0;
         }

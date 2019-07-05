@@ -20,6 +20,8 @@ nav {
         }
     }
     #user-info-actions {
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
     }
     .user__image {
