@@ -10,8 +10,10 @@ import UPDATE_USER_MUTATION from '../queries/UpdateUser';
 import Modal from './Modal';
 
 const NavBar = (props) => {
-    const [passwordVisibility, setPasswordVisibility] = React.useState(false);
-    const [isFormUpdated, setIsFormUpdated] = React.useState(false);
+    const [passwordVisibility,
+        setPasswordVisibility] = React.useState(false);
+    const [isFormUpdated,
+        setIsFormUpdated] = React.useState(false);
     const [modal,
         showModal] = React.useState(false);
     const logOut = () => {
@@ -107,7 +109,13 @@ const NavBar = (props) => {
                                                 }) => (
                                                     <form onSubmit={handleSubmit}>
                                                         <Modal.Main>
-                                                            <div className='field'>
+                                                            <div
+                                                                className='field'
+                                                                style={{
+                                                                background: isFormUpdated
+                                                                    ? "#fff"
+                                                                    : "rgb(248, 250, 255)"
+                                                            }}>
                                                                 <input
                                                                     type="text"
                                                                     placeholder="Enter your name"
@@ -121,7 +129,13 @@ const NavBar = (props) => {
                                                                 </label>
                                                             </div>
                                                             {touched.name && errors.name && <span id='name-error' className='error-message'>{errors.name}</span>}
-                                                            <div className='field'>
+                                                            <div
+                                                                className='field'
+                                                                style={{
+                                                                background: isFormUpdated
+                                                                    ? "#fff"
+                                                                    : "rgb(248, 250, 255)"
+                                                            }}>
                                                                 <input
                                                                     onChange={e => isFormUpdated && handleChange(e)}
                                                                     onBlur={handleBlur}
@@ -135,7 +149,13 @@ const NavBar = (props) => {
                                                                 </label>
                                                             </div>
                                                             {touched.email && errors.email && <span id='email-error' className='error-message'>{errors.email}</span>}
-                                                            <div className="field">
+                                                            <div
+                                                                className="field"
+                                                                style={{
+                                                                background: isFormUpdated
+                                                                    ? "#fff"
+                                                                    : "rgb(248, 250, 255)"
+                                                            }}>
                                                                 <input
                                                                     onChange={e => isFormUpdated && handleChange(e)}
                                                                     onBlur={handleBlur}
@@ -149,7 +169,13 @@ const NavBar = (props) => {
                                                                 </label>
                                                             </div>
                                                             {touched.username && errors.username && <span id='username-error' className='error-message'>{errors.username}</span>}
-                                                            <div className='field'>
+                                                            <div
+                                                                className='field'
+                                                                style={{
+                                                                background: isFormUpdated
+                                                                    ? "#fff"
+                                                                    : "rgb(248, 250, 255)"
+                                                            }}>
                                                                 <input
                                                                     onChange={e => isFormUpdated && handleChange(e)}
                                                                     onBlur={handleBlur}
@@ -173,13 +199,20 @@ const NavBar = (props) => {
                                                             <button
                                                                 type="button"
                                                                 className='btn btn__primary btn__small'
-                                                                style={{display: isFormUpdated ? 'none' : "block"}}
-                                                                onClick={e => setIsFormUpdated(!isFormUpdated)}
-                                                                >Edit Profile</button>
+                                                                style={{
+                                                                display: isFormUpdated
+                                                                    ? 'none'
+                                                                    : "block"
+                                                            }}
+                                                                onClick={e => setIsFormUpdated(!isFormUpdated)}>Edit Profile</button>
                                                             <button
                                                                 type="submit"
                                                                 className='btn btn__success btn__small'
-                                                                style={{display: isFormUpdated ? 'block' : "none"}}
+                                                                style={{
+                                                                display: isFormUpdated
+                                                                    ? 'block'
+                                                                    : "none"
+                                                            }}
                                                                 onClick={e => setIsFormUpdated(!isFormUpdated)}
                                                                 disabled={isSubmitting}>Save Profile</button>
                                                         </Modal.Footer>
