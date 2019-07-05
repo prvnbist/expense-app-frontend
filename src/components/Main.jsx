@@ -2,6 +2,7 @@ import React from 'react'
 import {Query, Mutation} from 'react-apollo';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
+import {Pie, Line} from "react-chartjs-2";
 
 import ADD_EXPENSE_MUTATION from '../queries/AddExpense';
 import USERS_EXPENSES from '../queries/UsersExpenses';
@@ -87,31 +88,28 @@ const Main = () => {
                 <Modal title={"Add Expense"} closeModal={closeModal}>
                     <Mutation
                         mutation={ADD_EXPENSE_MUTATION}
-                        refetchQueries={() => ['usersExpenses']}
-                    >
+                        refetchQueries={() => ['usersExpenses']}>
                         {addExpense => (
                             <Formik
                                 initialValues={{
                                 spentOn: '',
-                                category: 'grocery',
+                                category: 'Grocery',
                                 amount: '',
                                 type: 'plus',
                                 description: ''
                             }}
                                 validationSchema={expenseSchema}
                                 onSubmit={(values, {setSubmitting}) => {
-                                setTimeout(() => {
-                                    addExpense({
-                                        variables: {
-                                            spentOn: values.spentOn,
-                                            category: values.category,
-                                            amount: values.amount,
-                                            type: values.type,
-                                            description: values.description
-                                        }
-                                    });
-                                    setSubmitting(false);
-                                }, 400);
+                                addExpense({
+                                    variables: {
+                                        spentOn: values.spentOn,
+                                        category: values.category,
+                                        amount: values.amount,
+                                        type: values.type,
+                                        description: values.description
+                                    }
+                                });
+                                setSubmitting(false);
                             }}>
                                 {({
                                     values,
@@ -275,7 +273,8 @@ const Main = () => {
                                 return `Error! ${error.message}`;
                             return <React.Fragment>
                                 {data.usersExpenses.length === 0
-                                    ? <div
+                                    ? (
+                                        <div
                                             className="container"
                                             style={{
                                             display: "flex",
@@ -288,16 +287,186 @@ const Main = () => {
                                         }}
                                             src="https://res.cloudinary.com/prvnbist/image/upload/v1561618359/Expense%20App/empty-expenses.svg"
                                             alt="EMpty Expenses"/></div>
-                                    : <div className="expenses-list">{data
-                                            .usersExpenses
-                                            .map((item, index) => <Expense key={index} item={item}/>)}</div>
+                                    )
+                                    : (
+                                        <div className="expenses-list">{data
+                                                .usersExpenses
+                                                .map((item, index) => <Expense key={index} item={item}/>)}</div>
+                                    )
 }
                             </React.Fragment>;
                         }}
                     </Query>
                 </div>
                 <div label="Insights">
-                    Insights
+                    <div id="top__row" className="container">
+                        <Query query={USERS_EXPENSES}>
+                            {({client, loading, error, data: {
+                                    usersExpenses
+                                }}) => {
+                                if (loading) 
+                                    return <div id='user-info-actions'>
+                                        <span id="user-name">Loading...</span>
+                                    </div>;
+                                if (error) 
+                                    return `Error! ${error.message}`;
+                                const totalSpent = usersExpenses
+                                    .filter(expense => expense.type === "minus")
+                                    .reduce((total, expense) => Number(expense.amount) + total, 0);
+                                const totalExpenses = usersExpenses.length;
+                                return (
+                                    <React.Fragment>
+                                        <div className="stats__card">
+                                            <header>Total Spent</header>
+                                            <main>
+                                                <span className="stats__number">{parseInt(totalSpent).toLocaleString("en-IN", {
+                                                        style: 'currency',
+                                                        currency: "INR"
+                                                    })}</span>
+                                                <span className="stats__text">rupees spent so far</span>
+                                            </main>
+                                        </div>
+                                        <div className="stats__card">
+                                            <header>Total Expenses</header>
+                                            <main>
+                                                <span className="stats__number">{totalExpenses}</span>
+                                                <span className="stats__text">expenses so far</span>
+                                            </main>
+                                        </div>
+                                    </React.Fragment>
+                                )
+                            }}
+                        </Query>
+                    </div>
+                    <div id="middle__row" className="container">
+                        <Query query={USERS_EXPENSES}>
+                            {({client, loading, error, data: {
+                                    usersExpenses
+                                }}) => {
+                                if (loading) 
+                                    return <div id='user-info-actions'>
+                                        <span id="user-name">Loading...</span>
+                                    </div>;
+                                if (error) 
+                                    return `Error! ${error.message}`;
+                                let categories = [...new Set(usersExpenses.filter(item => item.type === "minus").map(item => item.category))];
+                                let amount = [];
+                                let catAmount = 0;
+                                for (let i in categories) {
+                                    for (let j in usersExpenses) {
+                                        if (usersExpenses[j].category === categories[i]) {
+                                            catAmount += Number(usersExpenses[j].amount);
+                                        }
+                                    }
+                                    amount.push(catAmount);
+                                    catAmount = 0;
+                                }
+                                let obj = [];
+                                for (let i = 0; i < categories.length; i++) {
+                                    obj.push({category: categories[i], amount: amount[i]});
+                                }
+                                let sortedData = obj.sort((a, b) => b.amount - a.amount).slice(0, 5);
+                                const data = {
+                                    labels: sortedData.map(i => i.category),
+                                    datasets: [
+                                        {
+                                            data: sortedData.map(i => i.amount),
+                                            backgroundColor: [
+                                                "#E84C3D", "#3598DB", "#1BBC9B", "#F1C40F", "#34495E"
+                                            ],
+                                            hoverBackgroundColor: ["#E84C3D", "#3598DB", "#1BBC9B", "#F1C40F", "#34495E"]
+                                        }
+                                    ]
+                                };
+
+                                const getMonth = data => new Intl
+                                    .DateTimeFormat("en-US", {month: "long"})
+                                    .format(new Date(Number(data)));
+                                const getYear = data => new Intl
+                                    .DateTimeFormat("en-US", {year: "numeric"})
+                                    .format(new Date(Number(data)));
+
+                                let months = [...new Set(usersExpenses.filter(item => item.type === "minus").map(i => `${getMonth(i.createdAt)} ${getYear(i.createdAt)}`))].reverse();
+
+                                let amount1 = [];
+                                let catAmount1 = 0;
+                                let filterRaw = usersExpenses.filter(item => item.type === "minus");
+                                for (let i in months) {
+                                    for (let j in filterRaw) {
+                                        let month = `${getMonth(filterRaw[j].createdAt)}`;
+                                        let year = `${getYear(filterRaw[j].createdAt)}`;
+
+                                        if (months[i].includes(month) && months[i].includes(year)) {
+                                            catAmount1 += Number(filterRaw[j].amount);
+                                        }
+                                    }
+                                    amount1.push(catAmount1);
+                                    catAmount1 = 0;
+                                }
+                                console.log(filterRaw, amount1)
+                                const data1 = {
+                                    labels: months,
+                                    datasets: [
+                                        {
+                                            data: amount1,
+                                            fill: false,
+                                            lineTension: 0.1,
+                                            backgroundColor: "rgba(75,192,192,0.4)",
+                                            borderColor: "rgba(75,192,192,1)",
+                                            borderCapStyle: "butt",
+                                            borderDash: [],
+                                            borderDashOffset: 0.0,
+                                            borderJoinStyle: "miter",
+                                            pointBorderColor: "rgba(75,192,192,1)",
+                                            pointBackgroundColor: "#fff",
+                                            pointBorderWidth: 1,
+                                            pointHoverRadius: 5,
+                                            pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                                            pointHoverBorderColor: "rgba(220,220,220,1)",
+                                            pointHoverBorderWidth: 2,
+                                            pointRadius: 1,
+                                            pointHitRadius: 10
+                                        }
+                                    ]
+                                };
+
+                                return (
+                                    <React.Fragment>
+                                        <div id="monthly__stats">
+                                            <header>Monthly Expenses</header>
+                                            <main>
+                                                <Line
+                                                    data={data1}
+                                                    options={{
+                                                    legend: {
+                                                        display: false
+                                                    },
+                                                    tooltips: {
+                                                        callbacks: {
+                                                            label: function (tooltipItem) {
+                                                                return tooltipItem.yLabel;
+                                                            }
+                                                        }
+                                                    },
+                                                    maintainAspectRatio: false
+                                                }}/>
+                                            </main>
+                                        </div>
+                                        <div id="most__spenton">
+                                            <header>Most Spent On Categories</header>
+                                            <main>
+                                                <Pie
+                                                    data={data}
+                                                    options={{
+                                                    maintainAspectRatio: false
+                                                }}/>
+                                            </main>
+                                        </div>
+                                    </React.Fragment>
+                                )
+                            }}
+                        </Query>
+                    </div>
                 </div>
             </Tabs>
         </div>
