@@ -272,7 +272,8 @@ const Main = () => {
                             if (error) 
                                 return `Error! ${error.message}`;
                             return <React.Fragment>
-                                {data.usersExpenses.length === 0
+                                {
+                                    data.usersExpenses.length === 0
                                     ? (
                                         <div
                                             className="container"
@@ -293,7 +294,7 @@ const Main = () => {
                                                 .usersExpenses
                                                 .map((item, index) => <Expense key={index} item={item}/>)}</div>
                                     )
-}
+                                }
                             </React.Fragment>;
                         }}
                     </Query>
@@ -403,7 +404,6 @@ const Main = () => {
                                     amount1.push(catAmount1);
                                     catAmount1 = 0;
                                 }
-                                console.log(filterRaw, amount1)
                                 const data1 = {
                                     labels: months,
                                     datasets: [

@@ -6,105 +6,6 @@ main {
     }
 }
 
-#content {
-    display: -ms-grid;
-    display: grid;
-    -ms-grid-columns: 280px 20px 1fr;
-    grid-template-columns: 280px 1fr;
-    grid-column-gap:20px;
-}
-
-#filters {
-    @include object(280px,100%,auto,null);
-    border: 1px solid #E1E4E8;
-    border-radius: 4px;
-    padding: 20px;
-    -ms-flex-item-align: start;
-        align-self: flex-start;
-    label {
-        margin-bottom: 16px;
-        display: block;
-        font-size:14px;
-        font-weight:500;
-        color:rgba(#041A2A,0.4);
-    }
-    input {
-        @include object(100%,100%,48px,null);
-        border:1px solid #E1E4E8;
-        border-radius:4px;
-        padding-left: 12px;
-        font-size: 16px;
-        &::-webkit-input-placeholder {
-            color:#9AA3AA;
-        }
-        &:-ms-input-placeholder {
-            color:#9AA3AA;
-        }
-        &::-ms-input-placeholder {
-            color:#9AA3AA;
-        }
-        &::placeholder {
-            color:#9AA3AA;
-        }
-    }
-    select {
-        @include object(100%,100%,48px,null);
-        border:1px solid #E1E4E8;
-        border-radius:4px;
-        padding-left: 8px;
-        font-size: 16px;
-        &::-webkit-input-placeholder {
-            color:#9AA3AA;
-        }
-        &:-ms-input-placeholder {
-            color:#9AA3AA;
-        }
-        &::-ms-input-placeholder {
-            color:#9AA3AA;
-        }
-        &::placeholder {
-            color:#9AA3AA;
-        }
-        
-    }
-    button {
-        height: 40px;
-        padding: 0px 15px;
-        background: rgb(49, 143, 254);
-        border-radius: 4px;
-        line-height: normal;
-        font-size: 14px;
-        text-transform: uppercase;
-        color: rgb(255, 255, 255);
-    }
-}
-
-#section-title {
-    height: 100px;
-    @include flex(center, space-between);
-
-    h1 {
-        font-style: normal;
-        font-weight: 500;
-        line-height: normal;
-        font-size: 16px;
-        color: #031A2A;
-        margin-right: 20px;
-        margin-bottom: 0;
-    }
-
-    button {
-        @include object(null, 40px, 40px, #318FFE);
-        border-radius: 50%;
-        color: #fff;
-        font-size: 28px;
-
-        i {
-            line-height: 40px;
-        }
-    }
-}
-
 .expense__options {
     width:100%;
     margin-bottom: 16px;
@@ -267,14 +168,6 @@ main {
 }
 
 @media screen and (max-width:567px) {
-    #content {
-        -ms-grid-columns: 100%;
-        grid-template-columns: 100%;
-    }
-    #filters {
-        max-width: 100%;
-        margin-bottom: 20px;
-    }
     .expense__options {
         &>div {
             .field, .select__component, .radio__group__component {

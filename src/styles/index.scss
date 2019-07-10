@@ -7,10 +7,8 @@
 @import './components/radiogroup.scss';
 @import './components/modal.scss';
 @import './layout/navbar.scss';
-@import './layout/header.scss';
 @import './layout/main.scss';
 @import './layout/form.scss';
-@import './layout/datepicker.scss';
 @import './layout/tabs.scss';
 @import './layout/select.scss';
 @import './layout/addexpense.scss';
@@ -57,39 +55,12 @@ body {
     }
 }
 
-.active {
-    border-bottom: 3px solid #fff;
-    padding-bottom: 20px;
-}
-
 .error-message {
     padding-top: 8px;
     color: red;
     display: block;
 }
 
-.popup-card {
-    .cateogriesSpentOn {
-        width: 350px;
-        margin-bottom: 20px;
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        -webkit-box-pack: justify;
-            -ms-flex-pack: justify;
-                justify-content: space-between;
-        span {
-            font-size: 18px;
-            font-weight: 400;
-            &:first-child {
-                color: #041A2A;
-            }
-            &:last-child {
-                color: #EC1A1A;
-            }
-        }
-    }
-}
 @media screen and (max-width:576px) {
     .login {
         height: calc(100vh - 149px);
@@ -107,19 +78,6 @@ body {
     .top-nav #logo {
         width: 30px;
         color: transparent;
-    }
-    .dashboard-header {
-        height: auto;
-    }
-    #total-expenses {
-        -ms-grid-columns: 100%;
-        grid-template-columns: 100%;
-    }
-    #user-account-info {
-        margin: 60px auto 20px;
-    }
-    .expense-wrapper {
-        margin: 20px 0 0;
     }
     .expense-card {
         height: auto;
@@ -154,32 +112,6 @@ body {
             -ms-grid-columns: 1fr;
             grid-template-columns: 1fr;
         }
-    }
-
-    .popup-card {
-        height: 100%;
-        width: 100%;
-        padding: 40px;
-        -ms-grid-columns: 1fr;
-        grid-template-columns: 1fr;
-        grid-row-gap: 40px;
-        #left {
-            width: 100%;
-        }
-        .cateogriesSpentOn {
-            width: 100%;
-        }
-    }
-    .cateogriesSpentOn {
-        span {
-            font-size: 16px;
-        }
-    }
-
-}
-@media screen and (max-width:576px) {
-    #showStatsButton {
-        display: none;
     }
 }
 
