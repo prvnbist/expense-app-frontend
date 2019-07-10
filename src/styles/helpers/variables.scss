@@ -1,0 +1,17 @@
+:root {
+    --font:  'Overpass', sans-serif;
+
+    --vertical-grid-size: 8;
+
+    --margin-1: calc(var(--vertical-grid-size) * 1px);
+    --margin-2: calc(var(--vertical-grid-size) * 2px);
+    --margin-3: calc(var(--vertical-grid-size) * 3px);
+    --margin-4: calc(var(--vertical-grid-size) * 4px);
+    --margin-5: calc(var(--vertical-grid-size) * 5px);
+    --margin-6: calc(var(--vertical-grid-size) * 6px);
+
+    --padding-1: calc(var(--vertical-grid-size) * 1px);
+    --padding-2: calc(var(--vertical-grid-size) * 2px);
+    --padding-3: calc(var(--vertical-grid-size) * 3px);
+    --padding-4: calc(var(--vertical-grid-size) * 4px);
+}

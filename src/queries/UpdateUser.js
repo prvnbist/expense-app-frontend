@@ -1,9 +1,11 @@
 import gql from 'graphql-tag';
 
 const UPDATE_USER_MUTATION = gql `
-  mutation UpdateUser($balance: String) {
-    updateUser(balance: $balance) {
-        balance
+  mutation UpdateUser($name: String, $email: String, $username: String, $password: String) {
+    updateUser(name: $name, email: $email, username: $username, password: $password) {
+        name,
+        username,
+        email
     }
   }
 `

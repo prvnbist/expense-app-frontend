@@ -14,7 +14,7 @@ Status - Work In Progress
 #### Getting Started
 - `git clone https://github.com/prvnbist/expense-app-frontend.git`
 - `npm install` to install all the required packages. 
-- Go into the `/config/keys-dev.js` file and replace the value `REACT_APP_SERVER_URL` with the url where your server is running.
+- Go into the `.env` file and replace the value of `REACT_APP_SERVER_URL` with the url where your server is running.
 - `npm start` to run the server locally on `http://localhost:3000`
 - `npm run build` to build the project for production.
 ---
