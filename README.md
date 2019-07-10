@@ -2,14 +2,13 @@
 
 Links - [Demo](https://expense-app.netlify.com/) | [Backend](https://github.com/prvnbist/expense-app-backend)
 
-Status - Work In Progress
+Status - Online
 
-![alt text](https://res.cloudinary.com/prvnbist/image/upload/v1548586320/2019-01-27_162142_okqnmt.png "Logo Title Text 1")
+![alt text](https://res.cloudinary.com/prvnbist/image/upload/v1562781804/Expense%20App/2019-07-10_233310.png "Expense App Homepage")
 
 #### Tech Stack
 - ReactJs
-- Ant Design
-- Apollo GraphQL Client
+- Apollo Client
 
 #### Getting Started
 - `git clone https://github.com/prvnbist/expense-app-frontend.git`
