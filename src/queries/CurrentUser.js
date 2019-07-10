@@ -9,15 +9,6 @@ const CURRENT_USER = gql `
         email
         gender
         balance
-        expenses {
-          id
-          spentOn
-          amount
-          type
-          description
-          category
-          createdAt
-        }
       }
   }
 `;

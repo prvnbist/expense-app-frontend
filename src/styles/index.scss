@@ -1,81 +1,42 @@
+@import './helpers/variables.scss';
 @import './helpers/mixins.scss';
-@import './helpers/spacings.scss';
 @import './base/typography.scss';
 @import './base/reset.scss';
 @import './base/grid.scss';
+@import './components/button.scss';
+@import './components/radiogroup.scss';
+@import './components/modal.scss';
 @import './layout/navbar.scss';
-@import './layout/header.scss';
 @import './layout/main.scss';
 @import './layout/form.scss';
-@import './layout/expense.scss';
-@import './layout/datepicker.scss';
+@import './layout/tabs.scss';
+@import './layout/select.scss';
+@import './layout/addexpense.scss';
+@import './layout/account.scss';
+@import './layout/insights.scss';
 
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-family: 'CircularStd', sans-serif;
+    font-family: var(--font);
+}
+
+body {
+    background: #F9F9F9;
 }
 
 #home {
-    background-image: url('../images/expense_bg.svg');
+    background-image: url('https://res.cloudinary.com/prvnbist/image/upload/v1561219822/Expense%20App/expense_bg.svg');
     background-position: bottom;
     background-repeat: no-repeat;
     background-size: contain;
-}
-
-#homepage-header {
-    height: 80px;
-    @include flex(center, null);
-    border-bottom: 1px solid rgba(#000, 0.1), ;
-}
-
-#home-page-content {
-    maxWidth: 1280px;
-    height: calc(100vh - 80px);
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-}
-
-#home-page-content-heading {
-    margin-bottom: 40px;
-    margin-top: -15%;
-    font-weight: 500;
-    line-height: normal;
-    font-size: 48px;
-    color: #031A2A;
-    width: 450px;
-}
-
-#home-page-content-buttons {
-    a {
-        button {
-            @include object(null, 123px, 48px, #F88383);
-            line-height: 48px;
-            font-weight: 400;
-            border-radius: 4px;
-            font-size: 14px;
-        }
-        &:first-child {
-            margin-right: 20px;
-            button {
-                color: #FFFFFF;
-                border: 1px solid transparent;
-            }
-        }
-
-        &:last-child {
-            button {
-                color: #CFD2D6;
-                background: transparent;            
-                border: 1.5px solid #CFD2D6;
-            }
-        }
-    }
-
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
 }
 
 #logo {
@@ -94,77 +55,49 @@
     }
 }
 
-.active {
-    border-bottom: 3px solid #fff;
-    padding-bottom: 20px;
-}
-
 .error-message {
-    padding: 0 0 20px;
+    padding-top: 8px;
     color: red;
     display: block;
 }
 
-.popup-card {
-    .cateogriesSpentOn {
-        width: 350px;
-        margin-bottom: 20px;
-        display: flex;
-        justify-content: space-between;
-        span {
-            font-size:18px;
-            font-weight: 400;
-            &:first-child {
-                color: #041A2A;
-            }
-            &:last-child {
-                color: #EC1A1A
-            }
-        }
-    }
-}
-
 @media screen and (max-width:576px) {
-    #home-page-content-heading {
-        width: 100%;
-        font-size: 40px;
+    .login {
+        height: calc(100vh - 149px);
+    }
+    #home {
+        padding-bottom: 16px;
+        overflow-y: auto;
+        overflow-x: hidden;
     }
     #logo {
         a {
-            font-size:16px;
+            font-size: 16px;
         }
     }
     .top-nav #logo {
-        width:30px;
-        color:transparent;
-    }
-    .dashboard-header {
-        height:auto;
-    }
-    #total-expenses {
-        grid-template-columns:100%;
-    }
-    #user-account-info {
-        margin: 60px auto 20px auto;
-    }
-    .expense-wrapper {
-        margin: 20px 0 0 0;
+        width: 30px;
+        color: transparent;
     }
     .expense-card {
-        height:auto;
+        height: auto;
     }
     .mid-row {
-        flex-direction:column;
-        .category,.time {
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
+        .category,
+        .time {
             margin-bottom: 16px;
         }
     }
     .top-row {
         .spentOn {
-            font-size:18px;
+            font-size: 18px;
         }
         .amount {
-            font-size:16px;
+            font-size: 16px;
         }
         .deleteExpense {
             i {
@@ -173,36 +106,26 @@
         }
     }
     #expense-popup-card {
-        height:100%;
+        height: 100%;
         overflow-y: scroll;
-        div:nth-child(2){
+        div:nth-child(2) {
+            -ms-grid-columns: 1fr;
             grid-template-columns: 1fr;
         }
     }
-    
-    .popup-card {
-        height:100%;
-        width:100%;
-        padding: 40px;
-        grid-template-columns: 1fr;
-        grid-row-gap: 40px;
-        #left {
-            width:100%;
-        }
-        .cateogriesSpentOn {
-            width: 100%;
-        }
-    }
-    .cateogriesSpentOn {
-        span {
-            font-size:16px;
-        }
-    }
-    
 }
 
-@media screen and (max-width:576px) {
-    #showStatsButton {
-        display: none;
-    }
+.page-heading {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 37px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    color: #1B2C44;
+    margin-bottom: 24px;
 }

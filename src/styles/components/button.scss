@@ -1,0 +1,52 @@
+.btn {
+    @include object(null,null,40px,null);
+    border-radius: 4px;
+    padding: 0 16px;
+    font-size: 16px;
+    text-align: center;
+    line-height: 42px;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+.btn__primary {
+    background: #0052CC;
+}
+.btn__success {
+    background: #6FCF97;
+}
+
+.btn__outline {
+    background: #fff;
+    color: #041A2A;
+    border: 1px solid #DCDCDC;
+}
+
+.btn__overlay__dark {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.btn__small {
+    height: 32px;
+    padding: 0 8px;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 34px;
+}
+
+.btn__icon {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    i {
+        margin-right: 8px;
+    }
+    span {
+        -webkit-transform: translateY(2px);
+                -ms-transform: translateY(2px);
+            transform: translateY(2px);
+    }
+}
