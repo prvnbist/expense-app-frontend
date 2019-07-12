@@ -9,7 +9,8 @@ export default class SignUp extends Component {
     super(props);
     this.state = {
       show: false,
-      buttonText: "Sign Up"
+      buttonText: "Sign Up",
+      authError: null
     };
   }
   showPassword = e => {
@@ -63,18 +64,33 @@ export default class SignUp extends Component {
         </h2>
         <Mutation
           mutation={SIGNUP_MUTATION}
+          onError={err => {
+            const errors = err.message
+              .split(",")
+              .map(i => i.split(":"))
+              .map(i => i.reverse()[0])
+              .map(i => i.trim());
+            this.setState({
+              authError: errors,
+              buttonText: "Sign Up"
+            });
+          }}
           onCompleted={data => this.submitForm(data)}
         >
           {signUpMutation => (
             <Formik
               initialValues={{
-                username: "",
-                password: "",
-                name: "",
-                email: "",
+                username: "prvnbist",
+                password: "xLr8e47@",
+                name: "Bruno Mars",
+                email: "prvnbist@gmail.com",
                 gender: "M"
               }}
-              validationSchema={SignupSchema}
+              validationSchema={() =>
+                this.setState({
+                  authError: null
+                }) || SignupSchema
+              }
               onSubmit={(values, { setSubmitting }) => {
                 this.setState({ buttonText: "Signing Up..." });
                 setTimeout(() => {
@@ -101,6 +117,16 @@ export default class SignUp extends Component {
                 isSubmitting
               }) => (
                 <form onSubmit={handleSubmit}>
+                  {this.state.authError &&
+                    this.state.authError.map(err => (
+                      <span
+                        key={err}
+                        id="username-error"
+                        className="error-message"
+                      >
+                        {err}
+                      </span>
+                    ))}
                   <div className="field">
                     <input
                       type="text"
