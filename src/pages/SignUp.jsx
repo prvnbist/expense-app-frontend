@@ -80,11 +80,11 @@ export default class SignUp extends Component {
           {signUpMutation => (
             <Formik
               initialValues={{
-                username: "prvnbist",
-                password: "xLr8e47@",
-                name: "Bruno Mars",
-                email: "prvnbist@gmail.com",
-                gender: "M"
+                username: "",
+                password: "",
+                name: "",
+                email: "",
+                gender: ""
               }}
               validationSchema={() =>
                 this.setState({
